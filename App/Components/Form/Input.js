@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
 const Input = (props) => (
   <View style={styles.container}>
     <TextInput
+      secureTextEntry={props.secureTextEntry}
+      autoCorrect={false}
       style={styles.text}
       underlineColorAndroid='transparent'
       placeholder={props.placeholder} />
@@ -37,7 +39,8 @@ const Input = (props) => (
 )
 
 Input.propTypes = {
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  secureTextEntry: PropTypes.bool
 }
 
 export default Input

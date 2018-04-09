@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="splashBackground" type="color">#DA4A4A</item>
+    <item name="darkPrimaryColor" type="color">#c44141</item>
 </resources>
