@@ -10,6 +10,16 @@ const ApplicationStyles = {
     mainContainer: {
       backgroundColor: Colors.snow,
       flex: 1
+    },
+    formContainer: {
+      padding: 30
+    }
+  },
+  text: {
+    italicLink: {
+      fontFamily: Fonts.type.emphasis,
+      color: Colors.darkPrimary,
+      fontSize: Fonts.size.medium
     }
   }
 }
