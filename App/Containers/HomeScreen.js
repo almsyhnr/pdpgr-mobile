@@ -1,21 +1,28 @@
 import React, { Component } from 'react'
 import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import { Icon } from 'react-native-elements'
+
+// components
+import { StatusBar } from '../Components/General'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
+import { Colors } from '../Themes'
 
 class HomeScreen extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      drawerLabel: 'Home',
+      title: 'PDPGR',
+      drawerIcon: ({focused}) => <Icon name='home' color={Colors.gray} />
+    }
+  }
 
   render () {
     return (
       <ScrollView style={styles.container}>
+        <StatusBar />
         <Text>HomeScreen Container</Text>
       </ScrollView>
     )

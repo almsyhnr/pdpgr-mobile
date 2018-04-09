@@ -1,8 +1,15 @@
+import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import ContactUsScreen from '../Containers/ContactUsScreen'
+import InfoScreen from '../Containers/InfoScreen'
+
 import ProfileScreen from '../Containers/ProfileScreen'
 import HomeScreen from '../Containers/HomeScreen'
 import LoginScreen from '../Containers/LoginScreen'
 
+import {DrawerButton} from '../Components/Button'
+import DrawerContent from '../Containers/DrawerContent'
+import { Colors } from '../Themes'
 import styles from './Styles/NavigationStyles'
 
 const MainDrawer = DrawerNavigator({
@@ -11,21 +18,42 @@ const MainDrawer = DrawerNavigator({
   },
   Profile: {
     screen: ProfileScreen
+  },
+  Info: { screen: InfoScreen },
+  HubungiKami: { screen: ContactUsScreen }
+}, {
+  contentComponent: (props) => {
+    return (
+      <DrawerContent {...props} />
+    )
   }
 })
 
+const MainDrawerNavigation = StackNavigator({
+  MainScreen: {screen: MainDrawer}
+}, {
+  headerMode: 'none',
+  navigationOptions: ({navigation}) => ({
+    headerLeft: <DrawerButton navigation={navigation} />,
+    headerStyle: styles.header,
+    headerTintColor: Colors.snow,
+    headerTitleStyle: styles.headerTitle,
+    headerBackTitle: null
+  })
+})
+
 const PrimaryNav = StackNavigator({
-  MainDrawerScreen: { screen: MainDrawer,
-    navigationOptions: {
-      header: null
-    } },
+  MainDrawerScreen: { screen: MainDrawerNavigation },
   LoginScreen: { screen: LoginScreen }
 }, {
   // Default config for all screens
   headerMode: 'screen',
   initialRouteName: 'LoginScreen',
   navigationOptions: {
-    headerStyle: styles.header
+    headerStyle: styles.header,
+    headerTintColor: Colors.snow,
+    headerTitleStyle: styles.headerTitle,
+    headerBackTitle: null
   }
 })
 

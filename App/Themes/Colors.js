@@ -5,7 +5,8 @@ const colors = {
   darkPrimary: '#c44141',
   background: '#f4f5f6',
   tabActive: '#E6E7e8',
-  lightBlue: '#9dc9eb'
+  lightBlue: '#9dc9eb',
+  gray: '#828282'
 }
 
 export default colors

@@ -19,6 +19,10 @@ const ApplicationStyles = {
       left: 10,
       right: 10,
       bottom: 10
+    },
+    sidebarIcon: {
+      width: 24,
+      height: 24
     }
   },
   text: {

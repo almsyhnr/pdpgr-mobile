@@ -6,22 +6,23 @@ import { connect } from 'react-redux'
 import { StatusBar } from '../Components/General'
 
 // Styles
-import styles from './Styles/ProfileScreenStyle'
+import styles from './Styles/ContactUsScreenStyle'
 import { Images } from '../Themes'
 
-class ProfileScreen extends Component {
+class ContactUsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      drawerLabel: 'Profile',
-      title: 'Profile',
-      drawerIcon: ({focused}) => <Image source={Images.profile} style={styles.sidebarIcon} />
+      drawerLabel: 'Hubungi Kami',
+      title: 'Hubungi Kami',
+      drawerIcon: ({focused}) => <Image source={Images.mail} style={styles.sidebarIcon} />
     }
   }
+
   render () {
     return (
       <ScrollView style={styles.container}>
         <StatusBar />
-        <Text>ProfileScreen Container</Text>
+        <Text>ContactUsScreen Container</Text>
       </ScrollView>
     )
   }
@@ -37,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ContactUsScreen)
