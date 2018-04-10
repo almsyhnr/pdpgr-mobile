@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, BackHandler, FlatList } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 
 // components
@@ -49,6 +50,24 @@ class HomeScreen extends Component {
       ]
     }
     this.renderItem = this.renderItem.bind(this)
+    this._backHandler = this._backHandler.bind(this)
+  }
+
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this._backHandler)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this._backHandler)
+  }
+
+  _backHandler () {
+    const { nav, navigation } = this.props
+    if (nav.index === 0) {
+      return false
+    }
+    navigation.dispatch(NavigationActions.back())
+    return true
   }
 
   renderItem = ({ item, index }) => {
@@ -71,6 +90,7 @@ class HomeScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    nav: state.nav
   }
 }
 

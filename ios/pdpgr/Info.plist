@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>pdpgr</string>
+	<string>PDPGR</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -73,5 +73,11 @@
 		<string>Lato-LightItalic.ttf</string>
 		<string>Lato.ttf</string>
 	</array>
+	<key>CodePushDeploymentKey</key>
+	<string>dFeStV3Z04ta04O_MqGuk3PHaBDjHJXt_VqiG</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>PDPGR needs to access your gallery to update your profile picture and send picture as report.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>PDPGR needs to access your camera to update your profile picture and send picture as report.</string>
 </dict>
 </plist>

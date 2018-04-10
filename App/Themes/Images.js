@@ -12,7 +12,8 @@ const images = {
   house: require('../Images/bedah_rumah.png'),
   trash: require('../Images/kebersihan.png'),
   road: require('../Images/keruasakan_jalan.png'),
-  health: require('../Images/kelahiran_kematian.png')
+  health: require('../Images/kelahiran_kematian.png'),
+  development: require('../Images/development.jpg')
 
 }
 

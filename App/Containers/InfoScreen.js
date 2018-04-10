@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image } from 'react-native'
+import { ScrollView, Image } from 'react-native'
 import { connect } from 'react-redux'
 
 // components
-import { StatusBar } from '../Components/General'
+import { StatusBar, UnderDevelopment } from '../Components/General'
 
 // Styles
 import styles from './Styles/InfoScreenStyle'
@@ -22,7 +22,7 @@ class InfoScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <StatusBar />
-        <Text>InfoScreen Container</Text>
+        <UnderDevelopment />
       </ScrollView>
     )
   }

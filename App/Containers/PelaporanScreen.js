@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+
+import { StatusBar, UnderDevelopment } from '../Components/General'
+import { NotificationButton } from '../Components/Button'
 
 // Styles
 import styles from './Styles/PelaporanScreenStyle'
 
 class PelaporanScreen extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+  static navigationOptions = {
+    title: 'Laporan',
+    headerRight: <NotificationButton />
+  }
 
   render () {
     return (
       <ScrollView style={styles.container}>
-        <Text>PelaporanScreen Container</Text>
+        <StatusBar />
+        <UnderDevelopment />
       </ScrollView>
     )
   }

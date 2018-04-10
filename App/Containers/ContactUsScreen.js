@@ -3,7 +3,7 @@ import { ScrollView, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
 
 // components
-import { StatusBar } from '../Components/General'
+import { StatusBar, UnderDevelopment } from '../Components/General'
 
 // Styles
 import styles from './Styles/ContactUsScreenStyle'
@@ -22,7 +22,7 @@ class ContactUsScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <StatusBar />
-        <Text>ContactUsScreen Container</Text>
+        <UnderDevelopment />
       </ScrollView>
     )
   }

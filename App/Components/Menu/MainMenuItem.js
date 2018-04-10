@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   image: {
-    width: 150,
-    height: 150
+    width: 120,
+    height: 120
   },
   text: {
     fontFamily: Fonts.type.base,

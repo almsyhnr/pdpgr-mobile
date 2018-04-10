@@ -1,5 +1,26 @@
 PODS:
+  - AppCenter/Analytics (1.5.0):
+    - AppCenter/Core
+  - AppCenter/Core (1.5.0)
+  - AppCenter/Crashes (1.5.0):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (1.4.0):
+    - AppCenter/Core (= 1.5.0)
   - boost-for-react-native (1.63.0)
+  - CodePush (5.3.2):
+    - CodePush/Base64 (= 5.3.2)
+    - CodePush/Core (= 5.3.2)
+    - CodePush/JWT (= 5.3.2)
+    - CodePush/SSZipArchive (= 5.3.2)
+    - React
+  - CodePush/Base64 (5.3.2):
+    - React
+  - CodePush/Core (5.3.2):
+    - React
+  - CodePush/JWT (5.3.2):
+    - React
+  - CodePush/SSZipArchive (5.3.2):
+    - React
   - DoubleConversion (1.1.5)
   - Folly (2016.09.26.00):
     - boost-for-react-native
@@ -7,6 +28,8 @@ PODS:
     - glog
   - glog (0.3.4)
   - QBImagePickerController (3.4.0)
+  - React (0.53.0):
+    - React/Core (= 0.53.0)
   - React/Core (0.53.0):
     - yoga (= 0.53.0.React)
   - React/CxxBridge (0.53.0):
@@ -60,6 +83,10 @@ PODS:
   - yoga (0.53.0.React)
 
 DEPENDENCIES:
+  - AppCenter/Analytics (~> 1.5.0)
+  - AppCenter/Crashes (~> 1.5.0)
+  - AppCenterReactNativeShared (~> 1.4.0)
+  - CodePush (from `../node_modules/react-native-code-push`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -77,6 +104,8 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
+  CodePush:
+    :path: ../node_modules/react-native-code-push
   React:
     :path: ../node_modules/react-native
   RNImageCropPicker:
@@ -85,7 +114,10 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
+  AppCenter: 42c293f0de27e173aacd600a55a49da5317cd40e
+  AppCenterReactNativeShared: 056324303732841fff14f2a71c4a6839831b038b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CodePush: af67b07310e4037ecd5c38f03c7a51c6350240b5
   DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
   Folly: 211775e49d8da0ca658aebc8eab89d642935755c
   glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
@@ -95,6 +127,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: cfd5a38aecc96480ce0a8211145410e5afab0cd9
+PODFILE CHECKSUM: 411e2cc62645efb8e2a2ec680a92de67c306eca9
 
 COCOAPODS: 1.4.0
