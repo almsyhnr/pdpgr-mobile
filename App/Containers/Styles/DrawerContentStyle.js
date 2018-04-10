@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    marginLeft: 7,
+    marginLeft: 15,
     justifyContent: 'center'
   },
   name: {

@@ -48,7 +48,7 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'screen',
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'MainDrawerScreen',
   navigationOptions: {
     headerStyle: styles.header,
     headerTintColor: Colors.snow,

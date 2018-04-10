@@ -1,30 +1,69 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { Icon } from 'react-native-elements'
 
 // components
-import { StatusBar } from '../Components/General'
+import { StatusBar, HeaderTitle } from '../Components/General'
+import { NotificationButton } from '../Components/Button'
+import { MainMenuItem } from '../Components/Menu'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
-import { Colors } from '../Themes'
+import { Colors, Images } from '../Themes'
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       drawerLabel: 'Home',
-      title: 'PDPGR',
-      drawerIcon: ({focused}) => <Icon name='home' color={Colors.gray} />
+      headerTitle: <HeaderTitle />,
+      drawerIcon: ({focused}) => <Icon name='home' color={Colors.gray} />,
+      headerRight: <NotificationButton />
     }
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      menu: [
+        {
+          title: 'Fasilitas Sekolah',
+          image: Images.facility
+        },
+        {
+          title: 'Bedah Rumah',
+          image: Images.house
+        }, {
+          title: 'Kebersihan',
+          image: Images.trash
+        },
+        {
+          title: 'Kerusakan Jalan',
+          image: Images.road
+        },
+        {
+          title: 'Kelahiran & Kematian',
+          image: Images.health
+        }
+      ]
+    }
+    this.renderItem = this.renderItem.bind(this)
+  }
+
+  renderItem = ({ item, index }) => {
+    return <MainMenuItem {...item} />
   }
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <StatusBar />
-        <Text>HomeScreen Container</Text>
-      </ScrollView>
+        <FlatList
+          numColumns={2}
+          data={this.state.menu}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => `${index}`} />
+      </View>
     )
   }
 }

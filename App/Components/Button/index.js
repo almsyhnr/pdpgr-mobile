@@ -1,3 +1,4 @@
 import DrawerButton from './DrawerButton'
+import NotificationButton from './NotificationButton'
 
-export { DrawerButton }
+export { DrawerButton, NotificationButton }
