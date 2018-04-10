@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { DrawerItems, NavigationActions } from 'react-navigation'
 import { Avatar } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import faker from 'faker'
 
 // Styles
 import styles from './Styles/DrawerContentStyle'
@@ -34,12 +35,12 @@ class DrawerContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.profileContainer}>
-          <Avatar source={{uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}
+          <Avatar source={{uri: faker.image.avatar()}}
             onPress={() => console.log('Works!')}
             activeOpacity={0.7} large rounded />
           <View style={styles.infoContainer}>
-            <Text style={styles.name}>Jhon</Text>
-            <Text style={styles.email}>email@gmail.com</Text>
+            <Text style={styles.name}>{faker.name.firstName()}</Text>
+            <Text style={styles.email}>{faker.internet.email()}</Text>
           </View>
         </View>
         <ScrollView>

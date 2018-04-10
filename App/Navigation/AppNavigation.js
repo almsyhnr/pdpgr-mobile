@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import PelaporanScreen from '../Containers/PelaporanScreen'
 import ContactUsScreen from '../Containers/ContactUsScreen'
 import InfoScreen from '../Containers/InfoScreen'
 
@@ -22,6 +23,7 @@ const MainDrawer = DrawerNavigator({
   Info: { screen: InfoScreen },
   HubungiKami: { screen: ContactUsScreen }
 }, {
+  drawerWidth: 300,
   contentComponent: (props) => {
     return (
       <DrawerContent {...props} />
@@ -43,6 +45,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  PelaporanScreen: { screen: PelaporanScreen },
   MainDrawerScreen: { screen: MainDrawerNavigation },
   LoginScreen: { screen: LoginScreen }
 }, {

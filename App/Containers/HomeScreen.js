@@ -39,7 +39,8 @@ class HomeScreen extends Component {
         },
         {
           title: 'Kerusakan Jalan',
-          image: Images.road
+          image: Images.road,
+          onPress: () => { this.props.navigation.navigate('PelaporanScreen') }
         },
         {
           title: 'Kelahiran & Kematian',

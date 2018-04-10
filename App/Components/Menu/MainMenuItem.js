@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     maxWidth: Metrics.screenWidth / 2,
-    paddingVertical: 10
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: Colors.shadow
   },
   view: {
     alignItems: 'center',
