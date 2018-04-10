@@ -1,0 +1,6 @@
+Incremental java compilation is an incubating feature.
+File /Users/gama/.android/repositories.cfg could not be loaded.
+
+BUILD FAILED
+
+Total time: 19.658 secs

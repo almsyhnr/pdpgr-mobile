@@ -28,6 +28,9 @@
   },
   "dependencies": {
     "apisauce": "^0.14.2",
+    "appcenter": "^1.4.0",
+    "appcenter-analytics": "^1.4.0",
+    "appcenter-crashes": "^1.4.0",
     "faker": "^4.1.0",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
@@ -41,6 +44,7 @@
     "react-native-config": "^0.10.0",
     "react-native-elements": "^1.0.0-beta4",
     "react-native-i18n": "1.0.0",
+    "react-native-image-crop-picker": "^0.20.1",
     "react-native-platform-touchable": "^1.1.1",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.0.0-beta.21",
