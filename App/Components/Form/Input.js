@@ -17,30 +17,38 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: Colors.snow,
-    marginBottom: 15
+    marginBottom: 15,
+    justifyContent: 'flex-start'
   },
   text: {
     flex: 1,
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 16,
-    fontFamily: Fonts.type.emphasis
+    fontFamily: Fonts.type.base,
+    textAlignVertical: 'top'
   }
 })
 
 const Input = (props) => (
-  <View style={styles.container}>
+  <View style={[styles.container, props.containerStyle]}>
     <TextInput
       secureTextEntry={props.secureTextEntry}
       autoCorrect={false}
-      style={styles.text}
+      style={[styles.text, props.inputStyle]}
       underlineColorAndroid='transparent'
-      placeholder={props.placeholder} />
+      placeholder={props.placeholder}
+      multiline={props.multiline}
+      numberOfLines={props.numberOfLines} />
   </View>
 )
 
 Input.propTypes = {
   placeholder: PropTypes.string,
-  secureTextEntry: PropTypes.bool
+  secureTextEntry: PropTypes.bool,
+  containerStyle: PropTypes.any,
+  inputStyle: PropTypes.any,
+  multiline: PropTypes.bool,
+  numberOfLines: PropTypes.number
 }
 
 export default Input

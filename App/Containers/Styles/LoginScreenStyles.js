@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { ApplicationStyles } from '../../Themes/'
-import { Colors } from '../../Themes'
+import { Colors, Fonts } from '../../Themes'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -23,5 +23,9 @@ export default StyleSheet.create({
     textAlign: 'right',
     marginTop: 15,
     marginRight: 20
+  },
+  input: {
+    fontFamily: Fonts.type.emphasis,
+    textAlign: 'center'
   }
 })

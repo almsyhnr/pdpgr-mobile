@@ -13,7 +13,8 @@ const images = {
   trash: require('../Images/kebersihan.png'),
   road: require('../Images/keruasakan_jalan.png'),
   health: require('../Images/kelahiran_kematian.png'),
-  development: require('../Images/development.jpg')
+  development: require('../Images/development.jpg'),
+  markerButton: require('../Images/map_marker_button.png')
 
 }
 

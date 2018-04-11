@@ -46,8 +46,8 @@ export default class LoginScreen extends Component {
         <Image source={Images.peta} style={styles.footerImage} />
         <Image source={Images.logo} style={styles.logo} />
         <View style={styles.formContainer}>
-          <Input placeholder='Username' />
-          <Input placeholder='Password' secureTextEntry />
+          <Input placeholder='Username' inputStyle={styles.input} />
+          <Input placeholder='Password' secureTextEntry inputStyle={styles.input} />
           <Button title='MASUK' buttonStyle={styles.button} onPress={this.openMainDrawer} />
           <Text
             style={[styles.italicLink, styles.forgotPassword]}
