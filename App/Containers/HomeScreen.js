@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList } from 'react-native'
+import { View, BackHandler, FlatList, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
@@ -7,10 +7,13 @@ import { Icon } from 'react-native-elements'
 // components
 import { StatusBar, HeaderTitle } from '../Components/General'
 import { NotificationButton, AddReportButton } from '../Components/Button'
+import { ReportItem } from '../Components/List'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
 import { Colors, Images } from '../Themes'
+
+const reports = require('../Fixtures/laporan.json')
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,10 +27,15 @@ class HomeScreen extends Component {
 
   constructor (props) {
     super(props)
+    this.state = {
+      reports: []
+    }
     this._backHandler = this._backHandler.bind(this)
+    this.renderItem = this.renderItem.bind(this)
   }
 
   componentDidMount () {
+    this.setState({ reports })
     BackHandler.addEventListener('hardwareBackPress', this._backHandler)
   }
 
@@ -44,10 +52,18 @@ class HomeScreen extends Component {
     return true
   }
 
+  renderItem = ({ item, index }) => <ReportItem report={item} />
+
   render () {
     return (
       <View style={styles.container}>
         <StatusBar />
+        <FlatList
+          data={this.state.reports}
+          keyExtractor={(item, index) => `${index}`}
+          renderItem={this.renderItem}
+          contentContainerStyle={{flexGrow: 1}}
+        />
         <AddReportButton />
       </View>
     )

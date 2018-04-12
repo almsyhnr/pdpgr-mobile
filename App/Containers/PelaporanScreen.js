@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Touchable from 'react-native-platform-touchable'
 import ImagePicker from 'react-native-image-crop-picker'
 import _ from 'lodash'
+import { NavigationActions } from 'react-navigation'
 import Modal from 'react-native-modal'
 
 import { StatusBar } from '../Components/General'
@@ -31,6 +32,7 @@ class PelaporanScreen extends Component {
     this.renderItem = this.renderItem.bind(this)
     this.showModal = this.showModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
+    this.openMainDrawer = this.openMainDrawer.bind(this)
   }
 
   showModal = () => this.setState({ showModal: true })
@@ -117,6 +119,20 @@ class PelaporanScreen extends Component {
     })
   }
 
+  openMainDrawer = () => {
+    this.props.navigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'MainDrawerScreen',
+            params: {}
+          })
+        ]
+      })
+    )
+  }
+
   render () {
     return (
       <View style={styles.container} >
@@ -140,7 +156,7 @@ class PelaporanScreen extends Component {
             contentContainerStyle={{flexGrow: 1}} />
         </View>
 
-        <Touchable style={styles.submitContainer}>
+        <Touchable style={styles.submitContainer} onPress={this.openMainDrawer}>
           <Text style={styles.submitText}>Submit</Text>
         </Touchable>
 
@@ -157,7 +173,6 @@ class PelaporanScreen extends Component {
                 <Image source={Images.gallery} style={styles.modalImage} />
                 <Text style={styles.modalText}>Gallery</Text>
               </View>
-
             </Touchable>
           </View>
         </Modal>

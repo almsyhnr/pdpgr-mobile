@@ -19,7 +19,10 @@ const images = {
   addPhoto: require('../Images/add_photo.png'),
   cancel: require('../Images/cancel.png'),
   gallery: require('../Images/galeri.png'),
-  camera: require('../Images/camera.png')
+  camera: require('../Images/camera.png'),
+  comment: require('../Images/comment.png'),
+  like: require('../Images/like.png'),
+  lokasi: require('../Images/lokasi.png')
 
 }
 
