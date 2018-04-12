@@ -20,7 +20,7 @@ class InfoScreen extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
         <StatusBar />
         <UnderDevelopment />
       </ScrollView>

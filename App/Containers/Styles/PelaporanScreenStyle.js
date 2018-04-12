@@ -44,8 +44,8 @@ export default StyleSheet.create({
   },
   delete: {
     position: 'absolute',
-    top: 3,
-    right: 3,
+    top: 0,
+    right: 0,
     backgroundColor: Colors.primary,
     zIndex: 10,
     width: 20,
@@ -56,5 +56,25 @@ export default StyleSheet.create({
   },
   deleteText: {
     color: Colors.snow
+  },
+  modalContainer: {
+    flexDirection: 'row',
+    backgroundColor: Colors.snow,
+    borderRadius: 10,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 220 },
+  modalItem: {
+    padding: 7,
+    alignItems: 'center'
+  },
+  modalImage: {
+    width: 80,
+    height: 80
+  },
+  modalText: {
+    fontFamily: Fonts.type.base,
+    color: Colors.darkPrimary
   }
 })

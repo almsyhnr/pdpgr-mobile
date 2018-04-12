@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Touchable from 'react-native-platform-touchable'
 import ImagePicker from 'react-native-image-crop-picker'
 import _ from 'lodash'
+import Modal from 'react-native-modal'
 
 import { StatusBar } from '../Components/General'
 import { NotificationButton } from '../Components/Button'
@@ -22,19 +23,24 @@ class PelaporanScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      showModal: false,
       images: [
         {}
       ]
     }
     this.renderItem = this.renderItem.bind(this)
-    this.selectImage = this.selectImage.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
+
+  showModal = () => this.setState({ showModal: true })
+  closeModal = () => this.setState({ showModal: false })
 
   renderItem = ({ item, index }) => {
     if (index === 0) {
       return (
-        <Touchable onPress={this.selectImage} style={{ width: '25%', alignItems: 'center' }}>
-          <Image source={Images.markerButton} style={{ width: 60, height: 60 }} />
+        <Touchable onPress={this.showModal} style={{ width: '25%', alignItems: 'center' }}>
+          <Image source={Images.addPhoto} style={{ width: 60, height: 60 }} />
         </Touchable>
       )
     } else {
@@ -72,48 +78,43 @@ class PelaporanScreen extends Component {
   }
 
   openCamera = () => {
-    ImagePicker.openCamera({
-      cropping: true,
-      compressImageMaxWidth: 1024,
-      compressImageMaxHeight: 1024
-    }).then(image => {
-      if (!image.filename) {
-        image.filename = image.path.split('\\').pop().split('/').pop()
-      }
-      this.addImage([image])
+    this.setState({ showModal: false }, () => {
+      ImagePicker.openCamera({
+        cropping: true,
+        compressImageMaxWidth: 1024,
+        compressImageMaxHeight: 1024
+      }).then(image => {
+        if (!image.filename) {
+          image.filename = image.path.split('\\').pop().split('/').pop()
+        }
+        this.addImage([image])
+      })
     })
   }
 
   openGallery = () => {
-    ImagePicker.openPicker({
-      cropping: true,
-      multiple: true,
-      maxFiles: 10,
-      compressImageMaxWidth: 1024,
-      compressImageMaxHeight: 1024
-    }).then(images => {
-      const data = _.map(images, image => {
-        if (!image.filename) {
-          image.filename = image.path.split('\\').pop().split('/').pop()
-        }
-        return image
-      })
+    this.setState({
+      showModal: false
+    }, () => {
+      setTimeout(() => {
+        ImagePicker.openPicker({
+          cropping: true,
+          multiple: true,
+          maxFiles: 10,
+          compressImageMaxWidth: 1024,
+          compressImageMaxHeight: 1024
+        }).then(images => {
+          const data = _.map(images, image => {
+            if (!image.filename) {
+              image.filename = image.path.split('\\').pop().split('/').pop()
+            }
+            return image
+          })
 
-      this.addImage(data)
+          this.addImage(data)
+        })
+      }, 1000)
     })
-  }
-
-  selectImage = () => {
-    Alert.alert(
-      'Action',
-      'Pilih sumber foto laporan',
-      [
-        {text: 'Kamera', onPress: () => this.openCamera()},
-        {text: 'Album', onPress: () => this.openGallery()},
-        {text: 'Batal', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}
-      ],
-      { cancelable: true }
-    )
   }
 
   render () {
@@ -142,6 +143,24 @@ class PelaporanScreen extends Component {
         <Touchable style={styles.submitContainer}>
           <Text style={styles.submitText}>Submit</Text>
         </Touchable>
+
+        <Modal isVisible={this.state.showModal} onBackButtonPress={this.closeModal} onBackdropPress={this.closeModal}>
+          <View style={styles.modalContainer}>
+            <Touchable onPress={this.openCamera}>
+              <View style={styles.modalItem}>
+                <Image source={Images.camera} style={styles.modalImage} />
+                <Text style={styles.modalText}>Camera</Text>
+              </View>
+            </Touchable>
+            <Touchable onPress={this.openGallery}>
+              <View style={styles.modalItem}>
+                <Image source={Images.gallery} style={styles.modalImage} />
+                <Text style={styles.modalText}>Gallery</Text>
+              </View>
+
+            </Touchable>
+          </View>
+        </Modal>
       </View>
     )
   }

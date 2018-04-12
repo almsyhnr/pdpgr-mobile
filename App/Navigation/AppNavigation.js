@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import ReportChooserScreen from '../Containers/ReportChooserScreen'
 import PelaporanScreen from '../Containers/PelaporanScreen'
 import ContactUsScreen from '../Containers/ContactUsScreen'
 import InfoScreen from '../Containers/InfoScreen'
@@ -45,6 +46,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  ReportChooserScreen: { screen: ReportChooserScreen },
   PelaporanScreen: { screen: PelaporanScreen },
   MainDrawerScreen: { screen: MainDrawerNavigation },
   LoginScreen: { screen: LoginScreen }

@@ -13,8 +13,13 @@ const images = {
   trash: require('../Images/kebersihan.png'),
   road: require('../Images/keruasakan_jalan.png'),
   health: require('../Images/kelahiran_kematian.png'),
-  development: require('../Images/development.jpg'),
-  markerButton: require('../Images/map_marker_button.png')
+  development: require('../Images/development.png'),
+  markerButton: require('../Images/map_marker_button.png'),
+  add: require('../Images/add.png'),
+  addPhoto: require('../Images/add_photo.png'),
+  cancel: require('../Images/cancel.png'),
+  gallery: require('../Images/galeri.png'),
+  camera: require('../Images/camera.png')
 
 }
 
