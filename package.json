@@ -26,7 +26,8 @@
     "fixcode": "standard --fix",
     "git-hook": "npm run lint -s && npm run test -s",
     "codepush:publish_android": "code-push release-react softcopy/pdpgr_android android -d Staging -m",
-    "codepush:publish_ios": "code-push release-react softcopy/pdpgr_ios ios -d Staging -m"
+    "codepush:publish_ios": "code-push release-react softcopy/pdpgr_ios ios -d Staging -m",
+    "codepush:clear_android": "code-push deployment clear softcopy/pdpgr_android Staging"
   },
   "dependencies": {
     "apisauce": "^0.14.2",
