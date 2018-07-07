@@ -65,6 +65,7 @@ class LoginScreen extends Component {
     const url = `${AppConfig.baseUrl}/password/reset`
     openUrl(url)
   }
+
   render () {
     const { email, password } = this.state
     const { fetching } = this.props

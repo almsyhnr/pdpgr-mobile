@@ -9,7 +9,15 @@ import codePush from 'react-native-code-push'
 // create our store
 const store = createStore()
 
-let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME }
+var updateDialogOptions = {
+  title: 'Update',
+  optionalUpdateMessage: 'Pembaharuan tersedia, install?',
+  optionalIgnoreButtonLabel: 'Tidak',
+  optionalInstallButtonLabel: 'Ya',
+  mandatoryContinueButtonLabel: 'Install',
+  mandatoryUpdateMessage: 'Pembaharuan tersedia, install sekarang'
+}
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME, updateDialog: updateDialogOptions }
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
