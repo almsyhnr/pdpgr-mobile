@@ -11,9 +11,12 @@ import { StatusBar } from '../Components/General'
 // redux
 import AuthActions from '../Redux/AuthRedux'
 
+import { openUrl } from '../Lib/helpers'
+
 // Styles
 import styles from './Styles/LoginScreenStyles'
 import { Images } from '../Themes'
+import AppConfig from '../Config/AppConfig'
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null
@@ -59,7 +62,8 @@ class LoginScreen extends Component {
   }
 
   openForgot = () => {
-    Alert.alert('Info', 'This is just prototype')
+    const url = `${AppConfig.baseUrl}/password/reset`
+    openUrl(url)
   }
   render () {
     const { email, password } = this.state
