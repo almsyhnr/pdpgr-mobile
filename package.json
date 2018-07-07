@@ -17,7 +17,7 @@
     "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
     "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
     "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
-    "android:emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_23",
+    "android:emulator": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_27",
     "android:emulator_n": "$ANDROID_HOME/tools/emulator @Nexus_5X_API_24",
     "android:dependencies": "cd android && ./gradlew app:dependencies --configuration releaseCompileClasspath > dependencies.txt",
     "storybook": "storybook start -p 7007",

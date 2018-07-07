@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import LaunchScreen from '../Containers/LaunchScreen'
 import ReportChooserScreen from '../Containers/ReportChooserScreen'
 import PelaporanScreen from '../Containers/PelaporanScreen'
 import ContactUsScreen from '../Containers/ContactUsScreen'
@@ -46,6 +47,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  LaunchScreen: { screen: LaunchScreen },
   ReportChooserScreen: { screen: ReportChooserScreen },
   PelaporanScreen: { screen: PelaporanScreen },
   MainDrawerScreen: { screen: MainDrawerNavigation },
@@ -53,7 +55,7 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'screen',
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'LaunchScreen',
   navigationOptions: {
     headerStyle: styles.header,
     headerTintColor: Colors.snow,

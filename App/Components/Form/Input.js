@@ -38,7 +38,9 @@ const Input = (props) => (
       underlineColorAndroid='transparent'
       placeholder={props.placeholder}
       multiline={props.multiline}
-      numberOfLines={props.numberOfLines} />
+      numberOfLines={props.numberOfLines}
+      onChangeText={props.onChangeText}
+      value={props.value} />
   </View>
 )
 
