@@ -37,6 +37,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   //
   const signin = (email, password) => api.post('api/login', {email: email, password: password})
   const getSubmissions = (page) => api.get('api/submissions?page=' + page)
+  const modules = () => api.get('api/modules')
   // ------
   // STEP 3
   // ------
@@ -53,7 +54,8 @@ const create = (baseURL = AppConfig.baseUrl) => {
     // a list of the API functions from step 2
     setHeader: api.setHeader,
     signin,
-    getSubmissions
+    getSubmissions,
+    modules
   }
 }
 

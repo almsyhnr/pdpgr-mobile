@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 const MainMenuItem = ({ title, image, onPress }) => (
   <Touchable onPress={onPress} style={styles.container}>
     <View style={styles.view}>
-      <Image source={image} style={styles.image} resizeMode='contain' />
+      <Image source={{ uri: image }} style={styles.image} resizeMode='contain' />
       <Text style={styles.text} >{title}</Text>
     </View>
   </Touchable>

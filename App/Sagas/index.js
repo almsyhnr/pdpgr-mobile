@@ -8,11 +8,13 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { SubmissionTypes } from '../Redux/SubmissionRedux'
+import { ModuleTypes } from '../Redux/ModuleRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
 import { getSubmissions } from './SubmissionSagas'
+import { getModules } from './ModuleSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -30,6 +32,9 @@ export default function * root () {
     takeLatest(AuthTypes.SIGNIN, signin, api),
 
     // Submission
-    takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api)
+    takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
+
+    // Module
+    takeLatest(ModuleTypes.GET_MODULES, getModules, api)
   ])
 }

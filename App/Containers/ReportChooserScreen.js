@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList } from 'react-native'
+import { View, InteractionManager, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
+
+// redux
+import ModuleActions from '../Redux/ModuleRedux'
 
 // components
 import { StatusBar, HeaderTitle } from '../Components/General'
@@ -16,42 +19,25 @@ import styles from './Styles/ReportChooserScreenStyle'
 class ReportChooserScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Pilih Laporan',
+      title: 'Pilih Jenis Pengajuan',
       headerRight: <NotificationButton />
     }
   }
 
   constructor (props) {
     super(props)
-    this.state = {
-      menu: [
-        {
-          title: 'Fasilitas Sekolah',
-          image: Images.facility
-        },
-        {
-          title: 'Bedah Rumah',
-          image: Images.house
-        }, {
-          title: 'Kebersihan',
-          image: Images.trash
-        },
-        {
-          title: 'Kerusakan Jalan',
-          image: Images.road,
-          onPress: () => { this.props.navigation.navigate('PelaporanScreen') }
-        },
-        {
-          title: 'Kelahiran & Kematian',
-          image: Images.health
-        }
-      ]
-    }
+
     this.renderItem = this.renderItem.bind(this)
   }
 
+  componentWillMount () {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.getModules()
+    })
+  }
+
   renderItem = ({ item, index }) => {
-    return <MainMenuItem {...item} />
+    return <MainMenuItem title={item.name} image={item.icons.color} onPress={() => this.props.navigation.navigate('PelaporanScreen', {module: item})} />
   }
 
   render () {
@@ -60,7 +46,7 @@ class ReportChooserScreen extends Component {
         <StatusBar />
         <FlatList
           numColumns={2}
-          data={this.state.menu}
+          data={this.props.modules}
           renderItem={this.renderItem}
           keyExtractor={(item, index) => `${index}`} />
       </View>
@@ -70,11 +56,13 @@ class ReportChooserScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    modules: state.module.modules
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getModules: () => dispatch(ModuleActions.getModules())
   }
 }
 

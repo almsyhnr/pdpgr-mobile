@@ -11,7 +11,8 @@ export const reducers = combineReducers({
   auth: require('./AuthRedux').reducer,
   user: require('./UserRedux').reducer,
   startup: require('./StartupRedux').reducer,
-  submission: require('./SubmissionRedux').reducer
+  submission: require('./SubmissionRedux').reducer,
+  module: require('./ModuleRedux').reducer
 })
 
 export default () => {
