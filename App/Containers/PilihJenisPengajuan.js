@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
 import { View, InteractionManager, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
-import { Icon } from 'react-native-elements'
-
 // redux
 import ModuleActions from '../Redux/ModuleRedux'
 
 // components
-import { StatusBar, HeaderTitle } from '../Components/General'
+import { StatusBar } from '../Components/General'
 import { NotificationButton } from '../Components/Button'
 import { MainMenuItem } from '../Components/Menu'
 
 // Styles
-import { Colors, Images } from '../Themes'
-import styles from './Styles/ReportChooserScreenStyle'
+import styles from './Styles/PilihJenisPengajuanStyle'
 
-class ReportChooserScreen extends Component {
+class PilihJenisPengajuan extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Pilih Jenis Pengajuan',
@@ -37,7 +33,7 @@ class ReportChooserScreen extends Component {
   }
 
   renderItem = ({ item, index }) => {
-    return <MainMenuItem title={item.name} image={item.icons.color} onPress={() => this.props.navigation.navigate('PelaporanScreen', {module: item})} />
+    return <MainMenuItem title={item.name} image={item.icons.color} onPress={() => this.props.navigation.navigate('TambahPengajuan', {module: item})} />
   }
 
   render () {
@@ -66,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportChooserScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PilihJenisPengajuan)

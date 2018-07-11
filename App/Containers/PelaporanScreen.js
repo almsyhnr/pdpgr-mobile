@@ -46,7 +46,6 @@ class PelaporanScreen extends Component {
         </Touchable>
       )
     } else {
-      // image thumbnails
       return (
         <View style={{width: '25%', marginBottom: 15}}>
           <Touchable style={styles.delete} onPress={() => this.deleteImage(index)}>
@@ -100,9 +99,9 @@ class PelaporanScreen extends Component {
     }, () => {
       setTimeout(() => {
         ImagePicker.openPicker({
-          cropping: true,
+          cropping: false,
           multiple: true,
-          maxFiles: 10,
+          maxFiles: 4,
           compressImageMaxWidth: 1024,
           compressImageMaxHeight: 1024
         }).then(images => {

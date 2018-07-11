@@ -6,7 +6,9 @@ const colors = {
   background: '#f4f5f6',
   tabActive: '#E6E7e8',
   lightBlue: '#9dc9eb',
-  gray: '#828282',
+  blue: '#33b7ff',
+  gray: '#d6d6d6',
+  lightGray: '#eeeeee',
   green: '#a8cf45'
 }
 

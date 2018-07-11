@@ -1,7 +1,8 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import TambahPengajuan from '../Containers/TambahPengajuan'
 import LaunchScreen from '../Containers/LaunchScreen'
-import ReportChooserScreen from '../Containers/ReportChooserScreen'
+import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
 import PelaporanScreen from '../Containers/PelaporanScreen'
 import ContactUsScreen from '../Containers/ContactUsScreen'
 import InfoScreen from '../Containers/InfoScreen'
@@ -47,8 +48,9 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  TambahPengajuan: { screen: TambahPengajuan },
   LaunchScreen: { screen: LaunchScreen },
-  ReportChooserScreen: { screen: ReportChooserScreen },
+  PilihJenisPengajuan: { screen: PilihJenisPengajuan },
   PelaporanScreen: { screen: PelaporanScreen },
   MainDrawerScreen: { screen: MainDrawerNavigation },
   LoginScreen: { screen: LoginScreen }

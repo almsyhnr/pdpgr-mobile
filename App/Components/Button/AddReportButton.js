@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 })
 
 const AddReportButton = ({ navigation }) => (
-  <Touchable onPress={() => navigation.navigate('ReportChooserScreen')} style={styles.container}>
+  <Touchable onPress={() => navigation.navigate('PilihJenisPengajuan')} style={styles.container}>
     <Icon name='add-circle' type='ionicons' color={Colors.green} size={50} />
   </Touchable>
 )
