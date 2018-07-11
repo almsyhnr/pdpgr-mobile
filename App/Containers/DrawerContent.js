@@ -42,6 +42,9 @@ class DrawerContent extends Component {
 
   render () {
     const { user } = this.props
+    if (!user) {
+      return null
+    }
     return (
       <View style={styles.container}>
         <View style={styles.profileContainer}>

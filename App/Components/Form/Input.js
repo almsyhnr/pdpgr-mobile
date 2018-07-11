@@ -40,6 +40,8 @@ const Input = (props) => (
       multiline={props.multiline}
       numberOfLines={props.numberOfLines}
       onChangeText={props.onChangeText}
+      keyboardType={props.keyboardType}
+      autoCapitalize={'none'}
       value={props.value} />
   </View>
 )

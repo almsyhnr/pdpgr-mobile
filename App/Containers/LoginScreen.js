@@ -79,6 +79,7 @@ class LoginScreen extends Component {
             placeholder='Email'
             inputStyle={styles.input}
             onChangeText={email => this.setState({ email })}
+            keyboardType={'email-address'}
             value={email} />
           <Input placeholder='Password'
             onChangeText={password => this.setState({ password })}

@@ -9,7 +9,9 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 10,
-    right: 10
+    right: 10,
+    backgroundColor: Colors.snow,
+    borderRadius: 30
   }
 })
 

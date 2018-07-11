@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     width: Metrics.screenWidth,
     resizeMode: 'cover'
   },
+  icon: {
+    resizeMode: 'contain',
+    backgroundColor: Colors.shadow
+  },
   mediaIndicator: {
     position: 'absolute',
     top: 5,
@@ -96,20 +100,18 @@ class ReportItem extends Component {
           <Avatar
             medium
             rounded
-            source={{ uri: faker.image.avatar() }} />
+            source={{ uri: report.creator.avatar }} />
           <View style={styles.profileContainer}>
-            <Text style={styles.reporter}>{report.reporter}</Text>
-            <Text style={styles.views}>{`${report.views} Views`}</Text>
+            <Text style={styles.reporter}>{report.creator.name}</Text>
+            {/* <Text style={styles.views}>{`${report.views} Views`}</Text> */}
           </View>
-          <TimeAgo dateTime={report.reported_at} textStyle={styles.timeAgo} showIcon={false} />
+          <TimeAgo dateTime={report.created_at} textStyle={styles.timeAgo} showIcon={false} />
         </View>
         <View style={styles.body}>
-          <Text style={styles.description}>{report.description}</Text>
+          {/* <Text style={styles.description}>{report.description}</Text> */}
           <View style={styles.mediaContainer}>
-            {report.images.length > 1 && <View style={styles.mediaIndicator}>
-              <Text >{report.images.length}+</Text>
-            </View>}
-            <FlatList data={report.images}
+            {report.galleries.length > 0
+            ? <FlatList data={report.galleries}
               horizontal
               showsHorizontalScrollIndicator
               keyExtractor={(item, index) => `${index}`}
@@ -119,11 +121,12 @@ class ReportItem extends Component {
                   <Image source={{uri: uri}} style={styles.media} />
                 )
               }} />
+              : <Image source={{ uri: report.module.icons.color }} style={[styles.media, styles.icon]} />}
           </View>
         </View>
         <View style={styles.footer}>
           <Text style={styles.comments}>
-            {report.likes} Likes {report.comments} Comments
+            0 Likes 0 Comments
         </Text>
           <View style={styles.actionContainer}>
             <Touchable style={styles.footerAction}>
