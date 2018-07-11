@@ -17,7 +17,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   submissions: null,
   submissionsPagination: null,
-  fetching: null,
+  fetching: false,
   error: null
 })
 

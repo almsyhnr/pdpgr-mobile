@@ -14,7 +14,7 @@ import { ReportItem } from '../Components/List'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
-import { Colors, Images } from '../Themes'
+import { Colors } from '../Themes'
 import { LoadingIndicator } from '../Components/Indicator'
 
 const reports = require('../Fixtures/laporan.json')

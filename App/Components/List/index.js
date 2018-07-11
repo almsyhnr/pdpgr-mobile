@@ -1,3 +1,4 @@
 import ReportItem from './ReportItem'
+import GalleryBadge from './GalleryBadge'
 
-export { ReportItem }
+export { ReportItem, GalleryBadge }
