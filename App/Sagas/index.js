@@ -9,12 +9,14 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { SubmissionTypes } from '../Redux/SubmissionRedux'
 import { ModuleTypes } from '../Redux/ModuleRedux'
+import { SubVillageTypes } from '../Redux/SubVillageRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
 import { getSubmissions } from './SubmissionSagas'
 import { getModules } from './ModuleSagas'
+import { getSubVillages } from './SubVillageSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -35,6 +37,9 @@ export default function * root () {
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
 
     // Module
-    takeLatest(ModuleTypes.GET_MODULES, getModules, api)
+    takeLatest(ModuleTypes.GET_MODULES, getModules, api),
+
+    // SubVillage
+    takeLatest(SubVillageTypes.GET_SUB_VILLAGES, getSubVillages, api)
   ])
 }
