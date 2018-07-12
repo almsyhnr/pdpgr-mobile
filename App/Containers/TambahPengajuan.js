@@ -318,15 +318,15 @@ class TambahPengajuan extends ValidationComponent {
                 onChangeText={value => this.onValueChange('rw', value)}
             />
             </View>
-
-            <InputBox
-              label='Peliuk'
-              placeholder='Pilih peliuk'
-              editable={false}
-              value={form.sub_village}
-              onTouchStart={() => this.refs.modal_peliuk.open()}
-              onChangeText={value => this.onValueChange('sub_village', value)}
-          />
+            <Touchable onPress={() => this.refs.modal_peliuk.open()} style={{ width: '100%', alignItems: 'center'}}>
+              <InputBox
+                label='Peliuk'
+                placeholder='Pilih peliuk'
+                editable={false}
+                value={form.sub_village}
+                onChangeText={value => this.onValueChange('sub_village', value)}
+              />
+            </Touchable>
             <InputBox label='Desa' value={form.village} editable={false} placeholder='Autocomplete' />
             <InputBox label='Kecamatan' value={form.district} editable={false} placeholder='Autocomplete' />
           </View>
