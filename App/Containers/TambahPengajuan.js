@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { Text, InteractionManager, FlatList, View, Alert, Image } from 'react-native'
+import {
+  Text,
+  InteractionManager,
+  FlatList,
+  View,
+  Alert,
+  Image,
+  Keyboard
+} from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -123,24 +131,26 @@ class TambahPengajuan extends ValidationComponent {
 
       return Alert.alert('Error', messages[0])
     }
-  }
+  };
 
-  deleteImage = (index) => {
+  deleteImage = index => {
     let images = _.cloneDeep(this.state.images)
     images.splice(index, 1)
-    this.setState({images})
-  }
+    this.setState({ images })
+  };
 
-  addImage = (image) => {
+  addImage = image => {
     console.tron.error(image)
     let images = _.cloneDeep(this.state.images)
-    this.setState({images: [
-      ...images,
-      ...image
-    ]}, () => {
-      console.tron.error(this.state)
-    })
-  }
+    this.setState(
+      {
+        images: [...images, ...image]
+      },
+      () => {
+        console.tron.error(this.state)
+      }
+    )
+  };
 
   openCamera = () => {
     this.refs.modal_image.close()
@@ -150,11 +160,15 @@ class TambahPengajuan extends ValidationComponent {
       compressImageMaxHeight: 1024
     }).then(image => {
       if (!image.filename) {
-        image.filename = image.path.split('\\').pop().split('/').pop()
+        image.filename = image.path
+          .split('\\')
+          .pop()
+          .split('/')
+          .pop()
       }
       this.addImage([image])
     })
-  }
+  };
 
   openGallery = () => {
     this.refs.modal_image.close()
@@ -168,7 +182,11 @@ class TambahPengajuan extends ValidationComponent {
       }).then(images => {
         const data = _.map(images, image => {
           if (!image.filename) {
-            image.filename = image.path.split('\\').pop().split('/').pop()
+            image.filename = image.path
+              .split('\\')
+              .pop()
+              .split('/')
+              .pop()
           }
           return image
         })
@@ -176,7 +194,7 @@ class TambahPengajuan extends ValidationComponent {
         this.addImage(data)
       })
     }, 1000)
-  }
+  };
 
   openMainDrawer = () => {
     this.props.navigation.dispatch(
@@ -190,11 +208,12 @@ class TambahPengajuan extends ValidationComponent {
         ]
       })
     )
-  }
+  };
 
-  selectPeliuk = (peliuk) => {
+  selectPeliuk = peliuk => {
     let form = _.cloneDeep(this.state.form)
-    form = {...form,
+    form = {
+      ...form,
       sub_village: peliuk.name,
       sub_village_id: peliuk.id,
       village: peliuk.village,
@@ -204,42 +223,49 @@ class TambahPengajuan extends ValidationComponent {
     }
     this.setState({ form })
     this.refs.modal_peliuk.close()
-  }
+  };
 
   renderPeliuk = ({ item, index }) => {
     return (
-      <ListItem title={item.full_name} topDivider onPress={() => this.selectPeliuk(item)} />
+      <ListItem
+        title={item.full_name}
+        topDivider
+        onPress={() => this.selectPeliuk(item)}
+      />
     )
-  }
+  };
 
-  filterPeliuk = (keyword) => {
+  filterPeliuk = keyword => {
     if (keyword.length === 0) {
       this.setState({ subVillages: this.props.subVillages })
     } else {
       let subVillages = _.cloneDeep(this.props.subVillages)
-      subVillages = _.filter(subVillages, (item) => {
+      subVillages = _.filter(subVillages, item => {
         if (_.includes(item.full_name, keyword)) {
           return item
         }
       })
       this.setState({ subVillages: subVillages })
     }
-  }
+  };
 
   renderImageItem = ({ item, index }) => {
     return (
-      <View style={{width: '25%', marginBottom: 15}}>
-        <Touchable style={styles.delete} onPress={() => this.deleteImage(index)}>
+      <View style={{ width: '25%', marginBottom: 15 }}>
+        <Touchable
+          style={styles.delete}
+          onPress={() => this.deleteImage(index)}
+        >
           <Text style={styles.deleteText}>X</Text>
         </Touchable>
         <Image
           source={{ uri: item.path, isStatic: true }}
           style={styles.image}
           resizeMode={'cover'}
-          />
+        />
       </View>
     )
-  }
+  };
 
   render () {
     const { form, modul } = this.state
@@ -252,73 +278,111 @@ class TambahPengajuan extends ValidationComponent {
               label='Jenis Pengajuan'
               value={form.module}
               editable={false}
-          />
-            {modul.type === 'kelompok' && (
-            <InputBox
-              label='Identifier'
-              value={form.identifier}
-              placeholder='SIUP/TDP/NIK Penanggung Jawab'
-              onChangeText={value => this.onValueChange('identifier', value)}
             />
-          )}
             {modul.type === 'kelompok' && (
-            <InputBox
-              label='Nama Kelompok'
-              value={form.group_name}
-              placeholder='Wirausaha Muda Mandiri'
-              onChangeText={value => this.onValueChange('group_name', value)}
-            />
-          )}
+              <InputBox
+                label='Identifier'
+                inputRef={c => { this.identifier_input = c }}
+                onSubmitEditing={() => {
+                  this.group_name_input.focus()
+                }}
+                value={form.identifier}
+                placeholder='SIUP/TDP/NIK Penanggung Jawab'
+                onChangeText={value => this.onValueChange('identifier', value)}
+              />
+            )}
+            {modul.type === 'kelompok' && (
+              <InputBox
+                inputRef={c => { this.group_name_input = c }}
+                onSubmitEditing={() => {
+                  this.pic_name_input.focus()
+                }}
+                label='Nama Kelompok'
+                value={form.group_name}
+                placeholder='Wirausaha Muda Mandiri'
+                onChangeText={value => this.onValueChange('group_name', value)}
+              />
+            )}
             <InputBox
               label='Nama Penerima Bantuan'
-              value={form.pic_name}
               placeholder='Steeve Jobs'
+              inputRef={c => { this.pic_name_input = c }}
+              onSubmitEditing={() => {
+                this.nik_input.focus()
+              }}
               onChangeText={value => this.onValueChange('pic_name', value)}
-          />
+            />
             <InputBox
+              inputRef={c => { this.nik_input = c }}
+              onSubmitEditing={() => {
+                this.phone_input.focus()
+              }}
               label='NIK Penerima Bantuan'
               value={form.nik}
-              keyboardType='numeric'
+
               placeholder='5204080099881112'
               onChangeText={value => this.onValueChange('nik', value)}
-          />
+            />
             <InputBox
+              inputRef={c => { this.phone_input = c }}
+              onSubmitEditing={() => {
+                this.email_input.focus()
+              }}
               label='Telepon'
               value={form.phone}
-              keyboardType='numeric'
               placeholder='087899098765'
               onChangeText={value => this.onValueChange('phone', value)}
-          />
+            />
             <InputBox
+              inputRef={c => { this.email_input = c }}
+              onSubmitEditing={() => {
+                this.address_input.focus()
+              }}
               label='Email'
               value={form.email}
               keyboardType='email-address'
               placeholder='pdpgr@mail.com'
               onChangeText={value => this.onValueChange('email', value)}
-          />
+            />
             <InputBox
+              inputRef={c => { this.address_input = c }}
+              onSubmitEditing={() => {
+                this.rt_input.focus()
+              }}
               label='Alamat'
               value={form.address}
               placeholder='Jalan pototano Gg. Teratai No.23'
               onChangeText={value => this.onValueChange('address', value)}
-          />
+            />
             <View style={styles.horizontalForm}>
               <InputBox
+                inputRef={c => { this.rt_input = c }}
+                onSubmitEditing={() => {
+                  this.rw_input.focus()
+                }}
                 label='RT'
                 value={form.rt}
                 placeholder='001'
                 containerStyle={{ width: 100, marginRight: 40 }}
                 onChangeText={value => this.onValueChange('rt', value)}
-            />
+              />
               <InputBox
+                inputRef={c => { this.rw_input = c }}
+                onSubmitEditing={() => {
+                  Keyboard.dismiss()
+                  this.refs.modal_peliuk.open()
+                }}
                 label='RW'
                 value={form.rw}
                 placeholder='003'
                 containerStyle={{ width: 100 }}
                 onChangeText={value => this.onValueChange('rw', value)}
-            />
+              />
             </View>
-            <Touchable onPress={() => this.refs.modal_peliuk.open()} style={{ width: '100%', alignItems: 'center'}}>
+            <Touchable
+              onPress={() => this.refs.modal_peliuk.open()}
+              style={{ width: '100%', alignItems: 'center' }}
+            >
               <InputBox
                 label='Peliuk'
                 placeholder='Pilih peliuk'
@@ -327,45 +391,76 @@ class TambahPengajuan extends ValidationComponent {
                 onChangeText={value => this.onValueChange('sub_village', value)}
               />
             </Touchable>
-            <InputBox label='Desa' value={form.village} editable={false} placeholder='Autocomplete' />
-            <InputBox label='Kecamatan' value={form.district} editable={false} placeholder='Autocomplete' />
+            <InputBox
+              label='Desa'
+              value={form.village}
+              editable={false}
+              placeholder='Autocomplete'
+            />
+            <InputBox
+              label='Kecamatan'
+              value={form.district}
+              editable={false}
+              placeholder='Autocomplete'
+            />
           </View>
           <FlatList
             data={this.state.images}
             renderItem={this.renderImageItem}
             numColumns={4}
-            keyExtractor={(item, index) => `img-${index}`} />
-          <Button title='Pilih File' buttonStyle={styles.btnPilihFile}
+            keyExtractor={(item, index) => `img-${index}`}
+          />
+          <Button
+            title='Pilih File'
+            buttonStyle={styles.btnPilihFile}
             disabled={this.props.posting}
-            containerStyle={{ marginTop: 20 }} onPress={() => this.refs.modal_image.open()} />
+            containerStyle={{ marginTop: 20 }}
+            onPress={() => this.refs.modal_image.open()}
+          />
           <View>
             <Button
               title='Simpan'
               disabled={this.props.posting}
               loading={this.props.posting}
+              loadingStyle={{ padding: 10 }}
               buttonStyle={{ borderRadius: 0, backgroundColor: Colors.blue }}
               onPress={this.onSavePress}
-          />
+            />
           </View>
-
         </KeyboardAwareScrollView>
         <Modal
           style={[styles.modalPeliuk]}
           ref={'modal_peliuk'}
           position='bottom'
-          swipeToClose={false}>
+          swipeToClose={false}
+        >
           <View style={styles.modalContent}>
-            <Button clear title='X' titleStyle={styles.closeModalText} containerStyle={styles.closeModal} onPress={() => this.refs.modal_peliuk.close()} />
+            <Button
+              clear
+              title='X'
+              titleStyle={styles.closeModalText}
+              containerStyle={styles.closeModal}
+              onPress={() => this.refs.modal_peliuk.close()}
+            />
             <View style={styles.modalSearch}>
-              <InputBox placeholder='Kata kunci' onChangeText={this.filterPeliuk} />
+              <InputBox
+                placeholder='Kata kunci'
+                onChangeText={this.filterPeliuk}
+              />
             </View>
             <FlatList
               data={this.state.subVillages}
               keyExtractor={(item, index) => `${index}`}
-              renderItem={this.renderPeliuk} />
+              renderItem={this.renderPeliuk}
+            />
           </View>
         </Modal>
-        <Modal ref='modal_image' position='center' style={styles.modalImageContainer} coverScreen>
+        <Modal
+          ref='modal_image'
+          position='center'
+          style={styles.modalImageContainer}
+          coverScreen
+        >
           <View style={styles.modalImageContent}>
             <Touchable onPress={this.openCamera}>
               <View style={styles.modalImageItem}>
@@ -399,7 +494,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSubVillages: () => dispatch(SubVillageActions.getSubVillages()),
-    createSubmission: (form, files) => dispatch(SubmissionActions.createSubmission(form, files))
+    createSubmission: (form, files) =>
+      dispatch(SubmissionActions.createSubmission(form, files))
   }
 }
 

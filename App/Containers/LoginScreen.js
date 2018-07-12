@@ -20,7 +20,7 @@ import AppConfig from '../Config/AppConfig'
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null
-  }
+  };
 
   constructor (props) {
     super(props)
@@ -45,7 +45,7 @@ class LoginScreen extends Component {
     }
 
     this.props.signin(email, password)
-  }
+  };
 
   openMainDrawer = () => {
     this.props.navigation.dispatch(
@@ -59,12 +59,12 @@ class LoginScreen extends Component {
         ]
       })
     )
-  }
+  };
 
   openForgot = () => {
     const url = `${AppConfig.baseUrl}/password/reset`
     openUrl(url)
-  }
+  };
 
   render () {
     const { email, password } = this.state
@@ -80,14 +80,30 @@ class LoginScreen extends Component {
             inputStyle={styles.input}
             onChangeText={email => this.setState({ email })}
             keyboardType={'email-address'}
-            value={email} />
-          <Input placeholder='Password'
+            value={email}
+          />
+          <Input
+            placeholder='Password'
             onChangeText={password => this.setState({ password })}
-            value={password} secureTextEntry inputStyle={styles.input} />
-          <Button title='MASUK' buttonStyle={styles.button} onPress={this.handleLogin} loading={fetching} disabled={fetching} />
+            value={password}
+            secureTextEntry
+            inputStyle={styles.input}
+          />
+          <Button
+            title='MASUK'
+            buttonStyle={styles.button}
+            onPress={this.handleLogin}
+            loading={fetching}
+            loadingStyle={{ padding: 10 }}
+            disabled={fetching}
+          />
           <Text
             style={[styles.italicLink, styles.forgotPassword]}
-            onPress={this.openForgot} hitSlop={styles.hitSlop}>Lupa kata sandi?</Text>
+            onPress={this.openForgot}
+            hitSlop={styles.hitSlop}
+          >
+            Lupa kata sandi?
+          </Text>
         </View>
       </View>
     )
@@ -100,12 +116,15 @@ const mapStateToProps = state => {
     error: state.auth.error,
     fetching: state.auth.fetching
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     signin: (email, password) => dispatch(AuthActions.signin(email, password))
   }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen)

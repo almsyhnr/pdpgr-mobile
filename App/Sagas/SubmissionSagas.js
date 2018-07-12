@@ -36,5 +36,6 @@ export function * createSubmission (api, { form, files }) {
     alert(response.data.message)
   } else {
     yield put(SubmissionActions.postSubmissionFailure())
+    alert('Pengajuan gagal ditambahkan')
   }
 }
