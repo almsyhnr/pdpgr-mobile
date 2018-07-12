@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes/'
+import { Colors, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   container: {
@@ -33,5 +33,60 @@ export default StyleSheet.create({
   closeModalText: {
     fontSize: 16,
     color: Colors.darkPrimary
+  },
+  btnPilihFile: {
+    backgroundColor: Colors.darkGreen,
+    width: 250,
+    height: 45,
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 30,
+    alignSelf: 'center',
+    marginBottom: 20
+  },
+  modalImageContainer: {
+    width: 220,
+    height: 120,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  modalImageContent: {
+    flexDirection: 'row',
+    backgroundColor: Colors.snow,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  modalImageItem: {
+    padding: 7,
+    alignItems: 'center'
+  },
+  modalImage: {
+    width: 80,
+    height: 80
+  },
+  modalImageText: {
+    fontFamily: Fonts.type.base,
+    color: Colors.darkPrimary
+  },
+  image: {
+    width: 80,
+    height: 60
+  },
+  delete: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: Colors.primary,
+    zIndex: 10,
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10
+  },
+  deleteText: {
+    color: Colors.snow
   }
 })

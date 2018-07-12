@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import { Text, InteractionManager, FlatList, View, Alert } from 'react-native'
+import { Text, InteractionManager, FlatList, View, Alert, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import _ from 'lodash'
+import ImagePicker from 'react-native-image-crop-picker'
 import Modal from 'react-native-modalbox'
-import { Button, SearchBar, ListItem } from 'react-native-elements'
+import { Button, ListItem } from 'react-native-elements'
+import Touchable from 'react-native-platform-touchable'
 
 // redux
 import SubVillageActions from '../Redux/SubVillageRedux'
+import SubmissionActions from '../Redux/SubmissionRedux'
 
 // components
 import { StatusBar } from '../Components/General'
@@ -16,7 +19,7 @@ import { InputBox } from '../Components/Form'
 
 // Styles
 import styles from './Styles/TambahPengajuanStyle'
-import { Colors } from '../Themes'
+import { Colors, Images } from '../Themes'
 import ValidationComponent from '../Lib/validator'
 
 class TambahPengajuan extends ValidationComponent {
@@ -32,6 +35,8 @@ class TambahPengajuan extends ValidationComponent {
       form: {
         module: _module.name,
         module_id: _module.id,
+        type: _module.type_id,
+        agen_id: props.user.id,
         identifier: '',
         group_name: '',
         pic_name: '',
@@ -64,6 +69,10 @@ class TambahPengajuan extends ValidationComponent {
     if (this.props.fetching && !nextProps.fetching) {
       this.setState({ subVillages: nextProps.subVillages })
     }
+
+    if (this.props.posting && !nextProps.posting && !nextProps.error) {
+      this.openMainDrawer()
+    }
   }
 
   onValueChange = (field, value) => {
@@ -80,22 +89,24 @@ class TambahPengajuan extends ValidationComponent {
 
   onSavePress = () => {
     this.validate({
-      identifier: { required: true },
-      group_name: { required: true },
+      // identifier: { required: true },
+      // group_name: { required: true },
       pic_name: { required: true },
       nik: { required: true },
       phone: { required: true },
       email: { required: true },
-      rt: { required: true, numbers: true },
-      rw: { required: true, numbers: true },
+      rt: { required: true },
+      rw: { required: true },
       sub_village: { required: true }
     })
-
+    console.tron.error(this.state.form)
+    console.tron.error(this.getErrorMessages())
     if (this.isFormValid()) {
-      console.tron.error('save')
+      const { form, images } = this.state
+      return this.props.createSubmission(form, images)
     }
 
-    if (this.getErrorMessages().length) {
+    if (this.getErrorMessages().length > 0) {
       const messages = []
 
       if (this.state.modul.type === 'kelompok') {
@@ -112,6 +123,59 @@ class TambahPengajuan extends ValidationComponent {
 
       return Alert.alert('Error', messages[0])
     }
+  }
+
+  deleteImage = (index) => {
+    let images = _.cloneDeep(this.state.images)
+    images.splice(index, 1)
+    this.setState({images})
+  }
+
+  addImage = (image) => {
+    console.tron.error(image)
+    let images = _.cloneDeep(this.state.images)
+    this.setState({images: [
+      ...images,
+      ...image
+    ]}, () => {
+      console.tron.error(this.state)
+    })
+  }
+
+  openCamera = () => {
+    this.refs.modal_image.close()
+    ImagePicker.openCamera({
+      cropping: true,
+      compressImageMaxWidth: 1024,
+      compressImageMaxHeight: 1024
+    }).then(image => {
+      if (!image.filename) {
+        image.filename = image.path.split('\\').pop().split('/').pop()
+      }
+      this.addImage([image])
+    })
+  }
+
+  openGallery = () => {
+    this.refs.modal_image.close()
+    setTimeout(() => {
+      ImagePicker.openPicker({
+        cropping: false,
+        multiple: true,
+        maxFiles: 4,
+        compressImageMaxWidth: 1024,
+        compressImageMaxHeight: 1024
+      }).then(images => {
+        const data = _.map(images, image => {
+          if (!image.filename) {
+            image.filename = image.path.split('\\').pop().split('/').pop()
+          }
+          return image
+        })
+
+        this.addImage(data)
+      })
+    }, 1000)
   }
 
   openMainDrawer = () => {
@@ -162,6 +226,21 @@ class TambahPengajuan extends ValidationComponent {
     }
   }
 
+  renderImageItem = ({ item, index }) => {
+    return (
+      <View style={{width: '25%', marginBottom: 15}}>
+        <Touchable style={styles.delete} onPress={() => this.deleteImage(index)}>
+          <Text style={styles.deleteText}>X</Text>
+        </Touchable>
+        <Image
+          source={{ uri: item.path, isStatic: true }}
+          style={styles.image}
+          resizeMode={'cover'}
+          />
+      </View>
+    )
+  }
+
   render () {
     const { form, modul } = this.state
     return (
@@ -199,18 +278,21 @@ class TambahPengajuan extends ValidationComponent {
             <InputBox
               label='NIK Penerima Bantuan'
               value={form.nik}
+              keyboardType='numeric'
               placeholder='5204080099881112'
               onChangeText={value => this.onValueChange('nik', value)}
           />
             <InputBox
               label='Telepon'
               value={form.phone}
+              keyboardType='numeric'
               placeholder='087899098765'
               onChangeText={value => this.onValueChange('phone', value)}
           />
             <InputBox
               label='Email'
               value={form.email}
+              keyboardType='email-address'
               placeholder='pdpgr@mail.com'
               onChangeText={value => this.onValueChange('email', value)}
           />
@@ -248,9 +330,19 @@ class TambahPengajuan extends ValidationComponent {
             <InputBox label='Desa' value={form.village} editable={false} placeholder='Autocomplete' />
             <InputBox label='Kecamatan' value={form.district} editable={false} placeholder='Autocomplete' />
           </View>
+          <FlatList
+            data={this.state.images}
+            renderItem={this.renderImageItem}
+            numColumns={4}
+            keyExtractor={(item, index) => `img-${index}`} />
+          <Button title='Pilih File' buttonStyle={styles.btnPilihFile}
+            disabled={this.props.posting}
+            containerStyle={{ marginTop: 20 }} onPress={() => this.refs.modal_image.open()} />
           <View>
             <Button
               title='Simpan'
+              disabled={this.props.posting}
+              loading={this.props.posting}
               buttonStyle={{ borderRadius: 0, backgroundColor: Colors.blue }}
               onPress={this.onSavePress}
           />
@@ -273,6 +365,22 @@ class TambahPengajuan extends ValidationComponent {
               renderItem={this.renderPeliuk} />
           </View>
         </Modal>
+        <Modal ref='modal_image' position='center' style={styles.modalImageContainer} coverScreen>
+          <View style={styles.modalImageContent}>
+            <Touchable onPress={this.openCamera}>
+              <View style={styles.modalImageItem}>
+                <Image source={Images.camera} style={styles.modalImage} />
+                <Text style={styles.modalImageText}>Camera</Text>
+              </View>
+            </Touchable>
+            <Touchable onPress={this.openGallery}>
+              <View style={styles.modalImageItem}>
+                <Image source={Images.gallery} style={styles.modalImage} />
+                <Text style={styles.modalImageText}>Gallery</Text>
+              </View>
+            </Touchable>
+          </View>
+        </Modal>
       </View>
     )
   }
@@ -283,13 +391,15 @@ const mapStateToProps = state => {
     user: state.user.user,
     subVillages: state.subVillage.subVillages,
     fetching: state.subVillage.fetching,
-    error: state.subVillage.error
+    error: state.submission.error,
+    posting: state.submission.posting
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSubVillages: () => dispatch(SubVillageActions.getSubVillages())
+    getSubVillages: () => dispatch(SubVillageActions.getSubVillages()),
+    createSubmission: (form, files) => dispatch(SubmissionActions.createSubmission(form, files))
   }
 }
 

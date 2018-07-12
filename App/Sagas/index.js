@@ -14,7 +14,7 @@ import { SubVillageTypes } from '../Redux/SubVillageRedux'
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
-import { getSubmissions } from './SubmissionSagas'
+import { getSubmissions, create, createSubmission } from './SubmissionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 /* ------------- API ------------- */
@@ -35,6 +35,7 @@ export default function * root () {
 
     // Submission
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
+    takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
 
     // Module
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),

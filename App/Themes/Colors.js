@@ -7,9 +7,11 @@ const colors = {
   tabActive: '#E6E7e8',
   lightBlue: '#9dc9eb',
   blue: '#33b7ff',
+  darkGray: 'grey',
   gray: '#d6d6d6',
   lightGray: '#eeeeee',
-  green: '#a8cf45'
+  green: '#a8cf45',
+  darkGreen: '#22a539'
 }
 
 export default colors

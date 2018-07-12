@@ -23,3 +23,18 @@ export function * getSubmissions (api, { page }) {
     yield put(SubmissionActions.submissionFailure())
   }
 }
+
+export function * createSubmission (api, { form, files }) {
+  const response = yield call(api.createSubmission, form, files)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionActions.createSubmissionSuccess(response.data))
+    } else {
+      yield put(SubmissionActions.postSubmissionFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(SubmissionActions.postSubmissionFailure())
+  }
+}

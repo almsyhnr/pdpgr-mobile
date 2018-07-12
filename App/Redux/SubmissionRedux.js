@@ -6,7 +6,10 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   getSubmissions: ['page'],
   getSubmissionsSuccess: ['response'],
-  submissionFailure: null
+  createSubmission: ['form', 'files'],
+  createSubmissionSuccess: ['response'],
+  submissionFailure: null,
+  postSubmissionFailure: null
 })
 
 export const SubmissionTypes = Types
@@ -18,6 +21,7 @@ export const INITIAL_STATE = Immutable({
   submissions: null,
   submissionsPagination: null,
   fetching: false,
+  posting: false,
   error: null
 })
 
@@ -32,6 +36,7 @@ export const SubmissionSelectors = {
 // request the data from an api
 export const request = (state) =>
   state.merge({ fetching: true })
+export const postRequest = (state) => state.merge({ posting: true })
 
 // successful api lookup
 export const getSubmissionsSuccess = (state, { response }) => {
@@ -45,14 +50,18 @@ export const getSubmissionsSuccess = (state, { response }) => {
   return state.merge({ fetching: false, error: null, submissions: submissions, submissionsPagination: meta.pagination })
 }
 
-// Something went wrong somewhere.
-export const failure = state =>
-  state.merge({ fetching: false, error: true })
+export const success = state => state.merge({ fetching: false, error: null })
+export const postSuccess = state => state.merge({ posting: false, error: false })
+export const failure = state => state.merge({ fetching: false, error: true })
+export const postFailure = state => state.merge({ posting: false, error: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_SUBMISSIONS]: request,
   [Types.GET_SUBMISSIONS_SUCCESS]: getSubmissionsSuccess,
-  [Types.SUBMISSION_FAILURE]: failure
+  [Types.CREATE_SUBMISSION]: postRequest,
+  [Types.CREATE_SUBMISSION_SUCCESS]: postSuccess,
+  [Types.SUBMISSION_FAILURE]: failure,
+  [Types.POST_SUBMISSION_FAILURE]: postFailure
 })

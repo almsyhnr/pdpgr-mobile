@@ -29,7 +29,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.emphasis
   },
   menuText: {
-    color: Colors.gray,
+    color: Colors.darkGray,
     flex: 1
   },
   logoutContainer: {

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 const InputBox = props => (
   <Input
     {...props}
+    autoCorrect={false}
     labelStyle={[styles.label, props.labelStyle]}
     containerStyle={[styles.container, props.containerStyle]}
     inputStyle={[styles.input, props.inputStyle]}

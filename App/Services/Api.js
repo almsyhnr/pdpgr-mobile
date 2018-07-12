@@ -39,6 +39,41 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const getSubmissions = (page) => api.get('api/submissions?page=' + page)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
+  const createSubmission = (form, files) => {
+    var body = new FormData()
+    body.append(`module_id`, form.module_id)
+    body.append(`type`, form.type)
+    body.append(`agen_id`, form.agen_id)
+    body.append(`identifier`, form.identifier)
+    body.append('group_name', form.group_name)
+    body.append('pic_name', form.pic_name)
+    body.append('nik', form.nik)
+    body.append('email', form.email)
+    body.append('phone', form.phone)
+    body.append('address', form.address)
+    body.append('rt', form.rt)
+    body.append('rw', form.rw)
+    body.append('sub_village_id', form.sub_village_id)
+    body.append('village_id', form.village_id)
+    body.append('district_id', form.district_id)
+
+    if (files.length > 0) {
+      files.map((file) => {
+        var image = {
+          uri: file.path,
+          type: file.mime,
+          name: file.filename
+        }
+        body.append(`images[]`, image)
+      })
+    }
+
+    return api.post('api/submissions/create', body, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
   // ------
   // STEP 3
   // ------
@@ -56,6 +91,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
     setHeader: api.setHeader,
     signin,
     getSubmissions,
+    createSubmission,
     modules,
     subVillages
   }

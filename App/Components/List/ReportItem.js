@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     flex: 1,
-    marginHorizontal: 10
+    margin: 10
   },
   reporter: {
-    ...Fonts.style.h5
+    ...Fonts.style.h5,
+    fontSize: 16
   },
   views: {
     fontSize: Fonts.size.small,
@@ -42,13 +43,14 @@ const styles = StyleSheet.create({
     lineHeight: 16
   },
   mediaContainer: {
-    height: Metrics.screenWidth * 0.6,
+    height: Metrics.screenWidth * 0.2,
     width: Metrics.screenWidth
   },
   media: {
-    height: Metrics.screenWidth * 0.6,
-    width: Metrics.screenWidth,
-    resizeMode: 'cover'
+    height: Metrics.screenWidth * 0.2,
+    width: Metrics.screenWidth / 3,
+    resizeMode: 'contain',
+    backgroundColor: Colors.shadow
   },
   icon: {
     resizeMode: 'contain',
@@ -99,7 +101,7 @@ class ReportItem extends Component {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Avatar
-            medium
+            small
             rounded
             source={{ uri: report.creator.avatar }} />
           <View style={styles.profileContainer}>
