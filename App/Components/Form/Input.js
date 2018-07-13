@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 const Input = (props) => (
   <View style={[styles.container, props.containerStyle]}>
     <TextInput
+      ref={props.inputRef}
       secureTextEntry={props.secureTextEntry}
       autoCorrect={false}
       style={[styles.text, props.inputStyle]}
@@ -42,6 +43,7 @@ const Input = (props) => (
       onChangeText={props.onChangeText}
       keyboardType={props.keyboardType}
       autoCapitalize={'none'}
+      onSubmitEditing={props.onSubmitEditing}
       value={props.value} />
   </View>
 )

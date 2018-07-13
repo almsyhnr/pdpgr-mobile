@@ -77,6 +77,10 @@ class LoginScreen extends Component {
         <View style={styles.formContainer}>
           <Input
             placeholder='Email'
+            inputRef={c => { this.email_input = c }}
+            onSubmitEditing={() => {
+              this.password_input.focus()
+            }}
             inputStyle={styles.input}
             onChangeText={email => this.setState({ email })}
             keyboardType={'email-address'}
@@ -84,6 +88,10 @@ class LoginScreen extends Component {
           />
           <Input
             placeholder='Password'
+            inputRef={c => { this.password_input = c }}
+            onSubmitEditing={() => {
+              this.handleLogin()
+            }}
             onChangeText={password => this.setState({ password })}
             value={password}
             secureTextEntry
@@ -116,13 +124,13 @@ const mapStateToProps = state => {
     error: state.auth.error,
     fetching: state.auth.fetching
   }
-};
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     signin: (email, password) => dispatch(AuthActions.signin(email, password))
   }
-};
+}
 
 export default connect(
   mapStateToProps,
