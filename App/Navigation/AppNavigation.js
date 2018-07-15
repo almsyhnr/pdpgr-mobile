@@ -30,9 +30,7 @@ const MainDrawer = DrawerNavigator({
   },
   Profile: {
     screen: ProfileScreen
-  },
-  Info: { screen: InfoScreen },
-  HubungiKami: { screen: ContactUsScreen }
+  }
 }, {
   drawerWidth: 300,
   contentComponent: (props) => {
