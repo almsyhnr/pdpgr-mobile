@@ -10,7 +10,7 @@ const colors = {
   darkBlue: '#456bb2',
   darkGray: 'grey',
   gray: '#d6d6d6',
-  lightGray: '#eeeeee',
+  lightGray: '#f9fbfc',
   green: '#a8cf45',
   darkGreen: '#49b753'
 }

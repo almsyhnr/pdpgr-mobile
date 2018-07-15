@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5,
-    color: Colors.gray
+    color: Colors.darkGray
   },
   text: {
-    color: Colors.gray
+    color: Colors.darkGray
   }
 })
 
@@ -73,7 +73,7 @@ class TimeAgo extends PureComponent {
             name='access-time'
             size={20}
             style={styles.icon}
-            color={Colors.primaryText}
+            color={Colors.darkGray}
           />
         )}
         <Text style={[styles.text, this.props.textStyle]}>

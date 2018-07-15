@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
 import { Icon, Avatar, Badge } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
-import faker from 'faker'
 
 import { TimeAgo } from '../General'
 import { Colors, Fonts, Metrics, Images } from '../../Themes'
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
   timeAgo: {
     fontSize: Fonts.size.small,
     fontFamily: Fonts.type.emphasis,
-    color: Colors.gray
+    color: Colors.darkGray
   },
   description: {
     fontFamily: Fonts.type.base,
@@ -43,12 +42,12 @@ const styles = StyleSheet.create({
     lineHeight: 16
   },
   mediaContainer: {
-    height: Metrics.screenWidth * 0.2,
+    height: Metrics.screenWidth,
     width: Metrics.screenWidth
   },
   media: {
-    height: Metrics.screenWidth * 0.2,
-    width: Metrics.screenWidth / 3,
+    height: Metrics.screenWidth,
+    width: Metrics.screenWidth,
     resizeMode: 'contain',
     backgroundColor: Colors.shadow
   },
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
   comments: {
     fontFamily: Fonts.type.base,
     textAlign: 'right',
-    color: Colors.gray
+    color: Colors.darkGray
   },
   actionContainer: {
     flexDirection: 'row',
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     marginTop: 10,
     paddingTop: 10,
-    borderColor: Colors.gray
+    borderColor: Colors.darkGray
   },
   footerAction: {
     flex: 1,
@@ -90,48 +89,78 @@ const styles = StyleSheet.create({
   footerImage: {
     width: 34,
     height: 34
+  },
+  body: {
+    borderTopWidth: 1,
+    paddingTop: 10
+  },
+  status_container: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginBottom: 10
   }
 })
 
 class ReportItem extends Component {
-  state = { }
+  state = {};
   render () {
     const { report } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Avatar
-            small
-            rounded
-            source={{ uri: report.creator.avatar }} />
+          <Avatar small rounded source={{ uri: report.creator.avatar }} />
           <View style={styles.profileContainer}>
             <Text style={styles.reporter}>{report.creator.name}</Text>
-            {/* <Text style={styles.views}>{`${report.views} Views`}</Text> */}
           </View>
-          <TimeAgo dateTime={report.created_at} textStyle={styles.timeAgo} showIcon={false} />
+          <TimeAgo
+            dateTime={report.created_at}
+            textStyle={styles.timeAgo}
+            showIcon={false}
+          />
         </View>
         <View style={styles.body}>
-          {report.galleries.length > 1 && <GalleryBadge value={report.galleries.length} />}
+          <View style={styles.status_container}>
+            <Text style={{ fontWeight: 'bold', fontFamily: Fonts.type.bold }}>{report.module.name}</Text>
+            <Badge
+              value={report.status}
+              textStyle={{ fontFamily: Fonts.type.base }}
+              containerStyle={{
+                backgroundColor: report.status_color,
+                marginLeft: 10
+              }}
+            />
+          </View>
+          <View style={styles.status_container}>
+            <Icon name='user' type='entypo' size={20} color={Colors.darkGray} />
+            <Text style={{ marginLeft: 10, fontFamily: Fonts.type.base }}>{report.name}</Text>
+          </View>
+          {report.galleries.length > 1 && (
+            <GalleryBadge value={report.galleries.length} />
+          )}
           <View style={styles.mediaContainer}>
-
-            {report.galleries.length > 0
-            ? <FlatList data={report.galleries}
-              horizontal
-              showsHorizontalScrollIndicator
-              keyExtractor={(item, index) => `${index}`}
-              renderItem={({ item, index }) => {
-                let uri = item.url
-                return (
-                  <Image source={{uri: uri}} style={styles.media} />
-                )
-              }} />
-              : <Image source={{ uri: report.module.icons.color }} style={[styles.media, styles.icon]} />}
+            {report.galleries.length > 0 ? (
+              <FlatList
+                data={report.galleries}
+                horizontal
+                showsHorizontalScrollIndicator
+                keyExtractor={(item, index) => `${index}`}
+                renderItem={({ item, index }) => {
+                  let uri = item.url
+                  return <Image source={{ uri: uri }} style={styles.media} />
+                }}
+              />
+            ) : (
+              <Image
+                source={{ uri: report.module.icons.color }}
+                style={[styles.media, styles.icon]}
+              />
+            )}
           </View>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.comments}>
-            0 Likes 0 Comments
-        </Text>
+          <Text style={styles.comments}>0 Likes 0 Comments</Text>
           <View style={styles.actionContainer}>
             <Touchable style={styles.footerAction}>
               <Image source={Images.like} style={styles.footerImage} />
