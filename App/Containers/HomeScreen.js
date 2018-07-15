@@ -70,7 +70,13 @@ class HomeScreen extends Component {
     return true
   }
 
-  renderItem = ({ item, index }) => <ReportItem report={item} />
+  openDetailPengajuan = (item) => {
+    this.props.navigation.navigate('DetailPengajuan', {
+      submission: item
+    })
+  }
+
+  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} />
 
   render () {
     return (

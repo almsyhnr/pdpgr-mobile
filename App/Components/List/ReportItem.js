@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback } from 'react-native'
 import { Icon, Avatar, Badge } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
 
@@ -106,8 +106,9 @@ const styles = StyleSheet.create({
 class ReportItem extends Component {
   state = {};
   render () {
-    const { report } = this.props
+    const { report, onPress } = this.props
     return (
+
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Avatar small rounded source={{ uri: report.creator.avatar }} />
@@ -142,7 +143,7 @@ class ReportItem extends Component {
           {report.galleries.length > 1 && (
             <GalleryBadge value={report.galleries.length} />
           )}
-          <View style={styles.mediaContainer}>
+          <View style={styles.mediaContainer} onStartShouldSetResponder={() => true}>
             {report.galleries.length > 0 ? (
               <FlatList
                 data={report.galleries}
@@ -151,27 +152,29 @@ class ReportItem extends Component {
                 keyExtractor={(item, index) => `${index}`}
                 renderItem={({ item, index }) => {
                   let uri = item.url
-                  return <Image source={{ uri: uri }} style={styles.media} />
+                  return <TouchableWithoutFeedback onPress={onPress}><Image source={{ uri: uri }} style={styles.media} /></TouchableWithoutFeedback>
                 }}
               />
             ) : (
-              <Image
-                source={{ uri: report.module.icons.color }}
-                style={[styles.media, styles.icon]}
+              <TouchableWithoutFeedback onPress={onPress}>
+                <Image
+                  source={{ uri: report.module.icons.color }}
+                  style={[styles.media, styles.icon]}
               />
+              </TouchableWithoutFeedback>
             )}
           </View>
         </View>
         <View style={styles.footer}>
           <Text style={styles.comments}>0 Likes 0 Comments</Text>
           <View style={styles.actionContainer}>
-            <Touchable style={styles.footerAction}>
+            <Touchable style={styles.footerAction} onPress={onPress}>
               <Image source={Images.like} style={styles.footerImage} />
             </Touchable>
-            <Touchable style={styles.footerAction}>
+            <Touchable style={styles.footerAction} onPress={onPress}>
               <Image source={Images.comment} style={styles.footerImage} />
             </Touchable>
-            <Touchable style={styles.footerAction}>
+            <Touchable style={styles.footerAction} onPress={onPress}>
               <Image source={Images.lokasi} style={styles.footerImage} />
             </Touchable>
           </View>
@@ -182,7 +185,8 @@ class ReportItem extends Component {
 }
 
 ReportItem.propTypes = {
-  report: PropTypes.object.isRequired
+  report: PropTypes.object.isRequired,
+  onPress: PropTypes.func
 }
 
 export default ReportItem

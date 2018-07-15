@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, InteractionManager, FlatList } from 'react-native'
+import { View, InteractionManager, FlatList, Image } from 'react-native'
 import { connect } from 'react-redux'
 // redux
 import ModuleActions from '../Redux/ModuleRedux'
@@ -11,10 +11,13 @@ import { MainMenuItem } from '../Components/Menu'
 
 // Styles
 import styles from './Styles/PilihJenisPengajuanStyle'
+import { Images } from '../Themes'
 
 class PilihJenisPengajuan extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
+      drawerLabel: 'Tambah Pengajuan',
+      drawerIcon: ({focused}) => <Image source={Images.info} style={styles.sidebarIcon} />,
       title: 'Pilih Jenis Pengajuan',
       headerRight: <NotificationButton />
     }
