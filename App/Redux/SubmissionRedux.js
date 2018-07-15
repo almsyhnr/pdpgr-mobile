@@ -4,6 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
+  getMySubmissions: ['page'],
   getSubmissions: ['page'],
   getSubmissionsSuccess: ['response'],
   createSubmission: ['form', 'files'],

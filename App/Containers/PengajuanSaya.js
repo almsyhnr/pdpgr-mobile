@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList, InteractionManager } from 'react-native'
+import { View, FlatList, InteractionManager, BackHandler, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
@@ -8,21 +8,22 @@ import { Icon } from 'react-native-elements'
 import SubmissionActions from '../Redux/SubmissionRedux'
 
 // components
-import { StatusBar, HeaderTitle } from '../Components/General'
+import { StatusBar } from '../Components/General'
 import { NotificationButton, AddReportButton } from '../Components/Button'
 import { ReportItem } from '../Components/List'
 
 // Styles
-import styles from './Styles/HomeScreenStyle'
-import { Colors } from '../Themes'
+import styles from './Styles/PengajuanSayaStyle'
+
+import { Colors, Images } from '../Themes'
 import { LoadingIndicator } from '../Components/Indicator'
 
-class HomeScreen extends Component {
+class PengajuanSaya extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      drawerLabel: 'Beranda',
-      headerTitle: <HeaderTitle />,
-      drawerIcon: ({focused}) => <Icon name='home' color={Colors.gray} />,
+      drawerLabel: 'Pengajuan Saya',
+      title: 'Pengajuan Saya',
+      drawerIcon: ({focused}) => <Image source={Images.info} style={styles.sidebarIcon} />,
       headerRight: <NotificationButton />
     }
   }
@@ -51,7 +52,7 @@ class HomeScreen extends Component {
   }
 
   getSubmissions = (page) => {
-    this.props.getSubmissions(page)
+    this.props.getMySubmissions(page)
   }
 
   loadMore = () => {
@@ -105,8 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSubmissions: page => dispatch(SubmissionActions.getSubmissions(page))
+    getMySubmissions: page => dispatch(SubmissionActions.getMySubmissions(page))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PengajuanSaya)

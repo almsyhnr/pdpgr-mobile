@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import PengajuanSaya from '../Containers/PengajuanSaya'
 import TambahPengajuan from '../Containers/TambahPengajuan'
 import LaunchScreen from '../Containers/LaunchScreen'
 import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
@@ -19,6 +20,9 @@ import styles from './Styles/NavigationStyles'
 const MainDrawer = DrawerNavigator({
   Home: {
     screen: HomeScreen
+  },
+  PengajuanSaya: {
+    screen: PengajuanSaya
   },
   Profile: {
     screen: ProfileScreen
@@ -48,6 +52,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  PengajuanSaya: { screen: PengajuanSaya },
   TambahPengajuan: { screen: TambahPengajuan },
   LaunchScreen: { screen: LaunchScreen },
   PilihJenisPengajuan: { screen: PilihJenisPengajuan },

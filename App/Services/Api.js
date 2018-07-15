@@ -37,6 +37,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   //
   const signin = (email, password) => api.post('api/login', {email: email, password: password})
   const getSubmissions = (page) => api.get('api/submissions?page=' + page)
+  const getMySubmissions = (page) => api.get('api/my_submissions?page=' + page)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
   const createSubmission = (form, files) => {
@@ -91,6 +92,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
     setHeader: api.setHeader,
     signin,
     getSubmissions,
+    getMySubmissions,
     createSubmission,
     modules,
     subVillages

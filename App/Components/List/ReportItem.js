@@ -136,6 +136,9 @@ class ReportItem extends Component {
             <Icon name='user' type='entypo' size={20} color={Colors.darkGray} />
             <Text style={{ marginLeft: 10, fontFamily: Fonts.type.base }}>{report.name}</Text>
           </View>
+        </View>
+        <View >
+
           {report.galleries.length > 1 && (
             <GalleryBadge value={report.galleries.length} />
           )}
