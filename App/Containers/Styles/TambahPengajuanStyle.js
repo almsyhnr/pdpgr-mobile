@@ -88,5 +88,6 @@ export default StyleSheet.create({
   },
   deleteText: {
     color: Colors.snow
-  }
+  },
+  upload: { width: 60, height: 60, resizeMode: 'contain', marginBottom: 5 }
 })

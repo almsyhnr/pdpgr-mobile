@@ -404,12 +404,18 @@ class TambahPengajuan extends ValidationComponent {
               placeholder='Autocomplete'
             />
           </View>
-          <FlatList
+          {this.state.images.length > 0
+          ? <FlatList
             data={this.state.images}
             renderItem={this.renderImageItem}
             numColumns={4}
             keyExtractor={(item, index) => `img-${index}`}
           />
+          : <View style={{ alignItems: 'center' }}>
+            <Image source={Images.upload} style={styles.upload} />
+            <Text>Pilih file untuk di upload</Text>
+          </View>}
+
           <Button
             title='Pilih File'
             buttonStyle={styles.btnPilihFile}
@@ -423,7 +429,7 @@ class TambahPengajuan extends ValidationComponent {
               disabled={this.props.posting}
               loading={this.props.posting}
               loadingStyle={{ padding: 10 }}
-              buttonStyle={{ borderRadius: 0, backgroundColor: Colors.blue }}
+              buttonStyle={{ borderRadius: 0, backgroundColor: Colors.darkBlue }}
               onPress={this.onSavePress}
             />
           </View>

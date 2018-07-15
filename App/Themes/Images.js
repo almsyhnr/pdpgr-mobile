@@ -22,8 +22,8 @@ const images = {
   camera: require('../Images/camera.png'),
   comment: require('../Images/comment.png'),
   like: require('../Images/like.png'),
-  lokasi: require('../Images/lokasi.png')
-
+  lokasi: require('../Images/lokasi.png'),
+  upload: require('../Images/upload.png')
 }
 
 export default images
