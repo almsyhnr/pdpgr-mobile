@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, Image, FlatList, BackHandler, InteractionManager } from 'react-native'
+import {
+  View,
+  Image,
+  FlatList,
+  BackHandler,
+  InteractionManager
+} from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -21,10 +27,16 @@ class Realisasi extends Component {
     return {
       drawerLabel: 'Realisasi',
       title: 'Realisasi',
-      drawerIcon: ({focused}) => <Image source={Images.ic_realisasi} style={styles.sidebarIcon} />,
-      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
+      drawerIcon: ({ focused }) => (
+        <Image source={Images.ic_realisasi} style={styles.sidebarIcon} />
+      ),
+      headerRight: (
+        <NotificationButton
+          onPress={() => navigation.navigate('Notifications')}
+        />
+      )
     }
-  }
+  };
 
   constructor (props) {
     super(props)
@@ -47,16 +59,16 @@ class Realisasi extends Component {
     this.props.resetSubmissions()
   }
 
-  getMyApprovedSubmissions = (page) => {
+  getMyApprovedSubmissions = page => {
     this.props.getMyApprovedSubmissions(page)
-  }
+  };
 
   loadMore = () => {
     const { pagination } = this.props
     if (pagination.current_page < pagination.total_pages) {
       this.getMyApprovedSubmissions(pagination.current_page + 1)
     }
-  }
+  };
 
   _backHandler () {
     const { nav, navigation } = this.props
@@ -67,7 +79,16 @@ class Realisasi extends Component {
     return true
   }
 
-  renderItem = ({ item, index }) => <ReportItem report={item} />
+  renderItem = ({ item, index }) => (
+    <ReportItem
+      report={item}
+      onPress={() =>
+        this.props.navigation.navigate('DetailRealisasi', {
+          id: item.id
+        })
+      }
+    />
+  );
 
   render () {
     return (
@@ -79,17 +100,19 @@ class Realisasi extends Component {
           data={this.props.submissions}
           keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderItem}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.3}
-          ListFooterComponent={<LoadingIndicator visible={this.props.fetching} size={'large'} />}
+          ListFooterComponent={
+            <LoadingIndicator visible={this.props.fetching} size={'large'} />
+          }
         />
       </View>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     nav: state.nav,
     fetching: state.submission.fetching,
@@ -97,13 +120,17 @@ const mapStateToProps = (state) => {
     submissions: state.submission.submissions,
     pagination: state.submission.submissionsPagination
   }
-}
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getMyApprovedSubmissions: page => dispatch(SubmissionActions.getMyApprovedSubmissions(page)),
+    getMyApprovedSubmissions: page =>
+      dispatch(SubmissionActions.getMyApprovedSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
   }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Realisasi)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Realisasi)

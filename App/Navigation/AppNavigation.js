@@ -8,6 +8,7 @@ import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
 import PelaporanScreen from '../Containers/PelaporanScreen'
 import { NotificationsScreen } from '../Containers/Notifications'
 import { DaftarRealisasi } from '../Containers/Realisasi'
+import { DetailRealisasi } from '../Containers/DetailRealisasi'
 
 import ProfileScreen from '../Containers/ProfileScreen'
 import HomeScreen from '../Containers/HomeScreen'
@@ -57,6 +58,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  DetailRealisasi: { screen: DetailRealisasi },
   Notifications: { screen: NotificationsScreen },
   DetailPengajuan: { screen: DetailPengajuan },
   PengajuanSaya: { screen: PengajuanSaya },
