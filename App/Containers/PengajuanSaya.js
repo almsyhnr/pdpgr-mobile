@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, FlatList, InteractionManager, BackHandler, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { Icon } from 'react-native-elements'
 
 // redux
 import SubmissionActions from '../Redux/SubmissionRedux'
@@ -10,13 +9,13 @@ import SubmissionActions from '../Redux/SubmissionRedux'
 // components
 import { StatusBar } from '../Components/General'
 import { NotificationButton, AddReportButton } from '../Components/Button'
+import { LoadingIndicator } from '../Components/Indicator'
 import { ReportItem } from '../Components/List'
 
 // Styles
 import styles from './Styles/PengajuanSayaStyle'
 
-import { Colors, Images } from '../Themes'
-import { LoadingIndicator } from '../Components/Indicator'
+import { Images } from '../Themes'
 
 class PengajuanSaya extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -49,6 +48,7 @@ class PengajuanSaya extends Component {
 
   componentWillUnmount () {
     BackHandler.removeEventListener('hardwareBackPress', this._backHandler)
+    this.props.resetSubmissions()
   }
 
   getSubmissions = (page) => {
@@ -106,7 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getMySubmissions: page => dispatch(SubmissionActions.getMySubmissions(page))
+    getMySubmissions: page => dispatch(SubmissionActions.getMySubmissions(page)),
+    resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
   }
 }
 

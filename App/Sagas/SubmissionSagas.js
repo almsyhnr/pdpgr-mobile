@@ -44,6 +44,16 @@ export function * getMySubmissions (api, { page }) {
   }
 }
 
+export function * getMyApprovedSubmissions (api, { page }) {
+  const response = yield call(api.getMyApprovedSubmissions, page)
+
+  if (response.ok) {
+    yield put(SubmissionActions.getSubmissionsSuccess(response.data))
+  } else {
+    yield put(SubmissionActions.submissionFailure())
+  }
+}
+
 export function * createSubmission (api, { form, files }) {
   const response = yield call(api.createSubmission, form, files)
 

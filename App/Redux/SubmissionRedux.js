@@ -5,6 +5,7 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   getMySubmissions: ['page'],
+  getMyApprovedSubmissions: ['page'],
   getSubmissions: ['page'],
   getSubmissionsSuccess: ['response'],
   createSubmission: ['form', 'files'],
@@ -12,6 +13,7 @@ const { Types, Creators } = createActions({
   getSubmissionDetail: ['id'],
   getSubmissionDetailSuccess: ['response'],
   resetSubmissionDetail: null,
+  resetSubmissions: null,
   submissionFailure: null,
   postSubmissionFailure: null
 })
@@ -61,6 +63,7 @@ export const getSubmissionDetailSuccess = (state, { response }) => {
 }
 
 export const resetSubmissionDetail = state => state.merge({ selectedSubmission: null })
+export const resetSubmissions = state => state.merge({ submissions: null, submissionsPagination: null })
 
 export const success = state => state.merge({ fetching: false, error: null })
 export const postSuccess = state => state.merge({ posting: false, error: false })
@@ -71,12 +74,15 @@ export const postFailure = state => state.merge({ posting: false, error: true })
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_SUBMISSIONS]: request,
+  [Types.GET_MY_SUBMISSIONS]: request,
+  [Types.GET_MY_APPROVED_SUBMISSIONS]: request,
   [Types.GET_SUBMISSIONS_SUCCESS]: getSubmissionsSuccess,
   [Types.CREATE_SUBMISSION]: postRequest,
   [Types.CREATE_SUBMISSION_SUCCESS]: postSuccess,
   [Types.GET_SUBMISSION_DETAIL]: request,
   [Types.GET_SUBMISSION_DETAIL_SUCCESS]: getSubmissionDetailSuccess,
   [Types.RESET_SUBMISSION_DETAIL]: resetSubmissionDetail,
+  [Types.RESET_SUBMISSIONS]: resetSubmissions,
   [Types.SUBMISSION_FAILURE]: failure,
   [Types.POST_SUBMISSION_FAILURE]: postFailure
 })

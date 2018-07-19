@@ -43,7 +43,7 @@ class NotificationItem extends Component {
   render () {
     const { data, onPress } = this.props
     let avatar = Images.ic_realisasi
-    if (data.type === 'submission') {
+    if (data.type === 'pengajuan') {
       avatar = Images.ic_pengajuan_saya
     }
 

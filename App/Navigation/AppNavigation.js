@@ -7,6 +7,7 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
 import PelaporanScreen from '../Containers/PelaporanScreen'
 import { NotificationsScreen } from '../Containers/Notifications'
+import { DaftarRealisasi } from '../Containers/Realisasi'
 
 import ProfileScreen from '../Containers/ProfileScreen'
 import HomeScreen from '../Containers/HomeScreen'
@@ -26,6 +27,9 @@ const MainDrawer = DrawerNavigator({
   },
   PengajuanSaya: {
     screen: PengajuanSaya
+  },
+  Realisasi: {
+    screen: DaftarRealisasi
   },
   Profile: {
     screen: ProfileScreen

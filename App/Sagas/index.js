@@ -15,7 +15,7 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
-import { getSubmissions, getSubmissionDetail, getMySubmissions, createSubmission } from './SubmissionSagas'
+import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
@@ -39,6 +39,7 @@ export default function * root () {
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
     takeLatest(SubmissionTypes.GET_SUBMISSION_DETAIL, getSubmissionDetail, api),
     takeLatest(SubmissionTypes.GET_MY_SUBMISSIONS, getMySubmissions, api),
+    takeLatest(SubmissionTypes.GET_MY_APPROVED_SUBMISSIONS, getMyApprovedSubmissions, api),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
 
     // Module

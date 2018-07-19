@@ -37,9 +37,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     padding: 15,
-    width: '100%',
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: Colors.gray
+    width: '100%'
+  },
+  divider: {
+    height: 1,
+    backgroundColor: Colors.gray
   }
 })

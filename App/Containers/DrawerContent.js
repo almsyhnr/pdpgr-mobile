@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { ScrollView, View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { DrawerItems, NavigationActions } from 'react-navigation'
-import { Avatar } from 'react-native-elements'
+import { Avatar, Divider } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import _ from 'lodash'
 
 // redux
 import AuthActions from '../Redux/AuthRedux'
@@ -41,10 +42,12 @@ class DrawerContent extends Component {
   }
 
   render () {
-    const { user } = this.props
+    const { user, items, ...rest } = this.props
     if (!user) {
       return null
     }
+    const hiddenMenus = ['Home', 'Profile']
+    const filteredItems = items.filter(item => !_.includes(hiddenMenus, item.key))
     return (
       <View style={styles.container}>
         <View style={styles.profileContainer}>
@@ -57,19 +60,34 @@ class DrawerContent extends Component {
           </View>
         </View>
         <ScrollView>
-          <DrawerItems {...this.props}
+          <Touchable onPress={() => this.props.navigation.navigate('Profile')}>
+            <View style={styles.logoutContainer}>
+              <Image source={Images.ic_profil} style={styles.sidebarIcon} />
+              <Text style={[styles.menuText, {marginLeft: 17}]}>Akun</Text>
+            </View>
+          </Touchable>
+          <Touchable onPress={() => this.props.navigation.navigate('Home')}>
+            <View style={styles.logoutContainer}>
+              <Image source={Images.ic_home} style={styles.sidebarIcon} />
+              <Text style={[styles.menuText, {marginLeft: 17}]}>Home</Text>
+            </View>
+          </Touchable>
+          <Divider style={styles.divider} />
+          <DrawerItems items={filteredItems} {...rest}
             getLabel={(scene) => (
               <View style={{ paddingVertical: 15 }}>
                 <Text style={styles.menuText}>{this.props.getLabel(scene)}</Text>
               </View>)}
             activeTintColor={Colors.gray} inactiveTintColor={Colors.gray}
             activeBackgroundColor={Colors.tabActive} itemStyle={styles.drawerItem} />
+          <Divider style={styles.divider} />
           <Touchable onPress={() => this.props.logout()}>
             <View style={styles.logoutContainer}>
               <Image source={Images.logout} style={styles.sidebarIcon} />
               <Text style={[styles.menuText, {marginLeft: 17}]}>Logout</Text>
             </View>
           </Touchable>
+          <Divider style={styles.divider} />
         </ScrollView>
 
       </View>

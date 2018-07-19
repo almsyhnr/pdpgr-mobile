@@ -1,44 +1,40 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList, Image, InteractionManager } from 'react-native'
+import { View, Image, FlatList, BackHandler, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { Icon } from 'react-native-elements'
 
 // redux
-import SubmissionActions from '../Redux/SubmissionRedux'
+import SubmissionActions from '../../Redux/SubmissionRedux'
 
 // components
-import { StatusBar, HeaderTitle } from '../Components/General'
-import { NotificationButton, AddReportButton } from '../Components/Button'
-import { ReportItem } from '../Components/List'
+import { StatusBar } from '../../Components/General'
+import { NotificationButton } from '../../Components/Button'
+import { ReportItem } from '../../Components/List'
+import { LoadingIndicator } from '../../Components/Indicator'
 
-// Styles
-import styles from './Styles/HomeScreenStyle'
-import { Images } from '../Themes'
-import { LoadingIndicator } from '../Components/Indicator'
+// styles
+import styles from './styles'
+import { Images } from '../../Themes'
 
-class HomeScreen extends Component {
+class Realisasi extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      drawerLabel: 'Beranda',
-      headerTitle: <HeaderTitle />,
-      drawerIcon: ({focused}) => <Image source={Images.ic_home} style={styles.sidebarIcon} />,
+      drawerLabel: 'Realisasi',
+      title: 'Realisasi',
+      drawerIcon: ({focused}) => <Image source={Images.ic_realisasi} style={styles.sidebarIcon} />,
       headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
     }
   }
 
   constructor (props) {
     super(props)
-    this.state = {
-      submissions: []
-    }
     this._backHandler = this._backHandler.bind(this)
     this.renderItem = this.renderItem.bind(this)
   }
 
   componentWillMount () {
     InteractionManager.runAfterInteractions(() => {
-      this.getSubmissions(1)
+      this.getMyApprovedSubmissions(1)
     })
   }
 
@@ -51,14 +47,14 @@ class HomeScreen extends Component {
     this.props.resetSubmissions()
   }
 
-  getSubmissions = (page) => {
-    this.props.getSubmissions(page)
+  getMyApprovedSubmissions = (page) => {
+    this.props.getMyApprovedSubmissions(page)
   }
 
   loadMore = () => {
     const { pagination } = this.props
     if (pagination.current_page < pagination.total_pages) {
-      this.getSubmissions(pagination.current_page + 1)
+      this.getMyApprovedSubmissions(pagination.current_page + 1)
     }
   }
 
@@ -71,13 +67,7 @@ class HomeScreen extends Component {
     return true
   }
 
-  openDetailPengajuan = (item) => {
-    this.props.navigation.navigate('DetailPengajuan', {
-      id: item.id
-    })
-  }
-
-  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} />
+  renderItem = ({ item, index }) => <ReportItem report={item} />
 
   render () {
     return (
@@ -85,7 +75,7 @@ class HomeScreen extends Component {
         <StatusBar />
         <FlatList
           refreshing={false}
-          onRefresh={() => this.getSubmissions(1)}
+          onRefresh={() => this.getMyApprovedSubmissions(1)}
           data={this.props.submissions}
           keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderItem}
@@ -94,7 +84,6 @@ class HomeScreen extends Component {
           onEndReachedThreshold={0.3}
           ListFooterComponent={<LoadingIndicator visible={this.props.fetching} size={'large'} />}
         />
-        <AddReportButton />
       </View>
     )
   }
@@ -112,9 +101,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSubmissions: page => dispatch(SubmissionActions.getSubmissions(page)),
+    getMyApprovedSubmissions: page => dispatch(SubmissionActions.getMyApprovedSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(Realisasi)
