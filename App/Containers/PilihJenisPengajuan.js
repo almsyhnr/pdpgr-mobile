@@ -17,9 +17,9 @@ class PilihJenisPengajuan extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       drawerLabel: 'Tambah Pengajuan',
-      drawerIcon: ({focused}) => <Image source={Images.info} style={styles.sidebarIcon} />,
+      drawerIcon: ({focused}) => <Image source={Images.ic_tambah_pengajuan} style={styles.sidebarIcon} />,
       title: 'Pilih Jenis Pengajuan',
-      headerRight: <NotificationButton />
+      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
     }
   }
 

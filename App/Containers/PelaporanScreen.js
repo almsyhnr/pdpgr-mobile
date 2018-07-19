@@ -16,9 +16,11 @@ import { Images } from '../Themes'
 import styles from './Styles/PelaporanScreenStyle'
 
 class PelaporanScreen extends Component {
-  static navigationOptions = {
-    title: 'Laporan',
-    headerRight: <NotificationButton />
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Laporan',
+      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
+    }
   }
 
   constructor (props) {

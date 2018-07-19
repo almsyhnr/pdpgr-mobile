@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList, InteractionManager } from 'react-native'
+import { View, BackHandler, FlatList, Image, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
@@ -14,7 +14,7 @@ import { ReportItem } from '../Components/List'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
-import { Colors } from '../Themes'
+import { Images } from '../Themes'
 import { LoadingIndicator } from '../Components/Indicator'
 
 class HomeScreen extends Component {
@@ -22,8 +22,8 @@ class HomeScreen extends Component {
     return {
       drawerLabel: 'Beranda',
       headerTitle: <HeaderTitle />,
-      drawerIcon: ({focused}) => <Icon name='home' color={Colors.gray} />,
-      headerRight: <NotificationButton />
+      drawerIcon: ({focused}) => <Image source={Images.ic_home} style={styles.sidebarIcon} />,
+      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
     }
   }
 
@@ -72,7 +72,7 @@ class HomeScreen extends Component {
 
   openDetailPengajuan = (item) => {
     this.props.navigation.navigate('DetailPengajuan', {
-      submission: item
+      id: item.id
     })
   }
 

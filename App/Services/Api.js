@@ -37,9 +37,12 @@ const create = (baseURL = AppConfig.baseUrl) => {
   //
   const signin = (email, password) => api.post('api/login', {email: email, password: password})
   const getSubmissions = (page) => api.get('api/submissions?page=' + page)
+  const getSubmissionDetail = (id) => api.get('api/submissions/' + id)
   const getMySubmissions = (page) => api.get('api/my_submissions?page=' + page)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
+  const getNotifications = (page) => api.get('api/notifications?page=' + page)
+  const readNotification = (id) => api.post('api/notifications/' + id + '/read')
   const createSubmission = (form, files) => {
     var body = new FormData()
     body.append(`module_id`, form.module_id)
@@ -92,9 +95,12 @@ const create = (baseURL = AppConfig.baseUrl) => {
     setHeader: api.setHeader,
     signin,
     getSubmissions,
+    getSubmissionDetail,
     getMySubmissions,
     createSubmission,
     modules,
+    getNotifications,
+    readNotification,
     subVillages
   }
 }

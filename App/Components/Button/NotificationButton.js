@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Icon } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
 import { StyleSheet } from 'react-native'
@@ -10,10 +11,26 @@ const styles = StyleSheet.create({
   }
 })
 
-const NotificationButton = () => (
-  <Touchable onPress={() => alert('Notification')} style={styles.container}>
-    <Icon name='notifications' color={Colors.snow} />
-  </Touchable>
-)
+class NotificationButton extends Component {
+  state = { }
+  render () {
+    return (
 
-export default NotificationButton
+      <Touchable onPress={this.props.onPress} style={styles.container}>
+        <Icon name='notifications' color={Colors.snow} />
+      </Touchable>
+    )
+  }
+}
+
+NotificationButton.propTypes = {
+  onPress: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, null)(NotificationButton)

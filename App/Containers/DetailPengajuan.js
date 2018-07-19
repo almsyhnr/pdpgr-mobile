@@ -5,14 +5,17 @@ import {
   Text,
   FlatList,
   TouchableWithoutFeedback,
+  InteractionManager,
   Image
 } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+
+// redux
+import SubmissionActions from '../Redux/SubmissionRedux'
 
 // Styles
 import styles from './Styles/DetailPengajuanStyle'
+import { LoadingIndicator } from '../Components/Indicator'
 
 class DetailPengajuan extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -28,8 +31,21 @@ class DetailPengajuan extends Component {
     }
   }
 
+  componentDidMount () {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.getSubmissionDetail(this.props.navigation.state.params.id)
+    })
+  }
+
+  componentWillUnmount () {
+    this.props.resetSubmissionDetail()
+  }
+
   render () {
-    const { submission } = this.state
+    const { submission, fetching } = this.props
+    if (!submission) {
+      return <LoadingIndicator visible={fetching} size={'large'} />
+    }
     return (
       <ScrollView style={styles.container}>
         <View style={styles.section}>
@@ -80,11 +96,18 @@ class DetailPengajuan extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    submission: state.submission.selectedSubmission,
+    fetching: state.submission.fetching,
+    error: state.submission.error
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    getSubmissionDetail: id => dispatch(SubmissionActions.getSubmissionDetail(id)),
+    resetSubmissionDetail: () => dispatch(SubmissionActions.resetSubmissionDetail())
+  }
 }
 
 export default connect(

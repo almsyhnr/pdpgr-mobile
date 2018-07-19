@@ -10,13 +10,15 @@ import { AuthTypes } from '../Redux/AuthRedux'
 import { SubmissionTypes } from '../Redux/SubmissionRedux'
 import { ModuleTypes } from '../Redux/ModuleRedux'
 import { SubVillageTypes } from '../Redux/SubVillageRedux'
+import { NotificationTypes } from '../Redux/NotificationRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
-import { getSubmissions, getMySubmissions, createSubmission } from './SubmissionSagas'
+import { getSubmissions, getSubmissionDetail, getMySubmissions, createSubmission } from './SubmissionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
+import { getNotifications, readNotification } from './NotificationSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -35,6 +37,7 @@ export default function * root () {
 
     // Submission
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
+    takeLatest(SubmissionTypes.GET_SUBMISSION_DETAIL, getSubmissionDetail, api),
     takeLatest(SubmissionTypes.GET_MY_SUBMISSIONS, getMySubmissions, api),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
 
@@ -42,6 +45,10 @@ export default function * root () {
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),
 
     // SubVillage
-    takeLatest(SubVillageTypes.GET_SUB_VILLAGES, getSubVillages, api)
+    takeLatest(SubVillageTypes.GET_SUB_VILLAGES, getSubVillages, api),
+
+    // Notifications
+    takeLatest(NotificationTypes.GET_NOTIFICATIONS, getNotifications, api),
+    takeLatest(NotificationTypes.READ_NOTIFICATION, readNotification, api)
   ])
 }

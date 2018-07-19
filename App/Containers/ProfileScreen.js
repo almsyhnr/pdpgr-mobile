@@ -14,7 +14,7 @@ class ProfileScreen extends Component {
     return {
       drawerLabel: 'Profile',
       title: 'Profile',
-      drawerIcon: ({focused}) => <Image source={Images.profile} style={styles.sidebarIcon} />
+      drawerIcon: ({focused}) => <Image source={Images.ic_profil} style={styles.sidebarIcon} />
     }
   }
   render () {

@@ -23,8 +23,8 @@ class PengajuanSaya extends Component {
     return {
       drawerLabel: 'Pengajuan Saya',
       title: 'Pengajuan Saya',
-      drawerIcon: ({focused}) => <Image source={Images.info} style={styles.sidebarIcon} />,
-      headerRight: <NotificationButton />
+      drawerIcon: ({focused}) => <Image source={Images.ic_pengajuan_saya} style={styles.sidebarIcon} />,
+      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
     }
   }
 

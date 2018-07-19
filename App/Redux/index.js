@@ -13,7 +13,8 @@ export const reducers = combineReducers({
   startup: require('./StartupRedux').reducer,
   submission: require('./SubmissionRedux').reducer,
   module: require('./ModuleRedux').reducer,
-  subVillage: require('./SubVillageRedux').reducer
+  subVillage: require('./SubVillageRedux').reducer,
+  notification: require('./NotificationRedux').reducer
 })
 
 export default () => {

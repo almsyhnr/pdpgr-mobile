@@ -23,7 +23,14 @@ const images = {
   comment: require('../Images/comment.png'),
   like: require('../Images/like.png'),
   lokasi: require('../Images/lokasi.png'),
-  upload: require('../Images/upload.png')
+  upload: require('../Images/upload.png'),
+
+  ic_profil: require('../Images/ic_profil.png'),
+  ic_home: require('../Images/ic_home.png'),
+  ic_pengajuan_kosong: require('../Images/ic_pengajuan_kosong.png'),
+  ic_pengajuan_saya: require('../Images/ic_pengajuan_saya.png'),
+  ic_realisasi: require('../Images/ic_realisasi.png'),
+  ic_tambah_pengajuan: require('../Images/ic_tambah_pengajuan.png')
 }
 
 export default images
