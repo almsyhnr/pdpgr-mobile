@@ -5,6 +5,8 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view'
 
 // redux
 import SubmissionActions from '../../Redux/SubmissionRedux'
+import SubmissionTerminActions from '../../Redux/SubmissionTerminRedux'
+import SubmissionTransactionActions from '../../Redux/SubmissionTransactionRedux'
 
 import styles from './styles'
 import { SubmissionDetail } from '../../Components/Shared'
@@ -27,7 +29,10 @@ class DetailRealisasi extends Component {
 
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
-      this.props.getSubmissionDetail(this.props.navigation.state.params.id)
+      const submissionId = this.props.navigation.state.params.id
+      this.props.getSubmissionDetail(submissionId)
+      this.props.getSubmissionTermins(submissionId)
+      this.props.getSubmissionTransactions(submissionId)
     })
   }
 
@@ -61,6 +66,8 @@ class DetailRealisasi extends Component {
 const mapStateToProps = state => {
   return {
     submission: state.submission.selected,
+    termins: state.submissionTermin.data,
+    transactions: state.submissionTransaction.data,
     fetching: state.submission.fetching,
     error: state.submission.error
   }
@@ -69,6 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSubmissionDetail: id => dispatch(SubmissionActions.getSubmissionDetail(id)),
+    getSubmissionTermins: id => dispatch(SubmissionTerminActions.getSubmissionTermins(id)),
+    getSubmissionTransactions: id => dispatch(SubmissionTransactionActions.getSubmissionTransactions(id)),
     resetSubmissionDetail: () => dispatch(SubmissionActions.resetSubmissionDetail())
   }
 }

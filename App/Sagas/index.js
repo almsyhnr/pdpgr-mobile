@@ -8,6 +8,8 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { SubmissionTypes } from '../Redux/SubmissionRedux'
+import { SubmissionTerminTypes } from '../Redux/SubmissionTerminRedux'
+import { SubmissionTransactionTypes } from '../Redux/SubmissionTransactionRedux'
 import { ModuleTypes } from '../Redux/ModuleRedux'
 import { SubVillageTypes } from '../Redux/SubVillageRedux'
 import { NotificationTypes } from '../Redux/NotificationRedux'
@@ -16,6 +18,8 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
 import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
+import { getSubmissionTermins } from './SubmissionTerminSagas'
+import { getSubmissionTransactions } from './SubmissionTransactionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
@@ -41,6 +45,12 @@ export default function * root () {
     takeLatest(SubmissionTypes.GET_MY_SUBMISSIONS, getMySubmissions, api),
     takeLatest(SubmissionTypes.GET_MY_APPROVED_SUBMISSIONS, getMyApprovedSubmissions, api),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
+
+    // Submission Termin
+    takeLatest(SubmissionTerminTypes.GET_SUBMISSION_TERMINS, getSubmissionTermins, api),
+
+    // Submission Transactions
+    takeLatest(SubmissionTransactionTypes.GET_SUBMISSION_TRANSACTIONS, getSubmissionTransactions, api),
 
     // Module
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),

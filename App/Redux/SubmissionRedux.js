@@ -40,11 +40,6 @@ export const SubmissionSelectors = {
 
 /* ------------- Reducers ------------- */
 
-// request the data from an api
-export const request = (state) =>
-  state.merge({ fetching: true })
-export const postRequest = (state) => state.merge({ posting: true })
-
 // successful api lookup
 export const getSubmissionsSuccess = (state, { response }) => {
   const { data, meta } = response
@@ -65,6 +60,9 @@ export const getSubmissionDetailSuccess = (state, { response }) => {
 export const resetSubmissionDetail = state => state.merge({ selected: null })
 export const resetSubmissions = state => state.merge({ data: null, pagination: null })
 
+// standard
+export const request = (state) => state.merge({ fetching: true })
+export const postRequest = (state) => state.merge({ posting: true })
 export const success = state => state.merge({ fetching: false, error: null })
 export const postSuccess = state => state.merge({ posting: false, error: false })
 export const failure = state => state.merge({ fetching: false, error: true })

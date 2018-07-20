@@ -40,6 +40,8 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const getSubmissionDetail = (id) => api.get('api/submissions/' + id)
   const getMySubmissions = (page) => api.get('api/my_submissions?page=' + page)
   const getMyApprovedSubmissions = (page) => api.get('api/my_approved_submissions?page=' + page)
+  const getSubmissionTermins = (id) => api.get('api/my_approved_submissions/' + id + '/termins')
+  const getSubmissionTransactions = (id, page) => api.get('api/my_approved_submissions/' + id + '/transactions?page=' + page)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
   const getNotifications = (page) => api.get('api/notifications?page=' + page)
@@ -99,6 +101,8 @@ const create = (baseURL = AppConfig.baseUrl) => {
     getSubmissionDetail,
     getMySubmissions,
     getMyApprovedSubmissions,
+    getSubmissionTermins,
+    getSubmissionTransactions,
     createSubmission,
     modules,
     getNotifications,

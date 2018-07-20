@@ -12,6 +12,8 @@ export const reducers = combineReducers({
   user: require('./UserRedux').reducer,
   startup: require('./StartupRedux').reducer,
   submission: require('./SubmissionRedux').reducer,
+  submissionTermin: require('./SubmissionTerminRedux').reducer,
+  submissionTransaction: require('./SubmissionTransactionRedux').reducer,
   module: require('./ModuleRedux').reducer,
   subVillage: require('./SubVillageRedux').reducer,
   notification: require('./NotificationRedux').reducer
