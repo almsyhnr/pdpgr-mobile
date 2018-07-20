@@ -9,6 +9,7 @@ import PelaporanScreen from '../Containers/PelaporanScreen'
 import { NotificationsScreen } from '../Containers/Notifications'
 import { DaftarRealisasi } from '../Containers/Realisasi'
 import { DetailRealisasi } from '../Containers/DetailRealisasi'
+import { ForumSatpolPp, ForumYasinan } from '../Containers/Forum'
 
 import ProfileScreen from '../Containers/ProfileScreen'
 import HomeScreen from '../Containers/HomeScreen'
@@ -31,6 +32,12 @@ const MainDrawer = DrawerNavigator({
   },
   Realisasi: {
     screen: DaftarRealisasi
+  },
+  ForumSatpolPp: {
+    screen: ForumSatpolPp
+  },
+  ForumYasinan: {
+    screen: ForumYasinan
   },
   Profile: {
     screen: ProfileScreen
