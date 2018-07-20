@@ -105,8 +105,8 @@ const mapStateToProps = (state) => {
     nav: state.nav,
     fetching: state.submission.fetching,
     error: state.submission.error,
-    submissions: state.submission.submissions,
-    pagination: state.submission.submissionsPagination
+    submissions: state.submission.data,
+    pagination: state.submission.pagination
   }
 }
 

@@ -490,7 +490,7 @@ class TambahPengajuan extends ValidationComponent {
 const mapStateToProps = state => {
   return {
     user: state.user.user,
-    subVillages: state.subVillage.subVillages,
+    subVillages: state.subVillage.data,
     fetching: state.subVillage.fetching,
     error: state.submission.error,
     posting: state.submission.posting

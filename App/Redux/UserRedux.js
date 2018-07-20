@@ -16,7 +16,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  user: null,
+  data: null,
   fetching: null,
   error: null
 })
@@ -24,7 +24,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const UserSelectors = {
-  getUser: state => state.user
+  getUser: state => state.data
 }
 
 /* ------------- Reducers ------------- */
@@ -33,7 +33,7 @@ export const request = (state) =>
   state.merge({ fetching: true })
 
 export const getUserSuccess = (state, { response }) => {
-  return state.merge({ fetching: false, error: null, user: response })
+  return state.merge({ fetching: false, error: null, data: response })
 }
 
 export const failure = state =>

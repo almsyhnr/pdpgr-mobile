@@ -24,9 +24,9 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  submissions: null,
-  submissionsPagination: null,
-  selectedSubmission: null,
+  data: null,
+  pagination: null,
+  selected: null,
   fetching: false,
   posting: false,
   error: null
@@ -35,7 +35,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const SubmissionSelectors = {
-  getSubmissions: state => state.submissions
+  getSubmissions: state => state.data
 }
 
 /* ------------- Reducers ------------- */
@@ -52,18 +52,18 @@ export const getSubmissionsSuccess = (state, { response }) => {
   if (meta.pagination.current_page === 1) {
     submissions = data
   } else {
-    submissions = state.submissions.concat(data)
+    submissions = state.data.concat(data)
   }
-  return state.merge({ fetching: false, error: null, submissions: submissions, submissionsPagination: meta.pagination })
+  return state.merge({ fetching: false, error: null, data: submissions, pagination: meta.pagination })
 }
 
 export const getSubmissionDetailSuccess = (state, { response }) => {
   const { data } = response
-  return state.merge({ fetching: false, error: null, selectedSubmission: data })
+  return state.merge({ fetching: false, error: null, selected: data })
 }
 
-export const resetSubmissionDetail = state => state.merge({ selectedSubmission: null })
-export const resetSubmissions = state => state.merge({ submissions: null, submissionsPagination: null })
+export const resetSubmissionDetail = state => state.merge({ selected: null })
+export const resetSubmissions = state => state.merge({ data: null, pagination: null })
 
 export const success = state => state.merge({ fetching: false, error: null })
 export const postSuccess = state => state.merge({ posting: false, error: false })

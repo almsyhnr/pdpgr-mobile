@@ -60,7 +60,7 @@ class DetailRealisasi extends Component {
 }
 const mapStateToProps = state => {
   return {
-    submission: state.submission.selectedSubmission,
+    submission: state.submission.selected,
     fetching: state.submission.fetching,
     error: state.submission.error
   }

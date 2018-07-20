@@ -15,7 +15,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  subVillages: null,
+  data: null,
   fetching: null,
   error: null
 })
@@ -23,7 +23,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const ModuleSelectors = {
-  getSubVillages: state => state.subVillages
+  getSubVillages: state => state.data
 }
 
 /* ------------- Reducers ------------- */
@@ -35,7 +35,7 @@ export const request = (state) =>
 // successful api lookup
 export const getSubVillagesSuccess = (state, { response }) => {
   const { data } = response
-  return state.merge({ fetching: false, error: null, subVillages: data })
+  return state.merge({ fetching: false, error: null, data })
 }
 
 // Something went wrong somewhere.

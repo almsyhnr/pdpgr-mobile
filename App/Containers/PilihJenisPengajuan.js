@@ -55,7 +55,7 @@ class PilihJenisPengajuan extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    modules: state.module.modules
+    modules: state.module.data
   }
 }
 

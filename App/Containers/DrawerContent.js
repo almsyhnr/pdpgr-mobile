@@ -98,7 +98,7 @@ class DrawerContent extends Component {
 const mapStateToProps = (state) => {
   return {
     accessToken: state.auth.accessToken,
-    user: state.user.user
+    user: state.user.data
   }
 }
 

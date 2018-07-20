@@ -117,10 +117,10 @@ const mapStateToProps = state => {
     nav: state.nav,
     fetching: state.submission.fetching,
     error: state.submission.error,
-    submissions: state.submission.submissions,
-    pagination: state.submission.submissionsPagination
+    submissions: state.submission.data,
+    pagination: state.submission.pagination || {}
   }
-};
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -128,7 +128,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(SubmissionActions.getMyApprovedSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
   }
-};
+}
 
 export default connect(
   mapStateToProps,

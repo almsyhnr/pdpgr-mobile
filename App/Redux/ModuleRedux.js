@@ -15,7 +15,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  modules: null,
+  data: null,
   fetching: null,
   error: null
 })
@@ -23,7 +23,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const ModuleSelectors = {
-  getModules: state => state.modules
+  getModules: state => state.data
 }
 
 /* ------------- Reducers ------------- */
@@ -35,7 +35,7 @@ export const request = (state) =>
 // successful api lookup
 export const getModulesSuccess = (state, { response }) => {
   const { data } = response
-  return state.merge({ fetching: false, error: null, modules: data })
+  return state.merge({ fetching: false, error: null, data })
 }
 
 // Something went wrong somewhere.
