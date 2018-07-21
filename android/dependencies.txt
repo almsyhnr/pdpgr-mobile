@@ -1,6 +1,161 @@
-Incremental java compilation is an incubating feature.
-File /Users/gama/.android/repositories.cfg could not be loaded.
+Starting a Gradle Daemon, 2 incompatible Daemons could not be reused, use --status for details
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (27.0.2) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '27.0.2'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (23.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '23.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (27.0.0) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '27.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+WARNING: The specified Android SDK Build Tools version (26.0.1) is ignored, as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.2.
+Android SDK Build Tools 27.0.3 will be used.
+To suppress this warning, remove "buildToolsVersion '26.0.1'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
+:app:dependencies
 
-BUILD FAILED
+------------------------------------------------------------
+Project :app
+------------------------------------------------------------
 
-Total time: 19.658 secs
+releaseCompileClasspath - Resolved configuration for compilation for variant: release
++--- project :react-native-fast-image
+|    +--- com.facebook.react:react-native:+ -> 0.53.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- com.android.support:appcompat-v7:23.0.1 -> 27.0.2
+|    |    |    +--- com.android.support:support-annotations:27.0.2
+|    |    |    +--- com.android.support:support-core-utils:27.0.2
+|    |    |    |    +--- com.android.support:support-annotations:27.0.2
+|    |    |    |    \--- com.android.support:support-compat:27.0.2
+|    |    |    |         +--- com.android.support:support-annotations:27.0.2
+|    |    |    |         \--- android.arch.lifecycle:runtime:1.0.3
+|    |    |    |              +--- android.arch.lifecycle:common:1.0.3
+|    |    |    |              \--- android.arch.core:common:1.0.0
+|    |    |    +--- com.android.support:support-fragment:27.0.2
+|    |    |    |    +--- com.android.support:support-compat:27.0.2 (*)
+|    |    |    |    +--- com.android.support:support-core-ui:27.0.2
+|    |    |    |    |    +--- com.android.support:support-annotations:27.0.2
+|    |    |    |    |    \--- com.android.support:support-compat:27.0.2 (*)
+|    |    |    |    +--- com.android.support:support-core-utils:27.0.2 (*)
+|    |    |    |    \--- com.android.support:support-annotations:27.0.2
+|    |    |    +--- com.android.support:support-vector-drawable:27.0.2
+|    |    |    |    +--- com.android.support:support-annotations:27.0.2
+|    |    |    |    \--- com.android.support:support-compat:27.0.2 (*)
+|    |    |    \--- com.android.support:animated-vector-drawable:27.0.2
+|    |    |         +--- com.android.support:support-vector-drawable:27.0.2 (*)
+|    |    |         \--- com.android.support:support-core-ui:27.0.2 (*)
+|    |    +--- com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0
+|    |    |    \--- com.facebook.fbui.textlayoutbuilder:staticlayout-proxy:1.0
+|    |    +--- com.facebook.fresco:fresco:1.3.0
+|    |    |    +--- com.facebook.fresco:drawee:1.3.0
+|    |    |    |    \--- com.facebook.fresco:fbcore:1.3.0
+|    |    |    +--- com.facebook.fresco:fbcore:1.3.0
+|    |    |    \--- com.facebook.fresco:imagepipeline:1.3.0
+|    |    |         +--- com.parse.bolts:bolts-tasks:1.4.0
+|    |    |         +--- com.facebook.fresco:fbcore:1.3.0
+|    |    |         \--- com.facebook.fresco:imagepipeline-base:1.3.0
+|    |    |              +--- com.parse.bolts:bolts-tasks:1.4.0
+|    |    |              \--- com.facebook.fresco:fbcore:1.3.0
+|    |    +--- com.facebook.fresco:imagepipeline-okhttp3:1.3.0
+|    |    |    +--- com.squareup.okhttp3:okhttp:3.6.0
+|    |    |    |    \--- com.squareup.okio:okio:1.11.0 -> 1.13.0
+|    |    |    +--- com.facebook.fresco:fbcore:1.3.0
+|    |    |    \--- com.facebook.fresco:imagepipeline:1.3.0 (*)
+|    |    +--- com.facebook.soloader:soloader:0.1.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- com.squareup.okhttp3:okhttp:3.6.0 (*)
+|    |    +--- com.squareup.okhttp3:okhttp-urlconnection:3.6.0
+|    |    |    \--- com.squareup.okhttp3:okhttp:3.6.0 (*)
+|    |    +--- com.squareup.okio:okio:1.13.0
+|    |    \--- org.webkit:android-jsc:r174650
+|    +--- com.android.support:support-v4:23.+ -> 23.4.0
+|    |    \--- com.android.support:support-annotations:23.4.0 -> 27.0.2
+|    +--- com.github.bumptech.glide:glide:3.8.0
+|    \--- com.github.bumptech.glide:okhttp3-integration:1.5.0
+|         +--- com.squareup.okhttp3:okhttp:3.1.0 -> 3.6.0 (*)
+|         \--- com.github.bumptech.glide:glide:3.8.0
++--- project :react-native-code-push
+|    +--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+|    \--- com.nimbusds:nimbus-jose-jwt:5.1
+|         +--- com.github.stephenc.jcip:jcip-annotations:1.0-1
+|         \--- net.minidev:json-smart:[1.3.1,2.3] -> 2.3
+|              \--- net.minidev:accessors-smart:1.2
+|                   \--- org.ow2.asm:asm:5.0.4
++--- project :appcenter-crashes
+|    +--- com.android.support:appcompat-v7:23.0.1 -> 27.0.2 (*)
+|    +--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+|    +--- com.microsoft.appcenter:appcenter-crashes:1.4.0
+|    |    \--- com.microsoft.appcenter:appcenter:1.4.0
+|    \--- com.microsoft.appcenter.reactnative:appcenter-react-native:1.4.0
+|         +--- com.android.support:appcompat-v7:23.0.1 -> 27.0.2 (*)
+|         \--- com.microsoft.appcenter:appcenter:1.4.0
++--- project :appcenter-analytics
+|    +--- com.android.support:appcompat-v7:23.0.1 -> 27.0.2 (*)
+|    +--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+|    +--- com.microsoft.appcenter:appcenter-analytics:1.4.0
+|    |    \--- com.microsoft.appcenter:appcenter:1.4.0
+|    \--- com.microsoft.appcenter.reactnative:appcenter-react-native:1.4.0 (*)
++--- project :appcenter
+|    +--- com.android.support:appcompat-v7:23.0.1 -> 27.0.2 (*)
+|    +--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+|    +--- com.microsoft.appcenter:appcenter:1.4.0
+|    \--- com.microsoft.appcenter.reactnative:appcenter-react-native:1.4.0 (*)
++--- project :react-native-image-crop-picker
+|    +--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+|    +--- com.github.yalantis:ucrop:2.2.1-native
+|    |    +--- com.android.support:appcompat-v7:25.0.0 -> 27.0.2 (*)
+|    |    \--- com.squareup.okhttp3:okhttp:3.4.1 -> 3.6.0 (*)
+|    \--- id.zelory:compressor:2.1.0
+|         \--- io.reactivex.rxjava2:rxjava:2.1.0
+|              \--- org.reactivestreams:reactive-streams:1.0.0
++--- project :react-native-config
+|    \--- com.facebook.react:react-native:+ -> 0.53.0 (*)
++--- project :react-native-vector-icons
+|    \--- com.facebook.react:react-native:+ -> 0.53.0 (*)
++--- project :react-native-i18n
+|    \--- com.facebook.react:react-native:0.12.+ -> 0.53.0 (*)
++--- com.android.support:appcompat-v7:27.0.2 (*)
++--- com.facebook.react:react-native:+ -> 0.53.0 (*)
+\--- com.android.support:multidex:1.0.2
+
+(*) - dependencies omitted (listed previously)
+
+BUILD SUCCESSFUL in 18s
+1 actionable task: 1 executed

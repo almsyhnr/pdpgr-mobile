@@ -31,6 +31,8 @@ target 'pdpgr' do
   platform :ios, '9.0'
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
+  pod 'react-native-fast-image', :path => '../node_modules/react-native-fast-image'
+
   target 'pdpgrTests' do
     inherit! :search_paths
     # Pods for testing

@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback } from 'react-native'
-import { Icon, Avatar, Badge } from 'react-native-elements'
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableWithoutFeedback
+} from 'react-native'
+import { Icon, Badge } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import FastImage from 'react-native-fast-image'
 
-import { TimeAgo } from '../General'
+import { TimeAgo, Avatar } from '../General'
 import { Colors, Fonts, Metrics, Images } from '../../Themes'
 import { GalleryBadge } from '.'
 
@@ -108,7 +116,6 @@ class ReportItem extends Component {
   render () {
     const { report, onPress } = this.props
     return (
-
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Avatar small rounded source={{ uri: report.creator.avatar }} />
@@ -123,7 +130,9 @@ class ReportItem extends Component {
         </View>
         <View style={styles.body}>
           <View style={styles.status_container}>
-            <Text style={{ fontWeight: 'bold', fontFamily: Fonts.type.bold }}>{report.module.name}</Text>
+            <Text style={{ fontWeight: 'bold', fontFamily: Fonts.type.bold }}>
+              {report.module.name}
+            </Text>
             <Badge
               value={report.status}
               textStyle={{ fontFamily: Fonts.type.base }}
@@ -135,15 +144,19 @@ class ReportItem extends Component {
           </View>
           <View style={styles.status_container}>
             <Icon name='user' type='entypo' size={20} color={Colors.darkGray} />
-            <Text style={{ marginLeft: 10, fontFamily: Fonts.type.base }}>{report.name}</Text>
+            <Text style={{ marginLeft: 10, fontFamily: Fonts.type.base }}>
+              {report.name}
+            </Text>
           </View>
         </View>
-        <View >
-
+        <View>
           {report.galleries.length > 1 && (
             <GalleryBadge value={report.galleries.length} />
           )}
-          <View style={styles.mediaContainer} onStartShouldSetResponder={() => true}>
+          <View
+            style={styles.mediaContainer}
+            onStartShouldSetResponder={() => true}
+          >
             {report.galleries.length > 0 ? (
               <FlatList
                 data={report.galleries}
@@ -152,15 +165,24 @@ class ReportItem extends Component {
                 keyExtractor={(item, index) => `${index}`}
                 renderItem={({ item, index }) => {
                   let uri = item.url
-                  return <TouchableWithoutFeedback onPress={onPress}><Image source={{ uri: uri }} style={styles.media} /></TouchableWithoutFeedback>
+                  return (
+                    <TouchableWithoutFeedback onPress={onPress}>
+                      <FastImage
+                        resizeMode={FastImage.resizeMode.contain}
+                        source={{ uri: uri }}
+                        style={styles.media}
+                      />
+                    </TouchableWithoutFeedback>
+                  )
                 }}
               />
             ) : (
               <TouchableWithoutFeedback onPress={onPress}>
-                <Image
+                <FastImage
                   source={{ uri: report.module.icons.color }}
                   style={[styles.media, styles.icon]}
-              />
+                  resizeMode={FastImage.resizeMode.contain}
+                />
               </TouchableWithoutFeedback>
             )}
           </View>

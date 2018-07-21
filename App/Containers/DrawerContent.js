@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { ScrollView, View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { DrawerItems, NavigationActions } from 'react-navigation'
-import { Avatar, Divider } from 'react-native-elements'
+import { Divider } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
 import _ from 'lodash'
 
 // redux
 import AuthActions from '../Redux/AuthRedux'
+
+import { Avatar } from '../Components/General'
 
 // Styles
 import styles from './Styles/DrawerContentStyle'

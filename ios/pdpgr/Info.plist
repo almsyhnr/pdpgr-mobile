@@ -42,7 +42,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>PDPGR needs to access your camera to update your profile picture and send picture as report.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>PDPGR needs to access your gallery to update your profile picture and send picture as report.</string>
 	<key>UIAppFonts</key>

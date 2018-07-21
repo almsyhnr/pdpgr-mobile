@@ -56,13 +56,17 @@ class Notifications extends Component {
   }
 
   handleNotificationClick = (data) => {
-    if (data.type === 'pengajuan') {
+    if (!data.read) {
       this.props.readNotification(data.id)
+    }
+    if (data.type === 'pengajuan') {
       this.props.navigation.navigate('DetailPengajuan', {
         id: data.notifiable_id
       })
     } else {
-      alert('open dtail realisasi')
+      this.props.navigation.navigate('DetailRealisasi', {
+        id: data.notifiable_id
+      })
     }
   }
 

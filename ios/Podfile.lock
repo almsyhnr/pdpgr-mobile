@@ -22,6 +22,7 @@ PODS:
   - CodePush/SSZipArchive (5.3.2):
     - React
   - DoubleConversion (1.1.5)
+  - FLAnimatedImage (1.0.12)
   - Folly (2016.09.26.00):
     - boost-for-react-native
     - DoubleConversion
@@ -30,6 +31,11 @@ PODS:
   - QBImagePickerController (3.4.0)
   - React (0.53.0):
     - React/Core (= 0.53.0)
+  - react-native-fast-image (4.0.14):
+    - FLAnimatedImage
+    - React
+    - SDWebImage/Core
+    - SDWebImage/GIF
   - React/Core (0.53.0):
     - yoga (= 0.53.0.React)
   - React/CxxBridge (0.53.0):
@@ -80,6 +86,10 @@ PODS:
     - React/Core
     - RSKImageCropper
   - RSKImageCropper (2.0.1)
+  - SDWebImage/Core (4.4.1)
+  - SDWebImage/GIF (4.4.1):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
   - yoga (0.53.0.React)
 
 DEPENDENCIES:
@@ -87,6 +97,7 @@ DEPENDENCIES:
   - AppCenter/Crashes (~> 1.5.0)
   - AppCenterReactNativeShared (~> 1.4.0)
   - CodePush (from `../node_modules/react-native-code-push`)
+  - react-native-fast-image (from `../node_modules/react-native-fast-image`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -103,15 +114,30 @@ DEPENDENCIES:
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AppCenter
+    - AppCenterReactNativeShared
+    - boost-for-react-native
+    - DoubleConversion
+    - FLAnimatedImage
+    - Folly
+    - glog
+    - QBImagePickerController
+    - RSKImageCropper
+    - SDWebImage
+
 EXTERNAL SOURCES:
   CodePush:
-    :path: ../node_modules/react-native-code-push
+    :path: "../node_modules/react-native-code-push"
   React:
-    :path: ../node_modules/react-native
+    :path: "../node_modules/react-native"
+  react-native-fast-image:
+    :path: "../node_modules/react-native-fast-image"
   RNImageCropPicker:
-    :path: ../node_modules/react-native-image-crop-picker
+    :path: "../node_modules/react-native-image-crop-picker"
   yoga:
-    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
+    :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
   AppCenter: 42c293f0de27e173aacd600a55a49da5317cd40e
@@ -119,14 +145,17 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CodePush: af67b07310e4037ecd5c38f03c7a51c6350240b5
   DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Folly: 211775e49d8da0ca658aebc8eab89d642935755c
   glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 988a7dbd5626e0dd4f4b63fb444fa7e3d975e5b7
+  react-native-fast-image: cba3d9bf9c2cf8ddb643d887a686c53a5dd90a2c
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 411e2cc62645efb8e2a2ec680a92de67c306eca9
+PODFILE CHECKSUM: 887636ac80aac47b1380e554ffe044b836cff5de
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

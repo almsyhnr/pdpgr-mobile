@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, FlatList, Image, TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
-import { Fonts, Colors, Metrics } from '../../Themes'
+import FastImage from 'react-native-fast-image'
 import { Badge } from 'react-native-elements'
+
+import { Fonts, Colors, Metrics } from '../../Themes'
 
 const styles = StyleSheet.create({
   section: {
@@ -93,15 +95,16 @@ const SubmissionDetail = ({ submission }) => {
               let uri = item.url
               return (
                 <TouchableWithoutFeedback>
-                  <Image source={{ uri: uri }} style={styles.media} />
+                  <FastImage resizeMode={FastImage.resizeMode.contain} source={{ uri: uri }} style={styles.media} />
                 </TouchableWithoutFeedback>
               )
             }}
               />
             ) : (
-              <Image
+              <FastImage
                 source={{ uri: submission.module.icons.color }}
                 style={[styles.media, styles.icon]}
+                resizeMode={FastImage.resizeMode.contain}
               />
             )}
       </View>

@@ -7902,6 +7902,12 @@ react-native-elements@^1.0.0-beta4:
     prop-types "^15.5.8"
     react-native-touchable-scale "2.0.0"
 
+react-native-fast-image@^4.0.14:
+  version "4.0.14"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-4.0.14.tgz#1e84c9a01b1471793e294ef4e7c3cc20e09562a0"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-i18n@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"
