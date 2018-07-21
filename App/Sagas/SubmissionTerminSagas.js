@@ -22,3 +22,20 @@ export function * getSubmissionTermins (api, { id }) {
     yield put(SubmissionTerminActions.submissionTerminFailure())
   }
 }
+
+export function * submitSubmissionTermin (api, { submissionId, id }) {
+  const response = yield call(api.submitSubmissionTermin, submissionId, id)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionTerminActions.submitSubmissionTerminSuccess(response.data))
+      yield put(SubmissionTerminActions.getSubmissionTermins(submissionId))
+    } else {
+      yield put(SubmissionTerminActions.postSubmissionTerminFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(SubmissionTerminActions.postSubmissionTerminFailure())
+    alert('Realisasi termin gagal diajukan')
+  }
+}

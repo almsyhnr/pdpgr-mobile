@@ -18,7 +18,7 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
 import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
-import { getSubmissionTermins } from './SubmissionTerminSagas'
+import { getSubmissionTermins, submitSubmissionTermin } from './SubmissionTerminSagas'
 import { getSubmissionTransactions } from './SubmissionTransactionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
@@ -48,6 +48,7 @@ export default function * root () {
 
     // Submission Termin
     takeLatest(SubmissionTerminTypes.GET_SUBMISSION_TERMINS, getSubmissionTermins, api),
+    takeLatest(SubmissionTerminTypes.SUBMIT_SUBMISSION_TERMIN, submitSubmissionTermin, api),
 
     // Submission Transactions
     takeLatest(SubmissionTransactionTypes.GET_SUBMISSION_TRANSACTIONS, getSubmissionTransactions, api),

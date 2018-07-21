@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   ajukan: {
-    backgroundColor: Colors.darkGreen
+    backgroundColor: Colors.primary
   },
   ajukanUlang: {
-    backgroundColor: Colors.darkYellow
+    backgroundColor: Colors.primary
   }
 })
 
@@ -43,9 +43,9 @@ const renderAction = (termin, onSubmit) => {
   if (termin.total_penggunaan > 0) {
     switch (termin.status_id) {
       case 0:
-        return <Button title='Ajukan' buttonStyle={styles.ajukan} />
+        return <Button title='Ajukan' buttonStyle={styles.ajukan} onPress={() => onSubmit(termin.id)} />
       case 50:
-        return <Button title='Ajukan Ulang' buttonStyle={styles.ajukanUlang} />
+        return <Button title='Ajukan Ulang' buttonStyle={styles.ajukanUlang} onPress={() => onSubmit(termin.id)} />
     }
   }
 
@@ -82,7 +82,8 @@ const TerminItem = ({ termin, onSubmit }) => (
 )
 
 TerminItem.propTypes = {
-  termin: PropTypes.object.isRequired
+  termin: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func
 }
 
 export default TerminItem

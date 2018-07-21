@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InteractionManager, Text } from 'react-native'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view'
 
@@ -9,7 +9,10 @@ import SubmissionTerminActions from '../../Redux/SubmissionTerminRedux'
 import SubmissionTransactionActions from '../../Redux/SubmissionTransactionRedux'
 
 // components
-import { SubmissionDetail, SubmissionTerminInfo } from '../../Components/Shared'
+import {
+  SubmissionDetail,
+  SubmissionTerminInfo
+} from '../../Components/Shared'
 import { Metrics, Colors, Fonts } from '../../Themes'
 import SubmissionTransactions from '../../Components/Shared/SubmissionTransactions'
 
@@ -20,7 +23,7 @@ class DetailRealisasi extends Component {
     return {
       title: 'Detail Realisasi'
     }
-  }
+  };
   state = {
     index: 0,
     routes: [
@@ -32,16 +35,26 @@ class DetailRealisasi extends Component {
 
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
-      const submissionId = this.props.navigation.state.params.id
-      this.props.getSubmissionDetail(submissionId)
-      this.props.getSubmissionTermins(submissionId)
-      this.props.getSubmissionTransactions(submissionId)
+      this.getAllData()
     })
   }
+
+  getAllData = () => {
+    const submissionId = this.props.navigation.state.params.id
+    this.props.getSubmissionDetail(submissionId)
+    this.props.getSubmissionTermins(submissionId)
+    this.props.getSubmissionTransactions(submissionId)
+  };
 
   componentWillUnmount () {
     this.props.resetSubmissionDetail()
   }
+
+  submitTermin = terminId => {
+    const submissionId = this.props.navigation.state.params.id
+    this.props.submitSubmissionTermin(submissionId, terminId)
+  };
+
   render () {
     const { submission, termins, transactions } = this.props
     return (
@@ -49,17 +62,29 @@ class DetailRealisasi extends Component {
         navigationState={this.state}
         renderScene={SceneMap({
           first: () => <SubmissionDetail submission={submission} />,
-          second: () => <SubmissionTerminInfo submission={submission} termins={termins} />,
-          third: () => <SubmissionTransactions submission={submission} termins={termins} transactions={transactions} />
+          second: () => (
+            <SubmissionTerminInfo
+              submission={submission}
+              termins={termins}
+              onSubmit={terminId => this.submitTermin(terminId)}
+            />
+          ),
+          third: () => (
+            <SubmissionTransactions
+              submission={submission}
+              termins={termins}
+              transactions={transactions}
+            />
+          )
         })}
-        renderTabBar={props =>
+        renderTabBar={props => (
           <TabBar
             {...props}
             style={{ backgroundColor: 'black' }}
             labelStyle={{ color: Colors.snow, fontFamily: Fonts.type.base }}
             indicatorStyle={{ backgroundColor: Colors.primary, height: 3 }}
-            />
-}
+          />
+        )}
         onIndexChange={index => this.setState({ index })}
         initialLayout={{ width: Metrics.screenWidth }}
       />
@@ -72,20 +97,30 @@ const mapStateToProps = state => {
     termins: state.submissionTermin.data,
     transactions: state.submissionTransaction.data,
     fetching: state.submission.fetching,
+    posting: state.submissionTermin.posting,
+    failure: state.submissionTermin.error,
     error: state.submission.error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSubmissionDetail: id => dispatch(SubmissionActions.getSubmissionDetail(id)),
-    getSubmissionTermins: id => dispatch(SubmissionTerminActions.getSubmissionTermins(id)),
-    getSubmissionTransactions: id => dispatch(SubmissionTransactionActions.getSubmissionTransactions(id)),
-    resetSubmissionDetail: () => dispatch(SubmissionActions.resetSubmissionDetail())
+    getSubmissionDetail: id =>
+      dispatch(SubmissionActions.getSubmissionDetail(id)),
+    getSubmissionTermins: id =>
+      dispatch(SubmissionTerminActions.getSubmissionTermins(id)),
+    submitSubmissionTermin: (submissionId, id) =>
+      dispatch(
+        SubmissionTerminActions.submitSubmissionTermin(submissionId, id)
+      ),
+    getSubmissionTransactions: id =>
+      dispatch(SubmissionTransactionActions.getSubmissionTransactions(id)),
+    resetSubmissionDetail: () =>
+      dispatch(SubmissionActions.resetSubmissionDetail())
   }
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(DetailRealisasi)
+  mapStateToProps,
+  mapDispatchToProps
+)(DetailRealisasi)

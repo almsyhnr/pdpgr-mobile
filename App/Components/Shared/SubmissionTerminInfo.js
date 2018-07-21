@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const SubmissionTerminInfo = ({ submission, termins }) => {
+const SubmissionTerminInfo = ({ submission, termins, onSubmit }) => {
   if (!submission || !termins) {
     return null
   }
@@ -49,7 +49,7 @@ const SubmissionTerminInfo = ({ submission, termins }) => {
         <Text style={styles.value}>{ formatMoney(submission.amount)}</Text>
       </View>
 
-      {_.map(termins, (termin, index) => <TerminItem termin={termin} key={'termin_' + index} />)}
+      {_.map(termins, (termin, index) => <TerminItem termin={termin} key={'termin_' + index} onSubmit={onSubmit} />)}
     </ScrollView>
   )
 }
