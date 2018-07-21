@@ -9,7 +9,7 @@ import SubmissionTerminActions from '../../Redux/SubmissionTerminRedux'
 import SubmissionTransactionActions from '../../Redux/SubmissionTransactionRedux'
 
 import styles from './styles'
-import { SubmissionDetail } from '../../Components/Shared'
+import { SubmissionDetail, SubmissionTerminInfo } from '../../Components/Shared'
 import { Metrics, Colors, Fonts } from '../../Themes'
 
 class DetailRealisasi extends Component {
@@ -40,13 +40,13 @@ class DetailRealisasi extends Component {
     this.props.resetSubmissionDetail()
   }
   render () {
-    const { submission } = this.props
+    const { submission, termins, transactions } = this.props
     return (
       <TabView
         navigationState={this.state}
         renderScene={SceneMap({
           first: () => <SubmissionDetail submission={submission} />,
-          second: () => <Text>Second</Text>,
+          second: () => <SubmissionTerminInfo submission={submission} termins={termins} />,
           third: () => <Text>Third</Text>
         })}
         renderTabBar={props =>

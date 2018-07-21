@@ -10,7 +10,10 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Fonts, Colors, Metrics } from '../../Themes'
+import _ from 'lodash'
 import { Badge } from 'react-native-elements'
+import { TerminItem } from '../List'
+import { formatMoney } from '../../Lib/helpers'
 
 const styles = StyleSheet.create({
   section: {
@@ -37,6 +40,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.type.base,
     color: Colors.darkGray,
+    backgroundColor: Colors.shadow,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: Colors.darkGray,
     marginBottom: 20
   },
   mediaContainer: {
@@ -59,13 +66,14 @@ const SubmissionTerminInfo = ({ submission, termins }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>INFO</Text>
-      </View>
       <View style={styles.sectionContent}>
-        <Text style={styles.label}>Jenis Bantuan</Text>
-        <Text style={styles.value}>test</Text>
+        <Text style={styles.label}>Jumlah Termin</Text>
+        <Text style={styles.value}>{submission.termin}</Text>
+        <Text style={styles.label}>Total Bantuan (Rp.)</Text>
+        <Text style={styles.value}>{ formatMoney(submission.amount)}</Text>
       </View>
+
+      {_.map(termins, (termin, index) => <TerminItem termin={termin} key={'termin_' + index} />)}
     </ScrollView>
   )
 }
