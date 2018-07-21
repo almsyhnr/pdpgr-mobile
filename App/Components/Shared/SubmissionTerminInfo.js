@@ -1,30 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
   Text,
   ScrollView,
-  FlatList,
-  Image,
-  TouchableWithoutFeedback,
   StyleSheet
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { Fonts, Colors, Metrics } from '../../Themes'
+import { Fonts, Colors } from '../../Themes'
 import _ from 'lodash'
-import { Badge } from 'react-native-elements'
 import { TerminItem } from '../List'
 import { formatMoney } from '../../Lib/helpers'
 
 const styles = StyleSheet.create({
-  section: {
-    backgroundColor: Colors.snow,
-    marginBottom: 1
-  },
-  sectionTitle: {
-    marginHorizontal: 20,
-    marginVertical: 10,
-    color: Colors.darkGray
-  },
   sectionContent: {
     backgroundColor: Colors.snow,
     paddingHorizontal: 20,
@@ -45,17 +32,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.darkGray,
     marginBottom: 20
-  },
-  mediaContainer: {
-    height: Metrics.screenWidth,
-    width: Metrics.screenWidth
-  },
-  media: {
-    height: Metrics.screenWidth / 4,
-    width: Metrics.screenWidth / 4,
-    resizeMode: 'contain',
-    backgroundColor: Colors.shadow,
-    marginHorizontal: 5
   }
 })
 

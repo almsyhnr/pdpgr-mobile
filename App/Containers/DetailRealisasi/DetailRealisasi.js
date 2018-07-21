@@ -8,9 +8,12 @@ import SubmissionActions from '../../Redux/SubmissionRedux'
 import SubmissionTerminActions from '../../Redux/SubmissionTerminRedux'
 import SubmissionTransactionActions from '../../Redux/SubmissionTransactionRedux'
 
-import styles from './styles'
+// components
 import { SubmissionDetail, SubmissionTerminInfo } from '../../Components/Shared'
 import { Metrics, Colors, Fonts } from '../../Themes'
+import SubmissionTransactions from '../../Components/Shared/SubmissionTransactions'
+
+import styles from './styles'
 
 class DetailRealisasi extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -47,7 +50,7 @@ class DetailRealisasi extends Component {
         renderScene={SceneMap({
           first: () => <SubmissionDetail submission={submission} />,
           second: () => <SubmissionTerminInfo submission={submission} termins={termins} />,
-          third: () => <Text>Third</Text>
+          third: () => <SubmissionTransactions submission={submission} termins={termins} transactions={transactions} />
         })}
         renderTabBar={props =>
           <TabBar
