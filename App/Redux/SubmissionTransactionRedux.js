@@ -6,6 +6,10 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   getSubmissionTransactions: ['id', 'page'],
   getSubmissionTransactionsSuccess: ['response'],
+  createTransaction: ['form', 'files'],
+  createTransactionSuccess: ['response'],
+  deleteTransaction: ['submissionId', 'transactionId'],
+  deleteTransactionSuccess: ['response'],
   resetSubmissionDetail: null,
   postSubmissionTransactionFailure: null,
   submissionTransactionFailure: null
@@ -58,6 +62,10 @@ export const reset = state => INITIAL_STATE
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_SUBMISSION_TRANSACTIONS]: request,
   [Types.GET_SUBMISSION_TRANSACTIONS_SUCCESS]: getSubmissionTransactionsSuccess,
+  [Types.CREATE_TRANSACTION]: postRequest,
+  [Types.CREATE_TRANSACTION_SUCCESS]: postSuccess,
+  [Types.DELETE_TRANSACTION]: postRequest,
+  [Types.DELETE_TRANSACTION_SUCCESS]: postSuccess,
   [Types.SUBMISSION_TRANSACTION_FAILURE]: failure,
   [Types.POST_SUBMISSION_TRANSACTION_FAILURE]: postFailure,
   [Types.RESET_SUBMISSION_DETAIL]: reset

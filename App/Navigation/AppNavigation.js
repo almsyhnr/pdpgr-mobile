@@ -5,7 +5,6 @@ import PengajuanSaya from '../Containers/PengajuanSaya'
 import TambahPengajuan from '../Containers/TambahPengajuan'
 import LaunchScreen from '../Containers/LaunchScreen'
 import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
-import PelaporanScreen from '../Containers/PelaporanScreen'
 import { NotificationsScreen } from '../Containers/Notifications'
 import { DaftarRealisasi } from '../Containers/Realisasi'
 import { DetailRealisasi } from '../Containers/DetailRealisasi'
@@ -72,7 +71,6 @@ const PrimaryNav = StackNavigator({
   TambahPengajuan: { screen: TambahPengajuan },
   LaunchScreen: { screen: LaunchScreen },
   PilihJenisPengajuan: { screen: PilihJenisPengajuan },
-  PelaporanScreen: { screen: PelaporanScreen },
   MainDrawerScreen: { screen: MainDrawerNavigation },
   LoginScreen: { screen: LoginScreen }
 }, {

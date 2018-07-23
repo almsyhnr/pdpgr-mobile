@@ -19,7 +19,7 @@ import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
 import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
 import { getSubmissionTermins, submitSubmissionTermin } from './SubmissionTerminSagas'
-import { getSubmissionTransactions } from './SubmissionTransactionSagas'
+import { getSubmissionTransactions, createTransaction, deleteTransaction } from './SubmissionTransactionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
@@ -52,6 +52,8 @@ export default function * root () {
 
     // Submission Transactions
     takeLatest(SubmissionTransactionTypes.GET_SUBMISSION_TRANSACTIONS, getSubmissionTransactions, api),
+    takeLatest(SubmissionTransactionTypes.CREATE_TRANSACTION, createTransaction, api),
+    takeLatest(SubmissionTransactionTypes.DELETE_TRANSACTION, deleteTransaction, api),
 
     // Module
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),

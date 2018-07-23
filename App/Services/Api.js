@@ -82,6 +82,32 @@ const create = (baseURL = AppConfig.baseUrl) => {
       }
     })
   }
+  const createTransaction = (form, files) => {
+    var body = new FormData()
+    body.append(`submission_termin_id`, form.termin_id)
+    body.append(`description`, form.description)
+    body.append(`price`, form.price)
+    body.append(`quantity`, form.quantity)
+    body.append('date', form.date)
+
+    if (files.length > 0) {
+      files.map((file) => {
+        var image = {
+          uri: file.path,
+          type: file.mime,
+          name: file.filename
+        }
+        body.append(`images[]`, image)
+      })
+    }
+
+    return api.post('api/my_approved_submissions/' + form.submission_id + '/transactions/create', body, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
+  const deleteTransaction = (submissionId, transactionId) => api.delete('api/my_approved_submissions/' + submissionId + '/transactions/' + transactionId)
   // ------
   // STEP 3
   // ------
@@ -109,7 +135,9 @@ const create = (baseURL = AppConfig.baseUrl) => {
     modules,
     getNotifications,
     readNotification,
-    subVillages
+    subVillages,
+    createTransaction,
+    deleteTransaction
   }
 }
 

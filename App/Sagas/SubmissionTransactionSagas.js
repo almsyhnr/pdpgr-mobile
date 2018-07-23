@@ -23,3 +23,35 @@ export function * getSubmissionTransactions (api, { id, page }) {
     yield put(SubmissionTransactionActions.submissionTransactionFailure())
   }
 }
+
+export function * createTransaction (api, { form, files }) {
+  const response = yield call(api.createTransaction, form, files)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionTransactionActions.createTransactionSuccess(response.data))
+    } else {
+      yield put(SubmissionTransactionActions.postSubmissionTransactionFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(SubmissionTransactionActions.postSubmissionTransactionFailure())
+    alert('Pengajuan gagal ditambahkan')
+  }
+}
+
+export function * deleteTransaction (api, { submissionId, transactionId }) {
+  const response = yield call(api.deleteTransaction, submissionId, transactionId)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionTransactionActions.deleteTransactionSuccess(response.data))
+    } else {
+      yield put(SubmissionTransactionActions.submissionTransactionFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(SubmissionTransactionActions.submissionTransactionFailure())
+    alert('Transaksi gagal dihapus')
+  }
+}

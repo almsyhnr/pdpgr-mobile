@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Image, StyleSheet, Text } from 'react-native'
-import { Images, Metrics, Fonts, Colors } from '../../Themes'
+import { View, StyleSheet, Text } from 'react-native'
+import { Metrics, Fonts, Colors } from '../../Themes'
 import { Icon } from 'react-native-elements'
 
 const styles = StyleSheet.create({
