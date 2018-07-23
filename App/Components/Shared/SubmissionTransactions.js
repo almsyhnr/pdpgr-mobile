@@ -229,7 +229,7 @@ class SubmissionTransactions extends Component {
             <FastImage
               source={{ uri: this.state.imageUrl }}
               resizeMode={FastImage.resizeMode.contain}
-              style={{ width: '100%', height: '100%', backgroundColor: 'red' }}
+              style={{ width: '100%', height: '100%' }}
             />
           </ImageZoom>
         </Modal>
