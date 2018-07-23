@@ -10,7 +10,7 @@ import SubmissionActions from '../Redux/SubmissionRedux'
 // components
 import { StatusBar, HeaderTitle } from '../Components/General'
 import { NotificationButton, AddReportButton } from '../Components/Button'
-import { ReportItem } from '../Components/List'
+import { ReportItem, EmptyReport } from '../Components/List'
 
 // Styles
 import styles from './Styles/HomeScreenStyle'
@@ -93,6 +93,7 @@ class HomeScreen extends Component {
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.3}
           ListFooterComponent={<LoadingIndicator visible={this.props.fetching} size={'large'} />}
+          ListEmptyComponent={<EmptyReport />}
         />
         <AddReportButton />
       </View>

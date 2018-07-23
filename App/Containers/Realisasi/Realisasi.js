@@ -15,7 +15,7 @@ import SubmissionActions from '../../Redux/SubmissionRedux'
 // components
 import { StatusBar } from '../../Components/General'
 import { NotificationButton } from '../../Components/Button'
-import { ReportItem } from '../../Components/List'
+import { ReportItem, EmptyReport } from '../../Components/List'
 import { LoadingIndicator } from '../../Components/Indicator'
 
 // styles
@@ -106,6 +106,7 @@ class Realisasi extends Component {
           ListFooterComponent={
             <LoadingIndicator visible={this.props.fetching} size={'large'} />
           }
+          ListEmptyComponent={<EmptyReport />}
         />
       </View>
     )

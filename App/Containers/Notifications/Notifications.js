@@ -7,7 +7,7 @@ import { NavigationActions } from 'react-navigation'
 import NotificationActions from '../../Redux/NotificationRedux'
 
 // component
-import { NotificationItem } from '../../Components/List'
+import { NotificationItem, EmptyNotification } from '../../Components/List'
 import { LoadingIndicator } from '../../Components/Indicator'
 
 // styles
@@ -86,6 +86,7 @@ class Notifications extends Component {
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.3}
           ListFooterComponent={<LoadingIndicator visible={this.props.fetching} size={'large'} />}
+          ListEmptyComponent={<EmptyNotification />}
         />
       </View>
     )
