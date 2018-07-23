@@ -59,6 +59,7 @@ class DetailRealisasi extends Component {
     const { submission, termins, transactions } = this.props
     return (
       <TabView
+        swipeEnabled={false}
         navigationState={this.state}
         renderScene={SceneMap({
           first: () => <SubmissionDetail submission={submission} />,
