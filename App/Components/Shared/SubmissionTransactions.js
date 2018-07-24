@@ -141,9 +141,123 @@ class SubmissionTransactions extends Component {
     )
   };
 
+  renderModalDetail = (selectedTransaction) => {
+    return (
+      <Modal
+        ref='modal'
+        position='center'
+        style={{ width: '90%', height: '80%', borderRadius: 10, zIndex: 10 }}
+        >
+        {selectedTransaction && (
+        <View style={{ flex: 1, padding: 10 }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontFamily: Fonts.type.bold,
+              fontSize: 16,
+              marginVertical: 10
+            }}
+              >
+                Detail Transaksi
+              </Text>
+          <Divider style={styles.divider} />
+          <View style={{ paddingVertical: 10 }}>
+            <Text style={styles.label}>Deskripsi</Text>
+            <Text style={styles.value}>
+              {selectedTransaction.description}
+            </Text>
+            <Divider style={styles.divider} />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+              }}
+                >
+              <View>
+                <Text style={styles.label}>Kuantitas</Text>
+                <Text style={[styles.value, styles.textRight]}>
+                  {formatMoney(selectedTransaction.quantity)}
+                </Text>
+              </View>
+              <View>
+                <Text style={[styles.label, styles.textRight]}>Harga</Text>
+                <Text style={[styles.value, styles.textRight]}>
+                      Rp.{formatMoney(selectedTransaction.price)}
+                </Text>
+              </View>
+            </View>
+            <Divider style={styles.divider} />
+            <Text style={[styles.label, styles.textRight]}>Total</Text>
+            <Text style={[styles.value, styles.textRight]}>
+                  Rp.{formatMoney(
+                    selectedTransaction.quantity * selectedTransaction.price
+                  )}
+            </Text>
+            {selectedTransaction.galleries.length > 0 && (
+            <View>
+              <Divider style={styles.divider} />
+              <FlatList
+                data={selectedTransaction.galleries}
+                numColumns={3}
+                keyExtractor={(item, index) => `${index}`}
+                renderItem={({ item, index }) => {
+                  let uri = item.url
+                  return (
+                    <TouchableWithoutFeedback
+                      onPress={() => this.openImage(uri)}
+                          >
+                      <FastImage
+                        resizeMode={FastImage.resizeMode.contain}
+                        source={{ uri: uri }}
+                        style={styles.media}
+                            />
+                    </TouchableWithoutFeedback>
+                  )
+                }}
+                    />
+            </View>
+                )}
+            {selectedTransaction && selectedTransaction.can_delete && <Button title='Hapus' onPress={this.handleDelete} buttonStyle={{ borderRadius: 10, backgroundColor: Colors.primary }} />}
+          </View>
+        </View>
+          )}
+      </Modal>
+    )
+  }
+
+  renderModalImage = () => {
+    return (
+      <Modal ref='modalImage' coverScreen>
+        <View style={{ flex: 1 }}>
+          <ImageZoom
+            cropWidth={Metrics.screenWidth}
+            cropHeight={Metrics.screenHeight}
+            imageWidth={Metrics.screenWidth}
+            imageHeight={Metrics.screenWidth}
+            enableSwipeDown
+            onSwipeDown={() => this.refs.modalImage.close()}
+            >
+            <FastImage
+              source={{ uri: this.state.imageUrl }}
+              resizeMode={FastImage.resizeMode.contain}
+              style={{ width: '100%', height: '100%' }}
+              />
+          </ImageZoom>
+        </View>
+        <Button
+          onPress={() => this.refs.modalImage.close()}
+          title='Tutup'
+          buttonStyle={{ borderRadius: 0 }}
+          />
+      </Modal>
+    )
+  }
+
+  openAddForm = () => {
+    this.props.navigation.navigate('TambahRealisasi')
+  }
+
   render () {
-    // group based on termin
-    // generate item
     const { selectedTransaction } = this.state
     return (
       <View style={styles.container}>
@@ -159,109 +273,9 @@ class SubmissionTransactions extends Component {
                 : this.renderTransaction(item)
           )}
         </ScrollView>
-        <Button buttonStyle={{ borderRadius: 0 }} title='Tambah' />
-        <Modal
-          ref='modal'
-          position='center'
-          style={{ width: '90%', height: '80%', borderRadius: 10, zIndex: 10 }}
-        >
-          {selectedTransaction && (
-            <View style={{ flex: 1, padding: 10 }}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontFamily: Fonts.type.bold,
-                  fontSize: 16,
-                  marginVertical: 10
-                }}
-              >
-                Detail Transaksi
-              </Text>
-              <Divider style={styles.divider} />
-              <View style={{ paddingVertical: 10 }}>
-                <Text style={styles.label}>Deskripsi</Text>
-                <Text style={styles.value}>
-                  {selectedTransaction.description}
-                </Text>
-                <Divider style={styles.divider} />
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <View>
-                    <Text style={styles.label}>Kuantitas</Text>
-                    <Text style={[styles.value, styles.textRight]}>
-                      {formatMoney(selectedTransaction.quantity)}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text style={[styles.label, styles.textRight]}>Harga</Text>
-                    <Text style={[styles.value, styles.textRight]}>
-                      Rp.{formatMoney(selectedTransaction.price)}
-                    </Text>
-                  </View>
-                </View>
-                <Divider style={styles.divider} />
-                <Text style={[styles.label, styles.textRight]}>Total</Text>
-                <Text style={[styles.value, styles.textRight]}>
-                  Rp.{formatMoney(
-                    selectedTransaction.quantity * selectedTransaction.price
-                  )}
-                </Text>
-                {selectedTransaction.galleries.length > 0 && (
-                  <View>
-                    <Divider style={styles.divider} />
-                    <FlatList
-                      data={selectedTransaction.galleries}
-                      numColumns={3}
-                      keyExtractor={(item, index) => `${index}`}
-                      renderItem={({ item, index }) => {
-                        let uri = item.url
-                        return (
-                          <TouchableWithoutFeedback
-                            onPress={() => this.openImage(uri)}
-                          >
-                            <FastImage
-                              resizeMode={FastImage.resizeMode.contain}
-                              source={{ uri: uri }}
-                              style={styles.media}
-                            />
-                          </TouchableWithoutFeedback>
-                        )
-                      }}
-                    />
-                  </View>
-                )}
-                {selectedTransaction && selectedTransaction.can_delete && <Button title='Hapus' onPress={this.handleDelete} buttonStyle={{ borderRadius: 10, backgroundColor: Colors.primary }} />}
-              </View>
-            </View>
-          )}
-        </Modal>
-        <Modal ref='modalImage' coverScreen>
-          <View style={{ flex: 1 }}>
-            <ImageZoom
-              cropWidth={Metrics.screenWidth}
-              cropHeight={Metrics.screenHeight}
-              imageWidth={Metrics.screenWidth}
-              imageHeight={Metrics.screenWidth}
-              enableSwipeDown
-              onSwipeDown={() => this.refs.modalImage.close()}
-            >
-              <FastImage
-                source={{ uri: this.state.imageUrl }}
-                resizeMode={FastImage.resizeMode.contain}
-                style={{ width: '100%', height: '100%' }}
-              />
-            </ImageZoom>
-          </View>
-          <Button
-            onPress={() => this.refs.modalImage.close()}
-            title='Tutup'
-            buttonStyle={{ borderRadius: 0 }}
-          />
-        </Modal>
+        <Button buttonStyle={{ borderRadius: 0 }} title='Tambah' onPress={this.openAddForm} />
+        {this.renderModalDetail(selectedTransaction)}
+        {this.renderModalImage()}
       </View>
     )
   }
@@ -270,7 +284,9 @@ class SubmissionTransactions extends Component {
 SubmissionTransactions.propTypes = {
   termins: PropTypes.array,
   transactions: PropTypes.array,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onCreate: PropTypes.func,
+  onRefresh: PropTypes.func
 }
 
 export default SubmissionTransactions

@@ -17,11 +17,22 @@ import { Metrics, Colors, Fonts } from '../../Themes'
 import SubmissionTransactions from '../../Components/Shared/SubmissionTransactions'
 
 import styles from './styles'
+import { Icon } from 'react-native-elements'
+import { LoadingIndicator } from '../../Components/Indicator'
 
 class DetailRealisasi extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Detail Realisasi'
+      title: 'Detail Realisasi',
+      headerRight: (
+        <Icon
+          name='refresh'
+          color={Colors.snow}
+          size={24}
+          containerStyle={{ marginRight: 5 }}
+          onPress={() => navigation.state.params.refresh()}
+        />
+      )
     }
   };
   state = {
@@ -36,6 +47,10 @@ class DetailRealisasi extends Component {
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
       this.getAllData()
+    })
+
+    this.props.navigation.setParams({
+      refresh: () => this.getAllData()
     })
   }
 
@@ -62,7 +77,11 @@ class DetailRealisasi extends Component {
   };
 
   render () {
-    const { submission, termins, transactions } = this.props
+    const { submission, termins, transactions, fetching, ...rest } = this.props
+
+    if (fetching) {
+      return <LoadingIndicator visible large />
+    }
     return (
       <TabView
         swipeEnabled={false}
@@ -81,7 +100,11 @@ class DetailRealisasi extends Component {
               submission={submission}
               termins={termins}
               transactions={transactions}
-              onDelete={(submissionId, id) => this.props.deleteTransaction(submissionId, id)}
+              onDelete={(submissionId, id) =>
+                this.props.deleteTransaction(submissionId, id)
+              }
+              onRefresh={() => this.props.getAllData()}
+              {...rest}
             />
           )
         })}
@@ -124,7 +147,13 @@ const mapDispatchToProps = dispatch => {
       ),
     getSubmissionTransactions: id =>
       dispatch(SubmissionTransactionActions.getSubmissionTransactions(id)),
-    deleteTransaction: (submissionId, transactionId) => dispatch(SubmissionTransactionActions.deleteTransaction(submissionId, transactionId)),
+    deleteTransaction: (submissionId, transactionId) =>
+      dispatch(
+        SubmissionTransactionActions.deleteTransaction(
+          submissionId,
+          transactionId
+        )
+      ),
     resetSubmissionDetail: () =>
       dispatch(SubmissionActions.resetSubmissionDetail())
   }
