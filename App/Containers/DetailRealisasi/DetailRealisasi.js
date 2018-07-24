@@ -39,6 +39,12 @@ class DetailRealisasi extends Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (this.props.transPosting && !nextProps.transPosting) {
+      this.getAllData()
+    }
+  }
+
   getAllData = () => {
     const submissionId = this.props.navigation.state.params.id
     this.props.getSubmissionDetail(submissionId)
@@ -75,6 +81,7 @@ class DetailRealisasi extends Component {
               submission={submission}
               termins={termins}
               transactions={transactions}
+              onDelete={(submissionId, id) => this.props.deleteTransaction(submissionId, id)}
             />
           )
         })}
@@ -99,6 +106,7 @@ const mapStateToProps = state => {
     transactions: state.submissionTransaction.data,
     fetching: state.submission.fetching,
     posting: state.submissionTermin.posting,
+    transPosting: state.submissionTransaction.posting,
     failure: state.submissionTermin.error,
     error: state.submission.error
   }
@@ -116,6 +124,7 @@ const mapDispatchToProps = dispatch => {
       ),
     getSubmissionTransactions: id =>
       dispatch(SubmissionTransactionActions.getSubmissionTransactions(id)),
+    deleteTransaction: (submissionId, transactionId) => dispatch(SubmissionTransactionActions.deleteTransaction(submissionId, transactionId)),
     resetSubmissionDetail: () =>
       dispatch(SubmissionActions.resetSubmissionDetail())
   }

@@ -5,7 +5,8 @@ import {
   ScrollView,
   StyleSheet,
   FlatList,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
 } from 'react-native'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.shadow,
     marginHorizontal: 5
   },
-  divider: {marginVertical: 5}
+  divider: { marginVertical: 5 }
 })
 class SubmissionTransactions extends Component {
   constructor (props) {
@@ -89,6 +90,22 @@ class SubmissionTransactions extends Component {
       </View>
     )
   };
+
+  handleDelete = () => {
+    console.tron.error(this.props)
+    const { selectedTransaction } = this.state
+    Alert.alert('Apakah Anda yakin?',
+    'Data yang telah di hapus tidak dapat dikembalikan',
+      [
+      {text: 'Batal', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yakin',
+          onPress: () => {
+            this.refs.modal.close()
+            this.props.onDelete(selectedTransaction.submission_id, selectedTransaction.id)
+          }}
+      ],
+    { cancelable: false })
+  }
 
   openDetail = selectedTransaction => {
     console.tron.error(selectedTransaction)
@@ -167,7 +184,12 @@ class SubmissionTransactions extends Component {
                   {selectedTransaction.description}
                 </Text>
                 <Divider style={styles.divider} />
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between'
+                  }}
+                >
                   <View>
                     <Text style={styles.label}>Kuantitas</Text>
                     <Text style={[styles.value, styles.textRight]}>
@@ -177,10 +199,9 @@ class SubmissionTransactions extends Component {
                   <View>
                     <Text style={[styles.label, styles.textRight]}>Harga</Text>
                     <Text style={[styles.value, styles.textRight]}>
-                  Rp.{formatMoney(selectedTransaction.price)}
+                      Rp.{formatMoney(selectedTransaction.price)}
                     </Text>
                   </View>
-
                 </View>
                 <Divider style={styles.divider} />
                 <Text style={[styles.label, styles.textRight]}>Total</Text>
@@ -213,25 +234,33 @@ class SubmissionTransactions extends Component {
                     />
                   </View>
                 )}
+                {selectedTransaction && selectedTransaction.can_delete && <Button title='Hapus' onPress={this.handleDelete} buttonStyle={{ borderRadius: 10, backgroundColor: Colors.primary }} />}
               </View>
             </View>
           )}
         </Modal>
         <Modal ref='modalImage' coverScreen>
-          <ImageZoom
-            cropWidth={Metrics.screenWidth}
-            cropHeight={Metrics.screenHeight}
-            imageWidth={Metrics.screenWidth}
-            imageHeight={Metrics.screenWidth}
-            enableSwipeDown
-            onSwipeDown={() => this.refs.modalImage.close()}
-          >
-            <FastImage
-              source={{ uri: this.state.imageUrl }}
-              resizeMode={FastImage.resizeMode.contain}
-              style={{ width: '100%', height: '100%' }}
-            />
-          </ImageZoom>
+          <View style={{ flex: 1 }}>
+            <ImageZoom
+              cropWidth={Metrics.screenWidth}
+              cropHeight={Metrics.screenHeight}
+              imageWidth={Metrics.screenWidth}
+              imageHeight={Metrics.screenWidth}
+              enableSwipeDown
+              onSwipeDown={() => this.refs.modalImage.close()}
+            >
+              <FastImage
+                source={{ uri: this.state.imageUrl }}
+                resizeMode={FastImage.resizeMode.contain}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </ImageZoom>
+          </View>
+          <Button
+            onPress={() => this.refs.modalImage.close()}
+            title='Tutup'
+            buttonStyle={{ borderRadius: 0 }}
+          />
         </Modal>
       </View>
     )
@@ -240,7 +269,8 @@ class SubmissionTransactions extends Component {
 
 SubmissionTransactions.propTypes = {
   termins: PropTypes.array,
-  transactions: PropTypes.array
+  transactions: PropTypes.array,
+  onDelete: PropTypes.func
 }
 
 export default SubmissionTransactions
