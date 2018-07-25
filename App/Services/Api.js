@@ -127,6 +127,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   }
   const changePassword = (form) => api.post('api/profile/change_password', form)
   const updateProfile = (form) => api.post('api/profile/update_profile', form)
+  const likeSubmission = (id) => api.post('api/submissions/' + id + '/likes')
   // ------
   // STEP 3
   // ------
@@ -160,7 +161,8 @@ const create = (baseURL = AppConfig.baseUrl) => {
     deleteTransaction,
     changeAvatar,
     changePassword,
-    updateProfile
+    updateProfile,
+    likeSubmission
   }
 }
 

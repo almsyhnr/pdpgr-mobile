@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
 class ReportItem extends Component {
   state = {};
   render () {
-    const { report, onPress } = this.props
+    const { report, onPress, onLikePress, onCommentPress } = this.props
+    let likedStyle = report.liked ? {tintColor: Colors.primary} : null
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -188,12 +189,12 @@ class ReportItem extends Component {
           </View>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.comments}>0 Likes 0 Comments</Text>
+          <Text style={styles.comments}>{report.like_count} Likes {report.comment_count} Comments</Text>
           <View style={styles.actionContainer}>
-            <Touchable style={styles.footerAction} onPress={onPress}>
-              <Image source={Images.like} style={styles.footerImage} />
+            <Touchable style={styles.footerAction} onPress={onLikePress}>
+              <Image source={Images.like} style={[styles.footerImage, likedStyle]} />
             </Touchable>
-            <Touchable style={styles.footerAction} onPress={onPress}>
+            <Touchable style={styles.footerAction} onPress={onCommentPress}>
               <Image source={Images.comment} style={styles.footerImage} />
             </Touchable>
             <Touchable style={styles.footerAction} onPress={onPress}>
@@ -208,7 +209,9 @@ class ReportItem extends Component {
 
 ReportItem.propTypes = {
   report: PropTypes.object.isRequired,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  onLikePress: PropTypes.func,
+  onCommentPress: PropTypes.func
 }
 
 export default ReportItem

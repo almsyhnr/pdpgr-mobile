@@ -79,16 +79,17 @@ class Realisasi extends Component {
     return true
   }
 
-  renderItem = ({ item, index }) => (
-    <ReportItem
-      report={item}
-      onPress={() =>
-        this.props.navigation.navigate('DetailRealisasi', {
-          id: item.id
-        })
-      }
-    />
-  );
+  likePengajuan = (id) => {
+    this.props.likeSubmission(id)
+  }
+
+  openDetailPengajuan = (item) => {
+    this.props.navigation.navigate('DetailPengajuan', {
+      id: item.id
+    })
+  }
+
+  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} onLikePress={() => this.likePengajuan(item.id)} />
 
   render () {
     return (
@@ -125,6 +126,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    likeSubmission: id => dispatch(SubmissionActions.likeSubmission(id)),
     getMyApprovedSubmissions: page =>
       dispatch(SubmissionActions.getMyApprovedSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())

@@ -18,10 +18,29 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
-import { getUser, changeAvatar, changePassword, updateProfile } from './UserSagas'
-import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
-import { getSubmissionTermins, submitSubmissionTermin } from './SubmissionTerminSagas'
-import { getSubmissionTransactions, createTransaction, deleteTransaction } from './SubmissionTransactionSagas'
+import {
+  getUser,
+  changeAvatar,
+  changePassword,
+  updateProfile
+} from './UserSagas'
+import {
+  getSubmissions,
+  getSubmissionDetail,
+  getMySubmissions,
+  getMyApprovedSubmissions,
+  createSubmission,
+  likeSubmission
+} from './SubmissionSagas'
+import {
+  getSubmissionTermins,
+  submitSubmissionTermin
+} from './SubmissionTerminSagas'
+import {
+  getSubmissionTransactions,
+  createTransaction,
+  deleteTransaction
+} from './SubmissionTransactionSagas'
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
@@ -51,17 +70,42 @@ export default function * root () {
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),
     takeLatest(SubmissionTypes.GET_SUBMISSION_DETAIL, getSubmissionDetail, api),
     takeLatest(SubmissionTypes.GET_MY_SUBMISSIONS, getMySubmissions, api),
-    takeLatest(SubmissionTypes.GET_MY_APPROVED_SUBMISSIONS, getMyApprovedSubmissions, api),
+    takeLatest(
+      SubmissionTypes.GET_MY_APPROVED_SUBMISSIONS,
+      getMyApprovedSubmissions,
+      api
+    ),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
+    takeLatest(SubmissionTypes.LIKE_SUBMISSION, likeSubmission, api),
 
     // Submission Termin
-    takeLatest(SubmissionTerminTypes.GET_SUBMISSION_TERMINS, getSubmissionTermins, api),
-    takeLatest(SubmissionTerminTypes.SUBMIT_SUBMISSION_TERMIN, submitSubmissionTermin, api),
+    takeLatest(
+      SubmissionTerminTypes.GET_SUBMISSION_TERMINS,
+      getSubmissionTermins,
+      api
+    ),
+    takeLatest(
+      SubmissionTerminTypes.SUBMIT_SUBMISSION_TERMIN,
+      submitSubmissionTermin,
+      api
+    ),
 
     // Submission Transactions
-    takeLatest(SubmissionTransactionTypes.GET_SUBMISSION_TRANSACTIONS, getSubmissionTransactions, api),
-    takeLatest(SubmissionTransactionTypes.CREATE_TRANSACTION, createTransaction, api),
-    takeLatest(SubmissionTransactionTypes.DELETE_TRANSACTION, deleteTransaction, api),
+    takeLatest(
+      SubmissionTransactionTypes.GET_SUBMISSION_TRANSACTIONS,
+      getSubmissionTransactions,
+      api
+    ),
+    takeLatest(
+      SubmissionTransactionTypes.CREATE_TRANSACTION,
+      createTransaction,
+      api
+    ),
+    takeLatest(
+      SubmissionTransactionTypes.DELETE_TRANSACTION,
+      deleteTransaction,
+      api
+    ),
 
     // Module
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),

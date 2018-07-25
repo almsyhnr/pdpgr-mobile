@@ -77,7 +77,11 @@ class HomeScreen extends Component {
     })
   }
 
-  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} />
+  likePengajuan = (id) => {
+    this.props.likeSubmission(id)
+  }
+
+  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} onLikePress={() => this.likePengajuan(item.id)} />
 
   render () {
     return (
@@ -113,6 +117,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    likeSubmission: id => dispatch(SubmissionActions.likeSubmission(id)),
     getSubmissions: page => dispatch(SubmissionActions.getSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
   }

@@ -69,3 +69,18 @@ export function * createSubmission (api, { form, files }) {
     alert('Pengajuan gagal ditambahkan')
   }
 }
+
+export function * likeSubmission (api, { id }) {
+  const response = yield call(api.likeSubmission, id)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionActions.likeSubmissionSuccess(response.data))
+    } else {
+      yield put(SubmissionActions.postSubmissionFailure())
+    }
+  } else {
+    yield put(SubmissionActions.postSubmissionFailure())
+    alert('Like gagal ditambahkan')
+  }
+}

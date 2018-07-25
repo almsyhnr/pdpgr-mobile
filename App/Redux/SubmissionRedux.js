@@ -1,5 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import _ from 'lodash'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -12,10 +13,13 @@ const { Types, Creators } = createActions({
   createSubmissionSuccess: ['response'],
   getSubmissionDetail: ['id'],
   getSubmissionDetailSuccess: ['response'],
+  likeSubmission: ['id'],
+  likeSubmissionSuccess: ['response'],
   resetSubmissionDetail: null,
   resetSubmissions: null,
   submissionFailure: null,
-  postSubmissionFailure: null
+  postSubmissionFailure: null,
+  postSubmissionSuccess: null
 })
 
 export const SubmissionTypes = Types
@@ -57,6 +61,23 @@ export const getSubmissionDetailSuccess = (state, { response }) => {
   return state.merge({ fetching: false, error: null, selected: data })
 }
 
+export const likeSubmissionSuccess = (state, { response }) => {
+  const { submission_id, like_count, liked } = response
+  let submissions = [...state.data]
+  submissions = _.map(submissions, item => {
+    if (item.id == submission_id) {
+      return {
+        ...item,
+        like_count: like_count,
+        liked: liked
+      }
+    }
+
+    return item
+  })
+  return state.merge({ posting: false, error: null, data: submissions })
+}
+
 export const resetSubmissionDetail = state => state.merge({ selected: null })
 export const resetSubmissions = state => state.merge({ data: null, pagination: null })
 
@@ -79,8 +100,11 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_SUBMISSION_SUCCESS]: postSuccess,
   [Types.GET_SUBMISSION_DETAIL]: request,
   [Types.GET_SUBMISSION_DETAIL_SUCCESS]: getSubmissionDetailSuccess,
+  [Types.LIKE_SUBMISSION]: postRequest,
+  [Types.LIKE_SUBMISSION_SUCCESS]: likeSubmissionSuccess,
   [Types.RESET_SUBMISSION_DETAIL]: resetSubmissionDetail,
   [Types.RESET_SUBMISSIONS]: resetSubmissions,
+  [Types.POST_SUBMISSION_SUCCESS]: postSuccess,
   [Types.SUBMISSION_FAILURE]: failure,
   [Types.POST_SUBMISSION_FAILURE]: postFailure
 })
