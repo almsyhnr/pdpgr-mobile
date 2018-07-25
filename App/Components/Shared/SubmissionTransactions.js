@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import ImageZoom from 'react-native-image-pan-zoom'
-import { ListItem, Icon, Divider, Button } from 'react-native-elements'
+import { ListItem, Icon, Divider, Button, Badge } from 'react-native-elements'
 import Modal from 'react-native-modalbox'
 import FastImage from 'react-native-fast-image'
 import { formatMoney } from '../../Lib/helpers'
@@ -84,7 +84,14 @@ class SubmissionTransactions extends Component {
       <View>
         <ListItem
           title={'Termin ' + item.termin}
-          rightIcon={<Icon name='list' />}
+          rightIcon={<Badge
+            value={item.status}
+            textStyle={{ fontFamily: Fonts.type.base }}
+            containerStyle={{
+              backgroundColor: item.status_color,
+              marginLeft: 10
+            }}
+      />}
         />
         <Divider />
       </View>

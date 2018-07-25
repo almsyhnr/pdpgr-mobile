@@ -252,15 +252,23 @@ class TambahRealisasiScreen extends ValidationComponent {
             <InputBox
               label='Deskripsi Transaksi'
               placeholder='Semen (Sak)'
+              onSubmitEditing={() => {
+                this.quantity_input.focus()
+              }}
               onChangeText={value => this.onValueChange('description', value)}
             />
             <InputBox
+              inputRef={c => this.quantity_input = c}
               label='Jumlah'
               placeholder='10'
               keyboardType='numeric'
+              onSubmitEditing={() => {
+                this.price_input.focus()
+              }}
               onChangeText={value => this.onValueChange('quantity', value)}
             />
             <InputBox
+              inputRef={c => this.price_input = c}
               label='Harga (Rp.)'
               placeholder='60000'
               keyboardType='numeric'
