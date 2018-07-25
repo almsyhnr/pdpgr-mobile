@@ -16,7 +16,8 @@ export default StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 75,
-    marginBottom: 20
+    marginBottom: 20,
+    borderWidth: 2
   },
   email: {
     marginVertical: 5,

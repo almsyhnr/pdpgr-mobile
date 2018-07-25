@@ -96,10 +96,10 @@ class ProfileScreen extends Component {
             <ListItem title='Ubah Avatar' rightIcon={rightIcon} onPress={() => this.refs.modal_image.open()} />
           </Card>
           <Card containerStyle={styles.card}>
-            <ListItem title='Ubah Password' rightIcon={rightIcon} />
+            <ListItem title='Ubah Password' rightIcon={rightIcon} onPress={() => this.props.navigation.navigate('UbahPasswordScreen')} />
           </Card>
           <Card containerStyle={styles.card}>
-            <ListItem title='Ubah Profile' rightIcon={rightIcon} />
+            <ListItem title='Ubah Profile' rightIcon={rightIcon} onPress={() => this.props.navigation.navigate('UpdateProfileScreen')} />
           </Card>
           <Card containerStyle={styles.card}>
             <ListItem title='Logout' rightIcon={logoutIcon} onPress={() => this.props.logout()} />

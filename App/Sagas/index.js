@@ -18,7 +18,7 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
-import { getUser, changeAvatar } from './UserSagas'
+import { getUser, changeAvatar, changePassword, updateProfile } from './UserSagas'
 import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
 import { getSubmissionTermins, submitSubmissionTermin } from './SubmissionTerminSagas'
 import { getSubmissionTransactions, createTransaction, deleteTransaction } from './SubmissionTransactionSagas'
@@ -44,6 +44,8 @@ export default function * root () {
     // User
     takeLatest(UserTypes.GET_USER, getUser, api),
     takeLatest(UserTypes.CHANGE_AVATAR, changeAvatar, api),
+    takeLatest(UserTypes.CHANGE_PASSWORD, changePassword, api),
+    takeLatest(UserTypes.UPDATE_PROFILE, updateProfile, api),
 
     // Submission
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),

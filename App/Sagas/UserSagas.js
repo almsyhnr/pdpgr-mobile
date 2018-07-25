@@ -39,3 +39,36 @@ export function * changeAvatar (api, { file }) {
     alert('Avatar gagal diubah')
   }
 }
+
+export function * changePassword (api, { form }) {
+  const response = yield call(api.changePassword, form)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(UserActions.postUserSuccess())
+    } else {
+      yield put(UserActions.postUserFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(UserActions.postUserFailure())
+    alert('Password gagal diubah')
+  }
+}
+
+export function * updateProfile (api, { form }) {
+  const response = yield call(api.updateProfile, form)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(UserActions.postUserSuccess())
+      yield put(UserActions.getUser())
+    } else {
+      yield put(UserActions.postUserFailure())
+    }
+    alert(response.data.message)
+  } else {
+    yield put(UserActions.postUserFailure())
+    alert('Profile gagal diubah')
+  }
+}
