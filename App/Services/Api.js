@@ -36,6 +36,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   // way at this level.
   //
   const signin = (email, password) => api.post('api/login', {email: email, password: password})
+  const getUser = () => api.get('api/user')
   const getSubmissions = (page) => api.get('api/submissions?page=' + page)
   const getSubmissionDetail = (id) => api.get('api/submissions/' + id)
   const getMySubmissions = (page) => api.get('api/my_submissions?page=' + page)
@@ -108,6 +109,24 @@ const create = (baseURL = AppConfig.baseUrl) => {
     })
   }
   const deleteTransaction = (submissionId, transactionId) => api.delete('api/my_approved_submissions/' + submissionId + '/transactions/' + transactionId)
+  const changeAvatar = (file) => {
+    var body = new FormData()
+
+    var image = {
+      uri: file.path,
+      type: file.mime,
+      name: file.filename
+    }
+    body.append(`photo`, image)
+
+    return api.post('api/profile/change_avatar', body, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
+  const changePassword = (form) => api.post('api/profile/change_password', form)
+  const updateProfile = (form) => api.post('api/profile/update_profile', form)
   // ------
   // STEP 3
   // ------
@@ -124,6 +143,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
     // a list of the API functions from step 2
     setHeader: api.setHeader,
     signin,
+    getUser,
     getSubmissions,
     getSubmissionDetail,
     getMySubmissions,
@@ -137,7 +157,10 @@ const create = (baseURL = AppConfig.baseUrl) => {
     readNotification,
     subVillages,
     createTransaction,
-    deleteTransaction
+    deleteTransaction,
+    changeAvatar,
+    changePassword,
+    updateProfile
   }
 }
 

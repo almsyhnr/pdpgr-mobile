@@ -7,6 +7,7 @@ import DebugConfig from '../Config/DebugConfig'
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
+import { UserTypes } from '../Redux/UserRedux'
 import { SubmissionTypes } from '../Redux/SubmissionRedux'
 import { SubmissionTerminTypes } from '../Redux/SubmissionTerminRedux'
 import { SubmissionTransactionTypes } from '../Redux/SubmissionTransactionRedux'
@@ -17,6 +18,7 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 
 import { startup } from './StartupSagas'
 import { signin } from './AuthSagas'
+import { getUser, changeAvatar } from './UserSagas'
 import { getSubmissions, getSubmissionDetail, getMySubmissions, getMyApprovedSubmissions, createSubmission } from './SubmissionSagas'
 import { getSubmissionTermins, submitSubmissionTermin } from './SubmissionTerminSagas'
 import { getSubmissionTransactions, createTransaction, deleteTransaction } from './SubmissionTransactionSagas'
@@ -38,6 +40,10 @@ export default function * root () {
 
     // Auth
     takeLatest(AuthTypes.SIGNIN, signin, api),
+
+    // User
+    takeLatest(UserTypes.GET_USER, getUser, api),
+    takeLatest(UserTypes.CHANGE_AVATAR, changeAvatar, api),
 
     // Submission
     takeLatest(SubmissionTypes.GET_SUBMISSIONS, getSubmissions, api),

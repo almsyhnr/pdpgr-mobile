@@ -27,5 +27,35 @@ export default StyleSheet.create({
     backgroundColor: Colors.gray,
     flex: 1
   },
-  card: {padding: 0, marginBottom: 5}
+  card: {padding: 0, marginBottom: 5},
+  modalImageContainer: {
+    width: 220,
+    height: 120,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  modalImageContent: {
+    flexDirection: 'row',
+    backgroundColor: Colors.snow,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  modalImageItem: {
+    padding: 7,
+    alignItems: 'center'
+  },
+  modalImage: {
+    width: 80,
+    height: 80
+  },
+  modalImageText: {
+    fontFamily: Fonts.type.base,
+    color: Colors.darkPrimary
+  },
+  image: {
+    width: 80,
+    height: 60
+  }
 })
