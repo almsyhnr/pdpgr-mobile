@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Image, View } from 'react-native'
+import { ScrollView, Image, View, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import FastImage from 'react-native-fast-image'
 import Touchable from 'react-native-platform-touchable'
@@ -24,6 +24,12 @@ class ProfileScreen extends Component {
       title: 'Profile',
       drawerIcon: ({focused}) => <Image source={Images.ic_profil} style={styles.sidebarIcon} />
     }
+  }
+
+  componentDidMount () {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.getUser()
+    })
   }
 
   openCamera = () => {
@@ -134,7 +140,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(AuthActions.logout()),
-    changeAvatar: (file) => dispatch(UserActions.changeAvatar(file))
+    changeAvatar: (file) => dispatch(UserActions.changeAvatar(file)),
+    getUser: () => dispatch(UserActions.getUser())
   }
 }
 
