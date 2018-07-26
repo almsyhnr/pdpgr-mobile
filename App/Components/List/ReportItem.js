@@ -116,6 +116,7 @@ class ReportItem extends Component {
   render () {
     const { report, onPress, onLikePress, onCommentPress } = this.props
     let likedStyle = report.liked ? {tintColor: Colors.primary} : null
+    let commentStyle = report.comment_count > 0 ? {tintColor: Colors.primary} : null
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -195,7 +196,7 @@ class ReportItem extends Component {
               <Image source={Images.like} style={[styles.footerImage, likedStyle]} />
             </Touchable>
             <Touchable style={styles.footerAction} onPress={onCommentPress}>
-              <Image source={Images.comment} style={styles.footerImage} />
+              <Image source={Images.comment} style={[styles.footerImage, commentStyle]} />
             </Touchable>
             <Touchable style={styles.footerAction} onPress={onPress}>
               <Image source={Images.lokasi} style={styles.footerImage} />
