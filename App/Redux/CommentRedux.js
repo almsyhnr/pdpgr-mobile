@@ -67,6 +67,7 @@ export const getCommentsSuccess = (state, { response }) => {
 
 export const insertMessage = (state, { message }) => {
   var data = CommentTransformer(message)
+  console.tron.error(data)
   var messages = _.cloneDeep(state.data)
   messages.unshift(data)
 

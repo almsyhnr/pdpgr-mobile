@@ -45,10 +45,9 @@ class KomentarScreen extends Component {
     this.props.postComment(id, message)
 
     const chat = {
-      _id: `delete` + moment().toISOString(),
+      id: `delete` + moment().toISOString(),
       comment: message.comment,
       user: {
-        _id: user.id,
         ...user
       }
     }
