@@ -15,6 +15,7 @@ const { Types, Creators } = createActions({
   getSubmissionDetailSuccess: ['response'],
   likeSubmission: ['id'],
   likeSubmissionSuccess: ['response'],
+  incrementSubmissionComment: ['id'],
   resetSubmissionDetail: null,
   resetSubmissions: null,
   submissionFailure: null,
@@ -78,6 +79,24 @@ export const likeSubmissionSuccess = (state, { response }) => {
   return state.merge({ posting: false, error: null, data: submissions })
 }
 
+export const incrementSubmissionComment = (state, { id }) => {
+  let data = _.map(_.cloneDeep(state.data), item => {
+    if (item.id === id) {
+      item.comment_count = item.comment_count + 1
+      console.tron.display({
+        name: 'increment',
+        value: {
+          id,
+          item,
+          equal: item.id === id
+        }
+      })
+    }
+
+    return item
+  })
+  return state.merge({ data })
+}
 export const resetSubmissionDetail = state => state.merge({ selected: null })
 export const resetSubmissions = state => state.merge({ data: null, pagination: null })
 
@@ -102,6 +121,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_SUBMISSION_DETAIL_SUCCESS]: getSubmissionDetailSuccess,
   [Types.LIKE_SUBMISSION]: postRequest,
   [Types.LIKE_SUBMISSION_SUCCESS]: likeSubmissionSuccess,
+  [Types.INCREMENT_SUBMISSION_COMMENT]: incrementSubmissionComment,
   [Types.RESET_SUBMISSION_DETAIL]: resetSubmissionDetail,
   [Types.RESET_SUBMISSIONS]: resetSubmissions,
   [Types.POST_SUBMISSION_SUCCESS]: postSuccess,

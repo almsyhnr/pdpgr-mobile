@@ -29,6 +29,10 @@ class KomentarScreen extends Component {
     })
   }
 
+  componentWillUnmount () {
+    this.props.commentReset()
+  }
+
   getComments = (page) => {
     const id = this.props.navigation.state.params.id
     this.props.getComments(id, page)
@@ -89,7 +93,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getComments: (id, page) => dispatch(CommentActions.getComments(id, page)),
     postComment: (id, form) => dispatch(CommentActions.postComment(id, form)),
-    insertMessage: (message) => dispatch(CommentActions.insertMessage(message))
+    insertMessage: (message) => dispatch(CommentActions.insertMessage(message)),
+    commentReset: () => dispatch(CommentActions.commentReset())
   }
 }
 

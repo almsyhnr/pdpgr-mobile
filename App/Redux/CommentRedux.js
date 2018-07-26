@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   postComment: ['id', 'form'],
   postCommentSuccess: ['response'],
   insertMessage: ['message'],
+  commentReset: null,
   postCommentFailure: null,
   commentFailure: null
 })
@@ -96,5 +97,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.INSERT_MESSAGE]: insertMessage,
   [Types.POST_COMMENT_SUCCESS]: postSuccess,
   [Types.POST_COMMENT_FAILURE]: postFailure,
-  [Types.COMMENT_FAILURE]: failure
+  [Types.COMMENT_FAILURE]: failure,
+  [Types.COMMENT_RESET]: reset
 })

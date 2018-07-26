@@ -12,6 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import CommentActions from '../Redux/CommentRedux'
+import SubmissionAction from '../Redux/SubmissionRedux'
 
 export function * getComments (api, {id, page}) {
   const response = yield call(api.getComments, id, page)
@@ -28,6 +29,7 @@ export function * postComment (api, {id, form}) {
 
   if (response.ok) {
     yield put(CommentActions.postCommentSuccess(response.data))
+    yield put(SubmissionAction.incrementSubmissionComment(id))
   } else {
     yield put(CommentActions.commentFailure())
   }
