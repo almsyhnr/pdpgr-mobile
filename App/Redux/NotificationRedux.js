@@ -19,6 +19,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: null,
   pagination: null,
+  unread: 0,
   fetching: null,
   error: null
 })
@@ -39,7 +40,7 @@ export const getNotificationsSuccess = (state, {response}) => {
   } else {
     notifications = state.data.concat(data)
   }
-  return state.merge({ fetching: false, error: null, data: notifications, pagination: meta.pagination })
+  return state.merge({ fetching: false, error: null, data: notifications, pagination: meta.pagination, unread: meta.unread })
 }
 
 export const request = (state) => state.merge({ fetching: true })

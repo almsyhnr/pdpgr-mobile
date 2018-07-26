@@ -8,10 +8,10 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { Icon } from 'react-native-elements'
 
 // redux
 import SubmissionActions from '../Redux/SubmissionRedux'
+import NotificationActions from '../Redux/NotificationRedux'
 
 // components
 import { StatusBar, HeaderTitle } from '../Components/General'
@@ -51,6 +51,7 @@ class HomeScreen extends Component {
   componentWillMount () {
     InteractionManager.runAfterInteractions(() => {
       this.getSubmissions(1)
+      this.props.getNotifications(1)
     })
   }
 
@@ -144,6 +145,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getNotifications: page => dispatch(NotificationActions.getNotifications(page)),
     likeSubmission: id => dispatch(SubmissionActions.likeSubmission(id)),
     getSubmissions: page => dispatch(SubmissionActions.getSubmissions(page)),
     resetSubmissions: () => dispatch(SubmissionActions.resetSubmissions())
