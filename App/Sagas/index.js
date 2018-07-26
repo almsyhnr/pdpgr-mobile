@@ -14,6 +14,8 @@ import { SubmissionTransactionTypes } from '../Redux/SubmissionTransactionRedux'
 import { ModuleTypes } from '../Redux/ModuleRedux'
 import { SubVillageTypes } from '../Redux/SubVillageRedux'
 import { NotificationTypes } from '../Redux/NotificationRedux'
+import { CommentTypes } from '../Redux/CommentRedux'
+
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
@@ -44,6 +46,7 @@ import {
 import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
+import { getComments, postComment } from './CommentSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -77,6 +80,10 @@ export default function * root () {
     ),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
     takeLatest(SubmissionTypes.LIKE_SUBMISSION, likeSubmission, api),
+
+    // comment
+    takeLatest(CommentTypes.GET_COMMENTS, getComments, api),
+    takeLatest(CommentTypes.POST_COMMENT, postComment, api),
 
     // Submission Termin
     takeLatest(

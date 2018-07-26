@@ -16,7 +16,8 @@ export const reducers = combineReducers({
   submissionTransaction: require('./SubmissionTransactionRedux').reducer,
   module: require('./ModuleRedux').reducer,
   subVillage: require('./SubVillageRedux').reducer,
-  notification: require('./NotificationRedux').reducer
+  notification: require('./NotificationRedux').reducer,
+  comment: require('./CommentRedux').reducer
 })
 
 export default () => {

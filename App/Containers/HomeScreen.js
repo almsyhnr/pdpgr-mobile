@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, BackHandler, FlatList, Image, InteractionManager } from 'react-native'
+import {
+  View,
+  BackHandler,
+  FlatList,
+  Image,
+  InteractionManager
+} from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
@@ -22,10 +28,16 @@ class HomeScreen extends Component {
     return {
       drawerLabel: 'Beranda',
       headerTitle: <HeaderTitle />,
-      drawerIcon: ({focused}) => <Image source={Images.ic_home} style={styles.sidebarIcon} />,
-      headerRight: <NotificationButton onPress={() => navigation.navigate('Notifications')} />
+      drawerIcon: ({ focused }) => (
+        <Image source={Images.ic_home} style={styles.sidebarIcon} />
+      ),
+      headerRight: (
+        <NotificationButton
+          onPress={() => navigation.navigate('Notifications')}
+        />
+      )
     }
-  }
+  };
 
   constructor (props) {
     super(props)
@@ -51,16 +63,16 @@ class HomeScreen extends Component {
     this.props.resetSubmissions()
   }
 
-  getSubmissions = (page) => {
+  getSubmissions = page => {
     this.props.getSubmissions(page)
-  }
+  };
 
   loadMore = () => {
     const { pagination } = this.props
     if (pagination.current_page < pagination.total_pages) {
       this.getSubmissions(pagination.current_page + 1)
     }
-  }
+  };
 
   _backHandler () {
     const { nav, navigation } = this.props
@@ -71,17 +83,30 @@ class HomeScreen extends Component {
     return true
   }
 
-  openDetailPengajuan = (item) => {
+  openDetailPengajuan = item => {
     this.props.navigation.navigate('DetailPengajuan', {
       id: item.id
     })
-  }
+  };
 
-  likePengajuan = (id) => {
+  openKomentar = item => {
+    this.props.navigation.navigate('KomentarScreen', {
+      id: item.id
+    })
+  };
+
+  likePengajuan = id => {
     this.props.likeSubmission(id)
-  }
+  };
 
-  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} onLikePress={() => this.likePengajuan(item.id)} />
+  renderItem = ({ item, index }) => (
+    <ReportItem
+      report={item}
+      onPress={() => this.openDetailPengajuan(item)}
+      onLikePress={() => this.likePengajuan(item.id)}
+      onCommentPress={() => this.openKomentar(item)}
+    />
+  );
 
   render () {
     return (
@@ -93,10 +118,12 @@ class HomeScreen extends Component {
           data={this.props.submissions}
           keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderItem}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.3}
-          ListFooterComponent={<LoadingIndicator visible={this.props.fetching} size={'large'} />}
+          ListFooterComponent={
+            <LoadingIndicator visible={this.props.fetching} size={'large'} />
+          }
           ListEmptyComponent={<EmptyReport />}
         />
         <AddReportButton />
@@ -105,7 +132,7 @@ class HomeScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     nav: state.nav,
     fetching: state.submission.fetching,
@@ -115,7 +142,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     likeSubmission: id => dispatch(SubmissionActions.likeSubmission(id)),
     getSubmissions: page => dispatch(SubmissionActions.getSubmissions(page)),
@@ -123,4 +150,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen)

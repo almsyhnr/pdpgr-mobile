@@ -79,17 +79,30 @@ class Realisasi extends Component {
     return true
   }
 
-  likePengajuan = (id) => {
+  likePengajuan = id => {
     this.props.likeSubmission(id)
-  }
+  };
 
-  openDetailPengajuan = (item) => {
+  openDetailPengajuan = item => {
     this.props.navigation.navigate('DetailPengajuan', {
       id: item.id
     })
-  }
+  };
 
-  renderItem = ({ item, index }) => <ReportItem report={item} onPress={() => this.openDetailPengajuan(item)} onLikePress={() => this.likePengajuan(item.id)} />
+  openKomentar = item => {
+    this.props.navigation.navigate('KomentarScreen', {
+      id: item.id
+    })
+  };
+
+  renderItem = ({ item, index }) => (
+    <ReportItem
+      report={item}
+      onPress={() => this.openDetailPengajuan(item)}
+      onLikePress={() => this.likePengajuan(item.id)}
+      onCommentPress={() => this.openKomentar(item)}
+    />
+  );
 
   render () {
     return (

@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import KomentarScreen from '../Containers/KomentarScreen'
 import UpdateProfileScreen from '../Containers/UpdateProfileScreen'
 import UbahPasswordScreen from '../Containers/UbahPasswordScreen'
 import DetailPengajuan from '../Containers/DetailPengajuan'
@@ -67,6 +68,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  KomentarScreen: { screen: KomentarScreen },
   UpdateProfileScreen: { screen: UpdateProfileScreen },
   UbahPasswordScreen: { screen: UbahPasswordScreen },
   TambahRealisasi: { screen: TambahRealisasi },
