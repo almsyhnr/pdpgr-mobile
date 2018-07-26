@@ -33,3 +33,13 @@ export function formatMoney (n, separator = '.') {
   // Put the decimals back and output the formatted number
   return `${num}${decimals}`
 }
+
+export const getCurrentRoute = (state: Object) => {
+  const findCurrentRoute = (navState: Object) => {
+    if (navState.index !== undefined) {
+      return findCurrentRoute(navState.routes[navState.index])
+    }
+    return navState.routeName
+  }
+  return findCurrentRoute(state)
+}

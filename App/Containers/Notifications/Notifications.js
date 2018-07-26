@@ -27,28 +27,11 @@ class Notifications extends Component {
     })
   }
 
-  componentDidMount () {
-    BackHandler.addEventListener('hardwareBackPress', this._backHandler)
-  }
-
-  componentWillUnmount () {
-    BackHandler.removeEventListener('hardwareBackPress', this._backHandler)
-  }
-
   loadMore = () => {
     const { pagination } = this.props
     if (pagination.current_page < pagination.total_pages) {
       this.getNotifications(pagination.current_page + 1)
     }
-  }
-
-  _backHandler () {
-    const { nav, navigation } = this.props
-    if (nav.index === 0) {
-      return false
-    }
-    navigation.dispatch(NavigationActions.back())
-    return true
   }
 
   getNotifications = (page) => {
@@ -95,7 +78,6 @@ class Notifications extends Component {
 
 const mapStateToProps = state => {
   return {
-    nav: state.nav,
     notifications: state.notification.data,
     fetching: state.notification.fetching,
     error: state.notification.error,

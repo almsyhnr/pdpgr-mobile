@@ -190,7 +190,9 @@ class ReportItem extends Component {
           </View>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.comments}>{report.like_count} Likes {report.comment_count} Comments</Text>
+          <Touchable onPress={onCommentPress}>
+            <Text style={styles.comments}>{report.like_count} Likes {report.comment_count} Comments</Text>
+          </Touchable>
           <View style={styles.actionContainer}>
             <Touchable style={styles.footerAction} onPress={onLikePress}>
               <Image source={Images.like} style={[styles.footerImage, likedStyle]} />

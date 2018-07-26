@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import _ from 'lodash'
 
 // redux
 import SubmissionActions from '../Redux/SubmissionRedux'
@@ -22,6 +23,7 @@ import { ReportItem, EmptyReport } from '../Components/List'
 import styles from './Styles/HomeScreenStyle'
 import { Images } from '../Themes'
 import { LoadingIndicator } from '../Components/Indicator'
+import { getCurrentRoute } from '../Lib/helpers'
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -76,11 +78,20 @@ class HomeScreen extends Component {
   };
 
   _backHandler () {
-    const { nav, navigation } = this.props
-    if (nav.index === 0) {
+    const currentRoute = getCurrentRoute(this.props.nav)
+    const exitRoutes = [
+      'Home',
+      'NewSubmission',
+      'PengajuanSaya',
+      'Realisasi',
+      'ForumSatpolPp',
+      'ForumYasinan',
+      'Profile'
+    ]
+    if (_.includes(exitRoutes, currentRoute)) {
       return false
     }
-    navigation.dispatch(NavigationActions.back())
+    this.props.navigation.dispatch(NavigationActions.back())
     return true
   }
 
