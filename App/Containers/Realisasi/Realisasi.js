@@ -83,8 +83,8 @@ class Realisasi extends Component {
     this.props.likeSubmission(id)
   };
 
-  openDetailPengajuan = item => {
-    this.props.navigation.navigate('DetailPengajuan', {
+  openDetailRealisasi = item => {
+    this.props.navigation.navigate('DetailRealisasi', {
       id: item.id
     })
   };
@@ -98,7 +98,7 @@ class Realisasi extends Component {
   renderItem = ({ item, index }) => (
     <ReportItem
       report={item}
-      onPress={() => this.openDetailPengajuan(item)}
+      onPress={() => this.openDetailRealisasi(item)}
       onLikePress={() => this.likePengajuan(item.id)}
       onCommentPress={() => this.openKomentar(item)}
     />
