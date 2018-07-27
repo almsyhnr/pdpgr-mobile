@@ -20,10 +20,23 @@ const styles = StyleSheet.create({
 })
 
 class KomentarForum extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      thread_id: props.forum.id,
+      text: ''
+    }
+  }
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
       this.getForumReplies(1)
     })
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.posting && !nextProps.posting && !nextProps.error) {
+      this.getForumReplies(0)
+    }
   }
 
   getForumReplies = page => {
@@ -57,6 +70,16 @@ class KomentarForum extends Component {
 
   );
 
+  sendReply = () => {
+    const { text } = this.state
+    if (text.length > 0) {
+      this.props.replyForum(this.state)
+      this.setState({
+        text: ''
+      })
+    }
+  }
+
   render () {
     return (
       <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
@@ -74,10 +97,12 @@ class KomentarForum extends Component {
         />
         <View style={{flexDirection: 'row', padding: 10, alignItems: 'center'}}>
           <View style={{flex: 1, marginRight: 10}}>
-            <Input placeholder='Tulis komentar...' containerStyle={{marginBottom: 0}} />
+            <Input value={this.state.text}
+              onSubmitEditing={this.sendReply}
+              onChangeText={text => this.setState({ text })} placeholder='Tulis komentar...' containerStyle={{marginBottom: 0}} />
           </View>
 
-          <Button title='Kirim' buttonStyle={{backgroundColor: Colors.primary}} />
+          <Button disabled={this.state.text.length === 0} onPress={this.sendReply} title='Kirim' buttonStyle={{backgroundColor: Colors.primary}} />
         </View>
       </View>
     )
@@ -92,6 +117,7 @@ const mapStateToProps = state => {
   return {
     replies: state.forumReply.data,
     fetching: state.forumReply.fetching,
+    posting: state.forumReply.posting,
     error: state.forumReply.error,
     pagination: state.forumReply.pagination || {}
   }
@@ -100,7 +126,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getForumReplies: (id, page) =>
-      dispatch(ForumReplyActions.getForumReplies(id, page))
+      dispatch(ForumReplyActions.getForumReplies(id, page)),
+    replyForum: (form) => dispatch(ForumReplyActions.replyForum(form))
   }
 }
 

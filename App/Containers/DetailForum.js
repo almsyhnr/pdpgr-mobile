@@ -12,6 +12,7 @@ import moment from 'moment'
 import HTML from 'react-native-render-html'
 import { Metrics, Fonts } from '../Themes'
 import KomentarForum from './KomentarForum'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class DetailForum extends Component {
   static navigationOptions = {
@@ -53,7 +54,7 @@ class DetailForum extends Component {
             Forum Diskusi {this.props.navigation.state.params.type.title}
           </Text>
         </View>
-        <ScrollView stickyHeaderIndices={[3]}>
+        <KeyboardAwareScrollView stickyHeaderIndices={[3]}>
           <ListItem
             title={forum.user.name}
             leftElement={avatar}
@@ -74,10 +75,10 @@ class DetailForum extends Component {
               Reply
             </Text>
           </View>
-          <View onStartShouldSetResponder={() => true}>
+          <View style={styles.replyContainer} onStartShouldSetResponder={() => true}>
             <KomentarForum forum={forum} />
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     )
   }
