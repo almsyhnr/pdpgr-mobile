@@ -1,7 +1,5 @@
-import ForumSatpolPp from './ForumSatpolPp'
-import ForumYasinan from './ForumYasinan'
+import ForumList from './ForumList'
 
 export {
-    ForumSatpolPp,
-    ForumYasinan
+    ForumList
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, Image, View, Text, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import ForumActions from '../../Redux/ForumRedux'
 
@@ -10,20 +11,11 @@ import { StatusBar, UnderDevelopment } from '../../Components/General'
 // styles
 import { Images } from '../../Themes'
 import styles from './styles'
-import { FORUM_TYPE } from './constant'
 import { LoadingIndicator } from '../../Components/Indicator'
 import { EmptyForum, ForumItem } from '../../Components/List'
 import { AddForumButton } from '../../Components/Button'
 
-class ForumSatpolPp extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      drawerLabel: 'Forum Satpol PP',
-      title: 'Forum Satpol PP',
-      drawerIcon: ({focused}) => <Image source={Images.ic_forum} style={styles.sidebarIcon} />
-    }
-  }
-
+class ForumList extends Component {
   componentDidMount () {
     InteractionManager.runAfterInteractions(() => {
       this.getForums(1)
@@ -31,7 +23,7 @@ class ForumSatpolPp extends Component {
   }
 
   getForums = (page) => {
-    this.props.getForums(FORUM_TYPE['Pol PP'], page)
+    this.props.getForums(this.props.type.id, page)
   }
 
   loadMore = () => {
@@ -53,7 +45,7 @@ class ForumSatpolPp extends Component {
       <View style={styles.container}>
         <StatusBar />
         <View style={styles.forumTitleContainer}>
-          <Text style={styles.forumTitle}>Forum Diskusi Satpol PP</Text>
+          <Text style={styles.forumTitle}>Forum Diskusi {this.props.type.title}</Text>
         </View>
         <FlatList
           refreshing={false}
@@ -75,6 +67,10 @@ class ForumSatpolPp extends Component {
   }
 }
 
+ForumList.props = {
+  type: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => {
   return {
     forums: state.forum.data,
@@ -90,4 +86,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForumSatpolPp)
+export default connect(mapStateToProps, mapDispatchToProps)(ForumList)

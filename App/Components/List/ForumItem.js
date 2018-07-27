@@ -18,7 +18,7 @@ const ForumItem = ({ forum, onPress }) => {
     <Text>Replies: {forum.reply_count}</Text>
   </View>
   return (
-    <ListItem title={forum.title} leftElement={leftElement} rightElement={rightElement} />
+    <ListItem onPress={onPress} title={forum.title} leftElement={leftElement} rightElement={rightElement} />
   )
 }
 

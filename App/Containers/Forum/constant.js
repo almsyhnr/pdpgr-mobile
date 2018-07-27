@@ -1,4 +1,10 @@
 export const FORUM_TYPE = {
-  'Yasinan': 1,
-  'Pol PP': 2
+  YASINAN: {
+    id: 1,
+    title: 'Yasinan'
+  },
+  SATPOL_PP: {
+    id: 2,
+    title: 'Satpol PP'
+  }
 }

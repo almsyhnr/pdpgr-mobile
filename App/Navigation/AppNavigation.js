@@ -1,4 +1,5 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import KomentarScreen from '../Containers/KomentarScreen'
 import UpdateProfileScreen from '../Containers/UpdateProfileScreen'
@@ -11,7 +12,7 @@ import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
 import { NotificationsScreen } from '../Containers/Notifications'
 import { DaftarRealisasi } from '../Containers/Realisasi'
 import { DetailRealisasi } from '../Containers/DetailRealisasi'
-import { ForumSatpolPp, ForumYasinan } from '../Containers/Forum'
+import { ForumList } from '../Containers/Forum'
 import { TambahRealisasi } from '../Containers/TambahRealisasi'
 
 import ProfileScreen from '../Containers/ProfileScreen'
@@ -20,8 +21,9 @@ import LoginScreen from '../Containers/LoginScreen'
 
 import {DrawerButton} from '../Components/Button'
 import DrawerContent from '../Containers/DrawerContent'
-import { Colors } from '../Themes'
+import { Colors, Images } from '../Themes'
 import styles from './Styles/NavigationStyles'
+import { FORUM_TYPE } from '../Containers/Forum/constant'
 
 const MainDrawer = DrawerNavigator({
   Home: {
@@ -37,10 +39,20 @@ const MainDrawer = DrawerNavigator({
     screen: DaftarRealisasi
   },
   ForumSatpolPp: {
-    screen: ForumSatpolPp
+    screen: props => <ForumList type={FORUM_TYPE.SATPOL_PP} />,
+    navigationOptions: {
+      drawerLabel: 'Forum Satpol PP',
+      title: 'Forum',
+      drawerIcon: ({focused}) => <Image source={Images.ic_forum} style={styles.sidebarIcon} />
+    }
   },
   ForumYasinan: {
-    screen: ForumYasinan
+    screen: props => <ForumList type={FORUM_TYPE.YASINAN} />,
+    navigationOptions: {
+      drawerLabel: 'Forum Yasinan',
+      title: 'Forum',
+      drawerIcon: ({focused}) => <Image source={Images.ic_forum} style={styles.sidebarIcon} />
+    }
   },
   Profile: {
     screen: ProfileScreen
