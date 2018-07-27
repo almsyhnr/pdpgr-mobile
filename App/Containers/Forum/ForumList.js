@@ -33,10 +33,17 @@ class ForumList extends Component {
     }
   };
 
+  openDetailForum = item => {
+    this.props.navigation.navigate('DetailForum', {
+      id: item.id,
+      type: this.props.type
+    })
+  };
+
   renderItem = ({ item, index }) => (
     <ForumItem
       forum={item}
-
+      onPress={() => this.openDetailForum(item)}
     />
   );
 

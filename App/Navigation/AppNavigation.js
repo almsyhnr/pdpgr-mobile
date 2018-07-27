@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
+import DetailForum from '../Containers/DetailForum'
 import KomentarScreen from '../Containers/KomentarScreen'
 import UpdateProfileScreen from '../Containers/UpdateProfileScreen'
 import UbahPasswordScreen from '../Containers/UbahPasswordScreen'
@@ -39,7 +40,7 @@ const MainDrawer = DrawerNavigator({
     screen: DaftarRealisasi
   },
   ForumSatpolPp: {
-    screen: props => <ForumList type={FORUM_TYPE.SATPOL_PP} />,
+    screen: props => <ForumList {...props} type={FORUM_TYPE.SATPOL_PP} />,
     navigationOptions: {
       drawerLabel: 'Forum Satpol PP',
       title: 'Forum',
@@ -47,7 +48,7 @@ const MainDrawer = DrawerNavigator({
     }
   },
   ForumYasinan: {
-    screen: props => <ForumList type={FORUM_TYPE.YASINAN} />,
+    screen: props => <ForumList {...props} type={FORUM_TYPE.YASINAN} />,
     navigationOptions: {
       drawerLabel: 'Forum Yasinan',
       title: 'Forum',
@@ -80,6 +81,7 @@ const MainDrawerNavigation = StackNavigator({
 })
 
 const PrimaryNav = StackNavigator({
+  DetailForum: { screen: DetailForum },
   KomentarScreen: { screen: KomentarScreen },
   UpdateProfileScreen: { screen: UpdateProfileScreen },
   UbahPasswordScreen: { screen: UbahPasswordScreen },
