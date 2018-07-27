@@ -54,7 +54,7 @@ class DetailForum extends Component {
             Forum Diskusi {this.props.navigation.state.params.type.title}
           </Text>
         </View>
-        <KeyboardAwareScrollView stickyHeaderIndices={[3]}>
+        <ScrollView stickyHeaderIndices={[3]}>
           <ListItem
             title={forum.user.name}
             leftElement={avatar}
@@ -75,10 +75,10 @@ class DetailForum extends Component {
               Reply
             </Text>
           </View>
-          <View style={styles.replyContainer} onStartShouldSetResponder={() => true}>
+          <View style={styles.replyContainer}>
             <KomentarForum forum={forum} />
           </View>
-        </KeyboardAwareScrollView>
+        </ScrollView>
       </View>
     )
   }

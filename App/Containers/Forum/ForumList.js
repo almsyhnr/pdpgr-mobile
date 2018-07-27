@@ -68,7 +68,7 @@ class ForumList extends Component {
           }
           ListEmptyComponent={<EmptyForum />}
         />
-        <AddForumButton />
+
       </View>
     )
   }

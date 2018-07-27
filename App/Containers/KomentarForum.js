@@ -10,6 +10,7 @@ import { ListItem, Divider, Button } from 'react-native-elements'
 import { Avatar, TimeAgo } from '../Components/General'
 import { Fonts, Colors } from '../Themes'
 import { Input } from '../Components/Form'
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 
 const styles = StyleSheet.create({
   timeAgo: {
@@ -50,7 +51,21 @@ class KomentarForum extends Component {
     }
   };
 
-  renderItem = ({ item, index }) => (
+  renderButton = () => {
+    return (
+      <View style={{flexDirection: 'row', padding: 10, alignItems: 'center'}}>
+        <View style={{flex: 1, marginRight: 10}}>
+          <Input value={this.state.text}
+            onSubmitEditing={this.sendReply}
+            onChangeText={text => this.setState({ text })} placeholder='Tulis komentar...' containerStyle={{marginBottom: 0}} />
+        </View>
+
+        <Button disabled={this.state.text.length === 0} onPress={this.sendReply} title='Kirim' buttonStyle={{backgroundColor: Colors.primary}} />
+      </View>
+    )
+  }
+
+  renderListItem = (item, index) => (
     <View style={{backgroundColor: Colors.snow}}>
       <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
         <Avatar rounded source={{ uri: item.user.avatar }} />
@@ -59,16 +74,22 @@ class KomentarForum extends Component {
           dateTime={item.created_at}
           textStyle={styles.timeAgo}
           showIcon={false}
-          />
+                />
       </View>
       <View style={{padding: 10, paddingTop: 0}}>
         <Text style={{marginLeft: 45}}>{item.reply_text}</Text>
       </View>
       <Divider />
-
     </View>
+  )
 
-  );
+  renderItem = ({ item, index }) => {
+    if (item.id === -1) {
+      return this.renderButton()
+    } else {
+      return this.renderListItem(item, index)
+    }
+  }
 
   sendReply = () => {
     const { text } = this.state
@@ -82,11 +103,12 @@ class KomentarForum extends Component {
 
   render () {
     return (
+
       <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-        <FlatList
+        <KeyboardAwareFlatList
           refreshing={false}
           onRefresh={() => this.getForumReplies(1)}
-          data={this.props.replies}
+          data={[...this.props.replies, {id: -1}]}
           keyExtractor={(item, index) => `${index}`}
           renderItem={this.renderItem}
           onEndReached={this.loadMore}
@@ -95,15 +117,7 @@ class KomentarForum extends Component {
             <LoadingIndicator visible={this.props.fetching} size={'large'} />
           }
         />
-        <View style={{flexDirection: 'row', padding: 10, alignItems: 'center'}}>
-          <View style={{flex: 1, marginRight: 10}}>
-            <Input value={this.state.text}
-              onSubmitEditing={this.sendReply}
-              onChangeText={text => this.setState({ text })} placeholder='Tulis komentar...' containerStyle={{marginBottom: 0}} />
-          </View>
 
-          <Button disabled={this.state.text.length === 0} onPress={this.sendReply} title='Kirim' buttonStyle={{backgroundColor: Colors.primary}} />
-        </View>
       </View>
     )
   }
@@ -115,7 +129,7 @@ KomentarForum.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    replies: state.forumReply.data,
+    replies: state.forumReply.data || [],
     fetching: state.forumReply.fetching,
     posting: state.forumReply.posting,
     error: state.forumReply.error,
