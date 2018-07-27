@@ -32,5 +32,8 @@ export default StyleSheet.create({
   body: {
     padding: 10,
     backgroundColor: Colors.snow
+  },
+  replyContainer: {
+    minHeight: Metrics.screenHeight - Metrics.navBarHeight
   }
 })

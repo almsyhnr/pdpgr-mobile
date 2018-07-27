@@ -11,6 +11,7 @@ import { ListItem } from 'react-native-elements'
 import moment from 'moment'
 import HTML from 'react-native-render-html'
 import { Metrics, Fonts } from '../Themes'
+import KomentarForum from './KomentarForum'
 
 class DetailForum extends Component {
   static navigationOptions = {
@@ -21,6 +22,10 @@ class DetailForum extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.getForumDetail()
     })
+  }
+
+  componentWillUnmount () {
+    this.props.resetForumDetail()
   }
 
   getForumDetail = () => {
@@ -39,8 +44,7 @@ class DetailForum extends Component {
         <Text>Replies: {forum.reply_count}</Text>
       </View>
     )
-    const subtitle =
-      'Diposting pada: ' + moment(forum.created_at).format('D-M-Y')
+    const subtitle = 'Diposting pada: ' + moment(forum.created_at).format('D-M-Y')
     return (
       <View style={styles.container}>
         <StatusBar />
@@ -49,7 +53,7 @@ class DetailForum extends Component {
             Forum Diskusi {this.props.navigation.state.params.type.title}
           </Text>
         </View>
-        <ScrollView>
+        <ScrollView stickyHeaderIndices={[3]}>
           <ListItem
             title={forum.user.name}
             leftElement={avatar}
@@ -65,7 +69,14 @@ class DetailForum extends Component {
               baseFontStyle={{fontFamily: Fonts.type.base}}
               imagesMaxWidth={Metrics.screenWidth} />
           </View>
-
+          <View style={styles.forumTitleContainer}>
+            <Text style={styles.forumTitle}>
+              Reply
+            </Text>
+          </View>
+          <View onStartShouldSetResponder={() => true}>
+            <KomentarForum forum={forum} />
+          </View>
         </ScrollView>
       </View>
     )
