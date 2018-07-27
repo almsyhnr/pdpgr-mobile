@@ -4,6 +4,8 @@ import TerminItem from './TerminItem'
 import GalleryBadge from './GalleryBadge'
 import EmptyReport from './EmptyReport'
 import EmptyNotification from './EmptyNotification'
+import EmptyForum from './EmptyForum'
+import ForumItem from './ForumItem'
 
 export {
   ReportItem,
@@ -11,5 +13,7 @@ export {
   EmptyNotification,
   NotificationItem,
   TerminItem,
-  EmptyReport
+  EmptyReport,
+  EmptyForum,
+  ForumItem
 }

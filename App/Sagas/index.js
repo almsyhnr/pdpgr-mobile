@@ -15,6 +15,8 @@ import { ModuleTypes } from '../Redux/ModuleRedux'
 import { SubVillageTypes } from '../Redux/SubVillageRedux'
 import { NotificationTypes } from '../Redux/NotificationRedux'
 import { CommentTypes } from '../Redux/CommentRedux'
+import { ForumTypes } from '../Redux/ForumRedux'
+import { ForumReplyTypes } from '../Redux/ForumReplyRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -47,6 +49,13 @@ import { getModules } from './ModuleSagas'
 import { getSubVillages } from './SubVillageSagas'
 import { getNotifications, readNotification } from './NotificationSagas'
 import { getComments, postComment } from './CommentSagas'
+import {
+  getForums,
+  getForumDetail,
+  createForum,
+  updateForum
+} from './ForumSagas'
+import { getForumReplies, replyForum } from './ForumReplySagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -122,6 +131,16 @@ export default function * root () {
 
     // Notifications
     takeLatest(NotificationTypes.GET_NOTIFICATIONS, getNotifications, api),
-    takeLatest(NotificationTypes.READ_NOTIFICATION, readNotification, api)
+    takeLatest(NotificationTypes.READ_NOTIFICATION, readNotification, api),
+
+    // forum
+    takeLatest(ForumTypes.GET_FORUMS, getForums, api),
+    takeLatest(ForumTypes.GET_FORUM_DETAIL, getForumDetail, api),
+    takeLatest(ForumTypes.CREATE_FORUM, createForum, api),
+    takeLatest(ForumTypes.UPDATE_FORUM, updateForum, api),
+
+    // forum reply
+    takeLatest(ForumReplyTypes.GET_FORUM_REPLIES, getForumReplies, api),
+    takeLatest(ForumReplyTypes.REPLY_FORUM, replyForum, api)
   ])
 }

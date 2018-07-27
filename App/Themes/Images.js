@@ -24,6 +24,7 @@ const images = {
   like: require('../Images/like.png'),
   lokasi: require('../Images/lokasi.png'),
   upload: require('../Images/upload.png'),
+  forum: require('../Images/forum.png'),
 
   ic_profil: require('../Images/ic_profil.png'),
   ic_home: require('../Images/ic_home.png'),

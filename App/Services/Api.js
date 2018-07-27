@@ -130,6 +130,13 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const likeSubmission = (id) => api.post('api/submissions/' + id + '/likes')
   const getComments = (id, page) => api.get('api/submissions/' + id + '/comments?page=' + page)
   const postComment = (id, form) => api.post('/api/submissions/' + id + '/comments', form)
+
+  const getForums = (type, page) => api.get('api/forum/index/' + type + '?page=' + page)
+  const getForumDetail = (id) => api.get('api/forum/' + id)
+  const getForumReplies = (id, page) => api.get('api/forum/' + id + '/replies?page=' + page)
+  const createForum = (form) => api.post('api/forum/create', form)
+  const updateForum = (id, form) => api.put('api/forum/' + id + '/update')
+  const replyForum = (form) => api.post('api/forum/reply', form)
   // ------
   // STEP 3
   // ------
@@ -166,7 +173,13 @@ const create = (baseURL = AppConfig.baseUrl) => {
     updateProfile,
     likeSubmission,
     getComments,
-    postComment
+    postComment,
+    getForums,
+    getForumDetail,
+    getForumReplies,
+    createForum,
+    updateForum,
+    replyForum
   }
 }
 
