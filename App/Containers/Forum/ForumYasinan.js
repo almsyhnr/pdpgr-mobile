@@ -31,7 +31,7 @@ class ForumYasinan extends Component {
   }
 
   getForums = (page) => {
-    this.props.getForums(1, page)
+    this.props.getForums(FORUM_TYPE.Yasinan, page)
   }
 
   loadMore = () => {
