@@ -102,7 +102,7 @@ class TambahPengajuan extends ValidationComponent {
       pic_name: { required: true },
       nik: { required: true },
       phone: { required: true },
-      email: { required: true },
+      // email: { required: true },
       rt: { required: true },
       rw: { required: true },
       sub_village: { required: true }
