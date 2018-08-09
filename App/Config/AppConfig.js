@@ -5,5 +5,5 @@ import '../I18n/I18n'
 export default {
   // font scaling override - RN default is on
   allowTextFontScaling: true,
-  baseUrl: 'http://pdpgr.smash.id'
+  baseUrl: 'http://pdpgr.sumbawabaratkab.go.id'
 }

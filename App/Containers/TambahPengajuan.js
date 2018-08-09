@@ -275,7 +275,7 @@ class TambahPengajuan extends ValidationComponent {
           <StatusBar />
           <View style={styles.content}>
             <InputBox
-              label='Jenis Pengajuan'
+              label='Jenis Pengajuan *'
               value={form.module}
               editable={false}
             />
@@ -297,14 +297,14 @@ class TambahPengajuan extends ValidationComponent {
                 onSubmitEditing={() => {
                   this.pic_name_input.focus()
                 }}
-                label='Nama Kelompok'
+                label='Nama Kelompok *'
                 value={form.group_name}
                 placeholder='Wirausaha Muda Mandiri'
                 onChangeText={value => this.onValueChange('group_name', value)}
               />
             )}
             <InputBox
-              label='Nama Penerima Bantuan'
+              label='Nama Penerima Bantuan *'
               placeholder='Steeve Jobs'
               inputRef={c => { this.pic_name_input = c }}
               onSubmitEditing={() => {
@@ -317,7 +317,7 @@ class TambahPengajuan extends ValidationComponent {
               onSubmitEditing={() => {
                 this.phone_input.focus()
               }}
-              label='NIK Penerima Bantuan'
+              label='NIK Penerima Bantuan *'
               value={form.nik}
 
               placeholder='5204080099881112'
@@ -328,7 +328,7 @@ class TambahPengajuan extends ValidationComponent {
               onSubmitEditing={() => {
                 this.email_input.focus()
               }}
-              label='Telepon'
+              label='Telepon *'
               value={form.phone}
               placeholder='087899098765'
               onChangeText={value => this.onValueChange('phone', value)}
@@ -349,7 +349,7 @@ class TambahPengajuan extends ValidationComponent {
               onSubmitEditing={() => {
                 this.rt_input.focus()
               }}
-              label='Alamat'
+              label='Alamat *'
               value={form.address}
               placeholder='Jalan pototano Gg. Teratai No.23'
               onChangeText={value => this.onValueChange('address', value)}
@@ -360,7 +360,7 @@ class TambahPengajuan extends ValidationComponent {
                 onSubmitEditing={() => {
                   this.rw_input.focus()
                 }}
-                label='RT'
+                label='RT *'
                 value={form.rt}
                 placeholder='001'
                 containerStyle={{ width: 100, marginRight: 40 }}
@@ -372,7 +372,7 @@ class TambahPengajuan extends ValidationComponent {
                   Keyboard.dismiss()
                   this.refs.modal_peliuk.open()
                 }}
-                label='RW'
+                label='RW *'
                 value={form.rw}
                 placeholder='003'
                 containerStyle={{ width: 100 }}
@@ -384,7 +384,7 @@ class TambahPengajuan extends ValidationComponent {
               style={{ width: '100%', alignItems: 'center' }}
             >
               <InputBox
-                label='Peliuk'
+                label='Peliuk *'
                 placeholder='Pilih peliuk'
                 editable={false}
                 value={form.sub_village}

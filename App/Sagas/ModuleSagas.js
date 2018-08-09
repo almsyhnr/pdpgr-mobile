@@ -12,7 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import ModuleActions from '../Redux/ModuleRedux'
-// import { ModuleSelectors } from '../Redux/ModuleRedux'
+import { Alert } from 'react-native'
 
 export function * getModules (api) {
   const response = yield call(api.modules)
@@ -21,5 +21,6 @@ export function * getModules (api) {
     yield put(ModuleActions.getModulesSuccess(response.data))
   } else {
     yield put(ModuleActions.moduleFailure())
+    Alert.alert('Error', 'Gagal mengambil data jenis pengajuan')
   }
 }
