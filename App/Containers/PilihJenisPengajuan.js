@@ -35,8 +35,20 @@ class PilihJenisPengajuan extends Component {
     })
   }
 
+  openTambahPengajuan = (modul) => {
+    const { navigate } = this.props.navigation
+    const param = {module: modul}
+    switch (modul.id) {
+      case 1:
+        navigate('TambahPengajuanRehabRumah', param)
+        break
+      default:
+        navigate('TambahPengajuan', param)
+    }
+  }
+
   renderItem = ({ item, index }) => {
-    return <MainMenuItem title={item.name} image={item.icons.color} onPress={() => this.props.navigation.navigate('TambahPengajuan', {module: item})} />
+    return <MainMenuItem title={item.name} image={item.icons.color} onPress={() => this.openTambahPengajuan(item)} />
   }
 
   render () {

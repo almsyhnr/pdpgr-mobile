@@ -8,7 +8,8 @@ export default StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    paddingVertical: 15
+    paddingVertical: 15,
+    backgroundColor: Colors.snow
   },
   horizontalForm: {
     flexDirection: 'row',
@@ -36,7 +37,7 @@ export default StyleSheet.create({
   },
   btnPilihFile: {
     backgroundColor: Colors.darkGreen,
-    width: 250,
+    paddingHorizontal: 20,
     height: 45,
     borderColor: 'transparent',
     borderWidth: 0,
@@ -89,5 +90,13 @@ export default StyleSheet.create({
   deleteText: {
     color: Colors.snow
   },
-  upload: { width: 60, height: 60, resizeMode: 'contain', marginBottom: 5 }
+  upload: { width: 60, height: 60, resizeMode: 'contain', marginBottom: 5 },
+  label: {
+    fontFamily: Fonts.type.base,
+    color: 'black',
+    marginBottom: 10,
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  customFieldBox: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}
 })

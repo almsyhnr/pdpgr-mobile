@@ -14,23 +14,23 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import _ from 'lodash'
 import ImagePicker from 'react-native-image-crop-picker'
 import Modal from 'react-native-modalbox'
-import { Button, ListItem } from 'react-native-elements'
+import { Button, ListItem, Divider } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
 
 // redux
-import SubVillageActions from '../Redux/SubVillageRedux'
-import SubmissionActions from '../Redux/SubmissionRedux'
+import SubVillageActions from '../../Redux/SubVillageRedux'
+import SubmissionActions from '../../Redux/SubmissionRedux'
 
 // components
-import { StatusBar } from '../Components/General'
-import { InputBox } from '../Components/Form'
+import { StatusBar } from '../../Components/General'
+import { InputBox } from '../../Components/Form'
 
 // Styles
-import styles from './Styles/TambahPengajuanStyle'
-import { Colors, Images } from '../Themes'
-import ValidationComponent from '../Lib/validator'
+import styles from '../Styles/TambahPengajuanStyle'
+import { Colors, Images } from '../../Themes'
+import ValidationComponent from '../../Lib/validator'
 
-class TambahPengajuan extends ValidationComponent {
+class TambahPengajuanRehabRumah extends ValidationComponent {
   static navigationOptions = {
     title: 'Tambah Pengajuan',
     headerRight: <View />
@@ -61,10 +61,15 @@ class TambahPengajuan extends ValidationComponent {
         sub_village_id: '',
         sub_village: ''
       },
-      images: [],
+      images: {
+        tampakDepan: null,
+        tampakKiri: null,
+        tampakKanan: null
+      },
       modul: _module,
       subVillages: []
     }
+    this.selectedImage = 'tampakDepan'
   }
 
   componentWillMount () {
@@ -95,6 +100,18 @@ class TambahPengajuan extends ValidationComponent {
     this.setState({ form: formData })
   };
 
+  onImageChange = (field, value) => {
+    const { images } = this.state
+    let data = {}
+    data[field] = value
+    var formData = _.cloneDeep(images)
+    formData = {
+      ...formData,
+      ...data
+    }
+    this.setState({ images: formData })
+  }
+
   onSavePress = () => {
     this.validate({
       // identifier: { required: true },
@@ -111,7 +128,10 @@ class TambahPengajuan extends ValidationComponent {
     console.tron.error(this.getErrorMessages())
     if (this.isFormValid()) {
       const { form, images } = this.state
-      return this.props.createSubmission(form, images)
+      if (!images.tampakDepan || !images.tampakKanan || !images.tampakKiri) {
+        return Alert.alert('Error', 'Semua field wajib diisi')
+      }
+      return this.props.createSubmission(form, [images.tampakDepan, images.tampakKanan, images.tampakKiri])
     }
 
     if (this.getErrorMessages().length > 0) {
@@ -133,24 +153,10 @@ class TambahPengajuan extends ValidationComponent {
     }
   };
 
-  deleteImage = index => {
-    let images = _.cloneDeep(this.state.images)
-    images.splice(index, 1)
-    this.setState({ images })
-  };
-
-  addImage = image => {
-    console.tron.error(image)
-    let images = _.cloneDeep(this.state.images)
-    this.setState(
-      {
-        images: [...images, ...image]
-      },
-      () => {
-        console.tron.error(this.state)
-      }
-    )
-  };
+  openImageModal = (field) => {
+    this.selectedImage = field
+    this.refs.modal_image.open()
+  }
 
   openCamera = () => {
     this.refs.modal_image.close()
@@ -166,7 +172,7 @@ class TambahPengajuan extends ValidationComponent {
           .split('/')
           .pop()
       }
-      this.addImage([image])
+      this.onImageChange(this.selectedImage, image)
     })
   };
 
@@ -175,23 +181,19 @@ class TambahPengajuan extends ValidationComponent {
     setTimeout(() => {
       ImagePicker.openPicker({
         cropping: false,
-        multiple: true,
-        maxFiles: 4,
+        multiple: false,
         compressImageMaxWidth: 1024,
         compressImageMaxHeight: 1024
-      }).then(images => {
-        const data = _.map(images, image => {
-          if (!image.filename) {
-            image.filename = image.path
-              .split('\\')
-              .pop()
-              .split('/')
-              .pop()
-          }
-          return image
-        })
+      }).then(image => {
+        if (!image.filename) {
+          image.filename = image.path
+            .split('\\')
+            .pop()
+            .split('/')
+            .pop()
+        }
 
-        this.addImage(data)
+        this.onImageChange(this.selectedImage, image)
       })
     }, 1000)
   };
@@ -249,12 +251,12 @@ class TambahPengajuan extends ValidationComponent {
     }
   };
 
-  renderImageItem = ({ item, index }) => {
+  renderImageItem = (field, item) => {
     return (
       <View style={{ width: '25%', marginBottom: 15 }}>
         <Touchable
           style={styles.delete}
-          onPress={() => this.deleteImage(index)}
+          onPress={() => this.onImageChange(field, null)}
         >
           <Text style={styles.deleteText}>X</Text>
         </Touchable>
@@ -268,7 +270,7 @@ class TambahPengajuan extends ValidationComponent {
   };
 
   render () {
-    const { form, modul } = this.state
+    const { form, modul, images } = this.state
     return (
       <View style={styles.container}>
         <KeyboardAwareScrollView style={styles.container}>
@@ -405,25 +407,41 @@ class TambahPengajuan extends ValidationComponent {
               placeholder='Autocomplete'
             />
           </View>
-          {this.state.images.length > 0
-          ? <FlatList
-            data={this.state.images}
-            renderItem={this.renderImageItem}
-            numColumns={4}
-            keyExtractor={(item, index) => `img-${index}`}
-          />
-          : <View style={{ alignItems: 'center' }}>
-            <Image source={Images.upload} style={styles.upload} />
-            <Text>Pilih file untuk di upload</Text>
-          </View>}
 
-          <Button
-            title='Pilih File'
-            buttonStyle={styles.btnPilihFile}
-            disabled={this.props.posting}
-            containerStyle={{ marginTop: 20 }}
-            onPress={() => this.refs.modal_image.open()}
-          />
+          <View style={{marginTop: 30, backgroundColor: Colors.snow, padding: 20}}>
+            <Text style={{color: Colors.darkGray, marginBottom: 20}}>DETAIL</Text>
+            <Divider />
+            <View style={styles.customFieldBox}>
+              <Text style={styles.label}>Tampak Depan *</Text>
+              {!images.tampakDepan ? (<Button
+                title='Pilih File'
+                buttonStyle={styles.btnPilihFile}
+                disabled={this.props.posting}
+                containerStyle={{ marginTop: 20 }}
+                onPress={() => this.openImageModal('tampakDepan')} />)
+                : this.renderImageItem('tampakDepan', images.tampakDepan)}
+            </View>
+            <View style={styles.customFieldBox}>
+              <Text style={styles.label}>45 Derajat Kiri *</Text>
+              {!images.tampakKiri ? (<Button
+                title='Pilih File'
+                buttonStyle={styles.btnPilihFile}
+                disabled={this.props.posting}
+                containerStyle={{ marginTop: 20 }}
+                onPress={() => this.openImageModal('tampakKiri')} />)
+                : this.renderImageItem('tampakKiri', images.tampakKiri)}
+            </View>
+            <View style={styles.customFieldBox}>
+              <Text style={styles.label}>45 Derajat Kanan *</Text>
+              {!images.tampakKanan ? (<Button
+                title='Pilih File'
+                buttonStyle={styles.btnPilihFile}
+                disabled={this.props.posting}
+                containerStyle={{ marginTop: 20 }}
+                onPress={() => this.openImageModal('tampakKanan')} />)
+                : this.renderImageItem('tampakKanan', images.tampakKanan)}
+            </View>
+          </View>
           <View>
             <Button
               title='Simpan'
@@ -509,4 +527,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TambahPengajuan)
+)(TambahPengajuanRehabRumah)
