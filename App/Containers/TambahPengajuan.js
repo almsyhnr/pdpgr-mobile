@@ -281,13 +281,13 @@ class TambahPengajuan extends ValidationComponent {
             />
             {modul.type === 'kelompok' && (
               <InputBox
-                label='Identifier'
+                label={modul.id === 4 ? 'Nomor Perizinan' : 'Identifier'}
                 inputRef={c => { this.identifier_input = c }}
                 onSubmitEditing={() => {
                   this.group_name_input.focus()
                 }}
                 value={form.identifier}
-                placeholder='SIUP/TDP/NIK Penanggung Jawab'
+                placeholder='SIUP/TDP/KK/NIK Penanggung Jawab'
                 onChangeText={value => this.onValueChange('identifier', value)}
               />
             )}
