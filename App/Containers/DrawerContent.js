@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { DrawerItems, NavigationActions } from 'react-navigation'
 import { Divider } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import DeviceInfo from 'react-native-device-info'
 import _ from 'lodash'
 
 // redux
@@ -90,8 +91,9 @@ class DrawerContent extends Component {
             </View>
           </Touchable>
           <Divider style={styles.divider} />
-        </ScrollView>
 
+        </ScrollView>
+        <Text style={{textAlign: 'center', padding: 20, fontSize: 12}}>{DeviceInfo.getReadableVersion()}</Text>
       </View>
     )
   }

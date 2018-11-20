@@ -53,6 +53,13 @@ const styles = StyleSheet.create({
   }
 })
 
+const fieldInfo = (label, value) => {
+  return (<View>
+    <Text style={styles.label}>{label}</Text>
+    <Text style={styles.value}>{value}</Text>
+  </View>)
+}
+
 const SubmissionDetail = ({ submission }) => {
   if (!submission) {
     return null
@@ -64,18 +71,13 @@ const SubmissionDetail = ({ submission }) => {
         <Text style={styles.sectionTitle}>INFO</Text>
       </View>
       <View style={styles.sectionContent}>
-        <Text style={styles.label}>Jenis Bantuan</Text>
-        <Text style={styles.value}>{submission.module.name}</Text>
-        <Text style={styles.label}>Nama Penerima Bantuan</Text>
-        <Text style={styles.value}>{submission.name}</Text>
-        <Text style={styles.label}>NIK Penerima Bantuan</Text>
-        <Text style={styles.value}>{submission.identifier}</Text>
-        <Text style={styles.label}>Telp</Text>
-        <Text style={styles.value}>{submission.phone}</Text>
-        <Text style={styles.label}>Email</Text>
-        <Text style={styles.value}>{submission.email}</Text>
-        <Text style={styles.label}>Alamat</Text>
-        <Text style={styles.value}>{submission.address}</Text>
+        {fieldInfo('Jenis Bantuan', submission.module.name)}
+        {fieldInfo('Nama Penerima Bantuan', submission.name)}
+        {fieldInfo('NIK Penerima Bantuan', submission.identifier)}
+        {submission.tgl_lahir != null && fieldInfo('Tanggal Lahir', submission.tgl_lahir)}
+        {fieldInfo('Telp', submission.phone)}
+        {fieldInfo('Email', submission.email)}
+        {fieldInfo('Alamat', submission.address)}
       </View>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Status</Text>

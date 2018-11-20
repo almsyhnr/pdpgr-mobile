@@ -65,6 +65,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
     body.append('sub_village_id', form.sub_village_id)
     body.append('village_id', form.village_id)
     body.append('district_id', form.district_id)
+    body.append('tgl_lahir', form.tgl_lahir)
 
     if (files.length > 0) {
       files.map((file) => {

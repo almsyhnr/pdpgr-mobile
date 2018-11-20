@@ -16,21 +16,23 @@ import ImagePicker from 'react-native-image-crop-picker'
 import Modal from 'react-native-modalbox'
 import { Button, ListItem } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import DateTimePicker from 'react-native-modal-datetime-picker'
+import moment from 'moment'
 
 // redux
-import SubVillageActions from '../Redux/SubVillageRedux'
-import SubmissionActions from '../Redux/SubmissionRedux'
+import SubVillageActions from '../../Redux/SubVillageRedux'
+import SubmissionActions from '../../Redux/SubmissionRedux'
 
 // components
-import { StatusBar } from '../Components/General'
-import { InputBox } from '../Components/Form'
+import { StatusBar } from '../../Components/General'
+import { InputBox } from '../../Components/Form'
 
 // Styles
-import styles from './Styles/TambahPengajuanStyle'
-import { Colors, Images } from '../Themes'
-import ValidationComponent from '../Lib/validator'
+import styles from '../Styles/TambahPengajuanStyle'
+import { Colors, Images } from '../../Themes'
+import ValidationComponent from '../../Lib/validator'
 
-class TambahPengajuan extends ValidationComponent {
+class TambahPengajuanPaririSehat extends ValidationComponent {
   static navigationOptions = {
     title: 'Tambah Pengajuan',
     headerRight: <View />
@@ -40,6 +42,7 @@ class TambahPengajuan extends ValidationComponent {
     super(props)
     let _module = props.navigation.state.params.module
     this.state = {
+      isDateTimePickerVisible: false,
       form: {
         module: _module.name,
         module_id: _module.id,
@@ -59,7 +62,8 @@ class TambahPengajuan extends ValidationComponent {
         district: '',
         district_id: '',
         sub_village_id: '',
-        sub_village: ''
+        sub_village: '',
+        tgl_lahir: null
       },
       images: [],
       modul: _module,
@@ -105,7 +109,8 @@ class TambahPengajuan extends ValidationComponent {
       // email: { required: true },
       rt: { required: true },
       rw: { required: true },
-      sub_village: { required: true }
+      sub_village: { required: true },
+      tgl_lahir: { required: true }
     })
     console.tron.error(this.state.form)
     console.tron.error(this.getErrorMessages())
@@ -225,6 +230,10 @@ class TambahPengajuan extends ValidationComponent {
     this.refs.modal_peliuk.close()
   };
 
+  openCalendar = () => {
+    this._showDateTimePicker()
+  }
+
   renderPeliuk = ({ item, index }) => {
     return (
       <ListItem
@@ -265,6 +274,16 @@ class TambahPengajuan extends ValidationComponent {
         />
       </View>
     )
+  };
+
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDatePicked = (date) => {
+    console.tron.log('A date has been picked: ', date)
+    this._hideDateTimePicker()
+    this.onValueChange('tgl_lahir', moment(date).format('YYYY-MM-DD'))
   };
 
   render () {
@@ -323,6 +342,18 @@ class TambahPengajuan extends ValidationComponent {
               placeholder='5204080099881112'
               onChangeText={value => this.onValueChange('nik', value)}
             />
+            <Touchable
+              onPress={this.openCalendar}
+              style={{ width: '100%', alignItems: 'center' }}
+            >
+              <InputBox
+                label='Tanggal Lahir *'
+                placeholder='Tanggal Lahir'
+                editable={false}
+                value={form.tgl_lahir}
+                onTouchEnd={this.openCalendar}
+              />
+            </Touchable>
             <InputBox
               inputRef={c => { this.phone_input = c }}
               onSubmitEditing={() => {
@@ -422,7 +453,7 @@ class TambahPengajuan extends ValidationComponent {
               disabled={this.props.posting}
               containerStyle={{ marginTop: 20 }}
               onPress={() => this.refs.modal_image.open()}
-            />
+          />
           </View>
 
           <View>
@@ -484,6 +515,11 @@ class TambahPengajuan extends ValidationComponent {
             </Touchable>
           </View>
         </Modal>
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this._handleDatePicked}
+          onCancel={this._hideDateTimePicker}
+        />
       </View>
     )
   }
@@ -510,4 +546,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TambahPengajuan)
+)(TambahPengajuanPaririSehat)
