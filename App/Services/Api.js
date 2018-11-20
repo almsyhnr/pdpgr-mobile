@@ -68,12 +68,14 @@ const create = (baseURL = AppConfig.baseUrl) => {
 
     if (files.length > 0) {
       files.map((file) => {
-        var image = {
-          uri: file.path,
-          type: file.mime,
-          name: file.filename
+        if (file) {
+          var image = {
+            uri: file.path,
+            type: file.mime,
+            name: file.filename
+          }
+          body.append(`images[]`, image)
         }
-        body.append(`images[]`, image)
       })
     }
 
