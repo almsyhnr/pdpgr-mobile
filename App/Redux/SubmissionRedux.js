@@ -19,6 +19,8 @@ const { Types, Creators } = createActions({
   resetSubmissionDetail: null,
   resetSubmissions: null,
   submissionFailure: null,
+  reportSubmission: ['form'],
+  reportSubmissionSuccess: null,
   postSubmissionFailure: null,
   postSubmissionSuccess: null
 })
@@ -125,6 +127,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.RESET_SUBMISSION_DETAIL]: resetSubmissionDetail,
   [Types.RESET_SUBMISSIONS]: resetSubmissions,
   [Types.POST_SUBMISSION_SUCCESS]: postSuccess,
+  [Types.REPORT_SUBMISSION]: postRequest,
+  [Types.REPORT_SUBMISSION_SUCCESS]: postSuccess,
   [Types.SUBMISSION_FAILURE]: failure,
   [Types.POST_SUBMISSION_FAILURE]: postFailure
 })

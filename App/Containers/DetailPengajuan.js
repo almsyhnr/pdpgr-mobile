@@ -45,12 +45,12 @@ class DetailPengajuan extends Component {
   }
 
   render () {
-    const { submission, fetching } = this.props
+    const { submission, fetching, user } = this.props
     if (!submission) {
       return <LoadingIndicator visible={fetching} size={'large'} />
     }
     return (
-      <SubmissionDetail submission={submission} />
+      <SubmissionDetail submission={submission} user={user} />
     )
   }
 }
@@ -59,7 +59,8 @@ const mapStateToProps = state => {
   return {
     submission: state.submission.selected,
     fetching: state.submission.fetching,
-    error: state.submission.error
+    error: state.submission.error,
+    user: state.user.data
   }
 }
 

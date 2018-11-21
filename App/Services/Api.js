@@ -44,6 +44,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const getSubmissionTermins = (id) => api.get('api/my_approved_submissions/' + id + '/termins')
   const submitSubmissionTermin = (submissionId, id) => api.get('api/my_approved_submissions/' + submissionId + '/termins/' + id + '/submit')
   const getSubmissionTransactions = (id, page) => api.get('api/my_approved_submissions/' + id + '/transactions?page=' + page)
+  const reportSubmission = (form) => api.post('api/submissions/report', form)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
   const bantuanTani = () => api.get('api/master_data/bantuan_tani')
@@ -176,6 +177,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
     getSubmissionTransactions,
     submitSubmissionTermin,
     createSubmission,
+    reportSubmission,
     modules,
     getNotifications,
     readNotification,

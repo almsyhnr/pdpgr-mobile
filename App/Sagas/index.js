@@ -35,7 +35,8 @@ import {
   getMySubmissions,
   getMyApprovedSubmissions,
   createSubmission,
-  likeSubmission
+  likeSubmission,
+  reportSubmission
 } from './SubmissionSagas'
 import {
   getSubmissionTermins,
@@ -97,6 +98,7 @@ export default function * root () {
     ),
     takeLatest(SubmissionTypes.CREATE_SUBMISSION, createSubmission, api),
     takeLatest(SubmissionTypes.LIKE_SUBMISSION, likeSubmission, api),
+    takeLatest(SubmissionTypes.REPORT_SUBMISSION, reportSubmission, api),
 
     // comment
     takeLatest(CommentTypes.GET_COMMENTS, getComments, api),

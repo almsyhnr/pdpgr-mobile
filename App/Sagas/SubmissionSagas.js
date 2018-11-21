@@ -84,3 +84,19 @@ export function * likeSubmission (api, { id }) {
     alert('Like gagal ditambahkan')
   }
 }
+
+export function * reportSubmission (api, { form }) {
+  const response = yield call(api.reportSubmission, form)
+
+  if (response.ok) {
+    if (response.data.success) {
+      yield put(SubmissionActions.reportSubmissionSuccess(response.data))
+      yield put(SubmissionActions.getSubmissionDetail(form.submission_id))
+    } else {
+      yield put(SubmissionActions.postSubmissionFailure())
+    }
+  } else {
+    yield put(SubmissionActions.postSubmissionFailure())
+    alert('Gagal dilaporkan')
+  }
+}
