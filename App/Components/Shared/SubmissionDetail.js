@@ -79,6 +79,7 @@ const SubmissionDetail = ({ submission }) => {
         {fieldInfo('Email', submission.email)}
         {fieldInfo('Alamat', submission.address)}
         {submission.bantuan_tani != null && fieldInfo('Jenis Bantuan', submission.bantuan_tani_label)}
+        {submission.bantuan_ternak != null && fieldInfo('Jenis Bantuan', submission.bantuan_ternak_label)}
       </View>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Status</Text>

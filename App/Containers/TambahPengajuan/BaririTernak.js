@@ -33,7 +33,7 @@ import styles from '../Styles/TambahPengajuanStyle'
 import { Colors, Images } from '../../Themes'
 import ValidationComponent from '../../Lib/validator'
 
-class TambahPengajuanBaririTani extends ValidationComponent {
+class TambahPengajuanBaririTernak extends ValidationComponent {
   static navigationOptions = {
     title: 'Tambah Pengajuan',
     headerRight: <View />
@@ -64,7 +64,7 @@ class TambahPengajuanBaririTani extends ValidationComponent {
         district_id: '',
         sub_village_id: '',
         sub_village: '',
-        bantuan_tani: null
+        bantuan_ternak: null
       },
       images: [],
       modul: _module,
@@ -111,12 +111,12 @@ class TambahPengajuanBaririTani extends ValidationComponent {
       rt: { required: true },
       rw: { required: true },
       sub_village: { required: true },
-      bantuan_tani: {required: true}
+      bantuan_ternak: {required: true}
     })
     console.tron.error(this.state.form)
     console.tron.error(this.getErrorMessages())
     if (this.isFormValid()) {
-      if (this.state.form.bantuan_tani != null) {
+      if (this.state.form.bantuan_ternak != null) {
         const { form, images } = this.state
         return this.props.createSubmission(form, images)
       } else {
@@ -457,11 +457,11 @@ class TambahPengajuanBaririTani extends ValidationComponent {
                 label: 'Pilih Jenis Bantuan',
                 value: null
               }}
-              items={this.props.bantuanTani}
+              items={this.props.bantuanTernak}
               onValueChange={(value) => {
-                this.onValueChange('bantuan_tani', value)
+                this.onValueChange('bantuan_ternak', value)
               }}
-              value={this.state.bantuan_tani}
+              value={this.state.bantuan_ternak}
               style={{ ...pickerSelectStyles }}
                 />
           </View>
@@ -530,7 +530,7 @@ class TambahPengajuanBaririTani extends ValidationComponent {
 }
 
 const mapStateToProps = state => {
-  const bantuanTani = _.map(state.masterData.bantuanTani, item => {
+  const bantuanTernak = _.map(state.masterData.bantuanTernak, item => {
     return {
       label: item.name,
       value: item.id
@@ -543,7 +543,7 @@ const mapStateToProps = state => {
     fetching: state.subVillage.fetching,
     error: state.submission.error,
     posting: state.submission.posting,
-    bantuanTani: bantuanTani
+    bantuanTernak: bantuanTernak
   }
 }
 
@@ -572,4 +572,4 @@ const pickerSelectStyles = StyleSheet.create({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TambahPengajuanBaririTani)
+)(TambahPengajuanBaririTernak)
