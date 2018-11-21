@@ -13,6 +13,7 @@ import TambahPengajuanPaririLansia from '../Containers/TambahPengajuan/PaririLan
 import TambahPengajuanPaririSehat from '../Containers/TambahPengajuan/PaririSehat'
 import TambahPengajuanBaririTani from '../Containers/TambahPengajuan/BaririTani'
 import TambahPengajuanBaririTernak from '../Containers/TambahPengajuan/BaririTernak'
+import TambahPengajuanDisabilitas from '../Containers/TambahPengajuan/Disabilitas'
 import LaunchScreen from '../Containers/LaunchScreen'
 import PilihJenisPengajuan from '../Containers/PilihJenisPengajuan'
 import { NotificationsScreen } from '../Containers/Notifications'
@@ -101,6 +102,7 @@ const PrimaryNav = StackNavigator({
   TambahPengajuanPaririSehat: { screen: TambahPengajuanPaririSehat },
   TambahPengajuanBaririTani: { screen: TambahPengajuanBaririTani },
   TambahPengajuanBaririTernak: { screen: TambahPengajuanBaririTernak },
+  TambahPengajuanDisabilitas: { screen: TambahPengajuanDisabilitas },
   LaunchScreen: { screen: LaunchScreen },
   PilihJenisPengajuan: { screen: PilihJenisPengajuan },
   MainDrawerScreen: { screen: MainDrawerNavigation },

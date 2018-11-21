@@ -25,7 +25,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   bantuanTani: [],
   bantuanTernak: [],
-  disabilitas: [],
+  jenisDisabilitas: [],
   jenisNelayan: [],
   bantuanNelayan: []
 })
@@ -38,7 +38,7 @@ export const request = (state) =>
 
 export const getBantuanTaniSuccess = (state, { response }) => state.merge({ bantuanTani: response })
 export const getBantuanTernakSuccess = (state, { response }) => state.merge({ bantuanTernak: response })
-export const getDisabilitasSuccess = (state, { response }) => state.merge({ disabilitas: response })
+export const getDisabilitasSuccess = (state, { response }) => state.merge({ jenisDisabilitas: response })
 export const getJenisNelayanSuccess = (state, { response }) => state.merge({ jenisNelayan: response })
 export const getBantuanNelayanSuccess = (state, { response }) => state.merge({ bantuanNelayan: response })
 
