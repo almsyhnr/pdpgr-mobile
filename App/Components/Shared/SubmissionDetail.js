@@ -81,6 +81,8 @@ const SubmissionDetail = ({ submission }) => {
         {submission.bantuan_tani != null && fieldInfo('Jenis Bantuan', submission.bantuan_tani_label)}
         {submission.bantuan_ternak != null && fieldInfo('Jenis Bantuan', submission.bantuan_ternak_label)}
         {submission.jenis_disabilitas != null && fieldInfo('Jenis Disabilitas', submission.jenis_disabilitas_label)}
+        {submission.jenis_nelayan != null && fieldInfo('Jenis Nelayan', submission.jenis_nelayan_label)}
+        {submission.bantuan_nelayan != null && fieldInfo('Jenis Bantuan', submission.bantuan_nelayan_label)}
       </View>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Status</Text>
