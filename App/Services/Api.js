@@ -46,6 +46,11 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const getSubmissionTransactions = (id, page) => api.get('api/my_approved_submissions/' + id + '/transactions?page=' + page)
   const modules = () => api.get('api/modules')
   const subVillages = () => api.get('api/sub_villages')
+  const bantuanTani = () => api.get('api/master_data/bantuan_tani')
+  const bantuanTernak = () => api.get('api/master_data/bantuan_ternak')
+  const disabilitas = () => api.get('api/master_data/disabilitas')
+  const jenisNelayan = () => api.get('api/master_data/jenis_nelayan')
+  const bantuanNelayan = () => api.get('api/master_data/bantuan_nelayan')
   const getNotifications = (page) => api.get('api/notifications?page=' + page)
   const readNotification = (id) => api.post('api/notifications/' + id + '/read')
   const createSubmission = (form, files) => {
@@ -65,7 +70,12 @@ const create = (baseURL = AppConfig.baseUrl) => {
     body.append('sub_village_id', form.sub_village_id)
     body.append('village_id', form.village_id)
     body.append('district_id', form.district_id)
-    body.append('tgl_lahir', form.tgl_lahir)
+    if (form.tgl_lahir) body.append('tgl_lahir', form.tgl_lahir)
+    if (form.bantuan_tani) body.append('bantuan_tani', form.bantuan_tani)
+    if (form.bantuan_ternak) body.append('bantuan_ternak', form.bantuan_ternak)
+    if (form.jenis_nelayan) body.append('jenis_nelayan', form.jenis_nelayan)
+    if (form.bantuan_nelayan) body.append('bantuan_nelayan', form.bantuan_nelayan)
+    if (form.jenis_disabilitas) body.append('jenis_disabilitas', form.jenis_disabilitas)
 
     if (files.length > 0) {
       files.map((file) => {
@@ -140,6 +150,7 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const createForum = (form) => api.post('api/forum/create', form)
   const updateForum = (id, form) => api.put('api/forum/' + id + '/update')
   const replyForum = (form) => api.post('api/forum/reply', form)
+
   // ------
   // STEP 3
   // ------
@@ -169,6 +180,11 @@ const create = (baseURL = AppConfig.baseUrl) => {
     getNotifications,
     readNotification,
     subVillages,
+    bantuanTani,
+    bantuanTernak,
+    jenisNelayan,
+    disabilitas,
+    bantuanNelayan,
     createTransaction,
     deleteTransaction,
     changeAvatar,

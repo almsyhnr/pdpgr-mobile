@@ -6255,6 +6255,10 @@ lodash.isempty@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.isempty/-/lodash.isempty-4.4.0.tgz#6f86cbedd8be4ec987be9aaf33c9684db1b31e7e"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -8381,6 +8385,12 @@ react-native-parsed-text@^0.0.20:
   dependencies:
     babel-plugin-check-es2015-constants "6.22.0"
     prop-types "^15.5.10"
+
+react-native-picker-select@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-5.1.0.tgz#528cb6a4bd113d8329ea795a8f4497c14f9d3433"
+  dependencies:
+    lodash.isequal "^4.5.0"
 
 react-native-platform-touchable@^1.1.1:
   version "1.1.1"

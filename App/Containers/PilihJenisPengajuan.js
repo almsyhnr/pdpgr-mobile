@@ -48,6 +48,9 @@ class PilihJenisPengajuan extends Component {
       case 3:
         navigate('TambahPengajuanPaririSehat', param)
         break
+      case 5:
+        navigate('TambahPengajuanBaririTani', param)
+        break
       default:
         navigate('TambahPengajuan', param)
     }

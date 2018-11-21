@@ -96,7 +96,8 @@ export default StyleSheet.create({
     color: 'black',
     marginBottom: 10,
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 5
   },
   customFieldBox: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}
 })

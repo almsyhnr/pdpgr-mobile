@@ -17,6 +17,7 @@ import { NotificationTypes } from '../Redux/NotificationRedux'
 import { CommentTypes } from '../Redux/CommentRedux'
 import { ForumTypes } from '../Redux/ForumRedux'
 import { ForumReplyTypes } from '../Redux/ForumReplyRedux'
+import { MasterDataTypes } from '../Redux/MasterDataRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -56,6 +57,13 @@ import {
   updateForum
 } from './ForumSagas'
 import { getForumReplies, replyForum } from './ForumReplySagas'
+import {
+  getBantuanNelayan,
+  getBantuanTani,
+  getBantuanTernak,
+  getDisabilitas,
+  getJenisNelayan
+} from './MasterDataSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -125,6 +133,13 @@ export default function * root () {
 
     // Module
     takeLatest(ModuleTypes.GET_MODULES, getModules, api),
+
+    // Master Data
+    takeLatest(MasterDataTypes.GET_BANTUAN_TANI, getBantuanTani, api),
+    takeLatest(MasterDataTypes.GET_BANTUAN_TERNAK, getBantuanTernak, api),
+    takeLatest(MasterDataTypes.GET_DISABILITAS, getDisabilitas, api),
+    takeLatest(MasterDataTypes.GET_JENIS_NELAYAN, getJenisNelayan, api),
+    takeLatest(MasterDataTypes.GET_BANTUAN_NELAYAN, getBantuanNelayan, api),
 
     // SubVillage
     takeLatest(SubVillageTypes.GET_SUB_VILLAGES, getSubVillages, api),

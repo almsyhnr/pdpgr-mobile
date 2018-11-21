@@ -19,7 +19,8 @@ export const reducers = combineReducers({
   notification: require('./NotificationRedux').reducer,
   comment: require('./CommentRedux').reducer,
   forum: require('./ForumRedux').reducer,
-  forumReply: require('./ForumReplyRedux').reducer
+  forumReply: require('./ForumReplyRedux').reducer,
+  masterData: require('./MasterDataRedux').reducer
 })
 
 export default () => {
