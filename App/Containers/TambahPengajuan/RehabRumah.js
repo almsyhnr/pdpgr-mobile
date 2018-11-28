@@ -6,7 +6,8 @@ import {
   View,
   Alert,
   Image,
-  Keyboard
+  Keyboard,
+  StyleSheet
 } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
@@ -16,6 +17,7 @@ import ImagePicker from 'react-native-image-crop-picker'
 import Modal from 'react-native-modalbox'
 import { Button, ListItem, Divider } from 'react-native-elements'
 import Touchable from 'react-native-platform-touchable'
+import RNPickerSelect from 'react-native-picker-select'
 
 // redux
 import SubVillageActions from '../../Redux/SubVillageRedux'
@@ -29,6 +31,118 @@ import { InputBox } from '../../Components/Form'
 import styles from '../Styles/TambahPengajuanStyle'
 import { Colors, Images } from '../../Themes'
 import ValidationComponent from '../../Lib/validator'
+
+const jenisAtap = [
+  {
+    label: 'Genteng',
+    value: 'Genteng'
+  },
+  {
+    label: 'Asbes',
+    value: 'Asbes'
+  },
+  {
+    label: 'Jerami',
+    value: 'Jerami'
+  },
+  {
+    label: 'Ijuk',
+    value: 'Ijuk'
+  },
+  {
+    label: 'Daun-daunan',
+    value: 'Daun-daunan'
+  },
+  {
+    label: 'Rumbia',
+    value: 'Rumbia'
+  }
+]
+
+const jenisDinding = [
+  {
+    label: 'Tembok',
+    value: 'Tembok'
+  },
+  {
+    label: 'Asbes',
+    value: 'Asbes'
+  },
+  {
+    label: 'Kayu/Papan',
+    value: 'Kayu/Papan'
+  },
+  {
+    label: 'Plasteran Anyaman Bambu',
+    value: 'Plasteran Anyaman Bambu'
+  },
+  {
+    label: 'Anyaman Bambu',
+    value: 'Anyaman Bambu'
+  },
+  {
+    label: 'Rumbia',
+    value: 'Rumbia'
+  },
+  {
+    label: 'Bambu',
+    value: 'Bambu'
+  },
+  {
+    label: 'Lainnya',
+    value: 'Lainnya'
+  }
+]
+
+const jenisLantai = [
+  {
+    label: 'Marmer/Granit',
+    value: 'Marmer/Granit'
+  },
+  {
+    label: 'Keramik',
+    value: 'Keramik'
+  },
+  {
+    label: 'Ubin/Tegel',
+    value: 'Ubin/Tegel'
+  },
+  {
+    label: 'Plesteran',
+    value: 'Plesteran'
+  },
+  {
+    label: 'Kayu',
+    value: 'Kayu'
+  },
+  {
+    label: 'Bambu',
+    value: 'Bambu'
+  },
+  {
+    label: 'Tanah',
+    value: 'Tanah'
+  }
+]
+
+const kondisi = [
+  {
+    label: 'Baik',
+    value: 'Baik'
+  },
+  {
+    label: 'Rusak Ringan',
+    value: 'Rusak Ringan'
+  },
+  {
+    label: 'Rusak Sedang/Sebagian',
+    value: 'Rusak Sedang/Sebagian'
+  },
+  {
+    label: 'Rusak Berat/Seluruhnya',
+    value: 'Rusak Berat/Seluruhnya'
+  }
+]
 
 class TambahPengajuanRehabRumah extends ValidationComponent {
   static navigationOptions = {
@@ -59,7 +173,15 @@ class TambahPengajuanRehabRumah extends ValidationComponent {
         district: '',
         district_id: '',
         sub_village_id: '',
-        sub_village: ''
+        sub_village: '',
+        luas_rumah: '',
+        jumlah_penghuni_rumah: '',
+        material_atap_terluas_rm: null,
+        kondisi_atap_rm: null,
+        material_dinding_terluas_rm: null,
+        kondisi_dinding_rm: null,
+        material_lantai_terluas_rm: null,
+        kondisi_lantai_rm: null
       },
       images: {
         tampakDepan: null,
@@ -122,7 +244,15 @@ class TambahPengajuanRehabRumah extends ValidationComponent {
       // email: { required: true },
       rt: { required: true },
       rw: { required: true },
-      sub_village: { required: true }
+      sub_village: { required: true },
+      luas_rumah: { required: true },
+      jumlah_penghuni_rumah: { required: true },
+      material_atap_terluas_rm: { required: true },
+      kondisi_atap_rm: { required: true },
+      material_dinding_terluas_rm: { required: true },
+      kondisi_dinding_rm: { required: true },
+      material_lantai_terluas_rm: { required: true },
+      kondisi_lantai_rm: { required: true }
     })
     console.tron.error(this.state.form)
     console.tron.error(this.getErrorMessages())
@@ -411,6 +541,101 @@ class TambahPengajuanRehabRumah extends ValidationComponent {
           <View style={{marginTop: 30, backgroundColor: Colors.snow, padding: 20}}>
             <Text style={{color: Colors.darkGray, marginBottom: 20}}>DETAIL</Text>
             <Divider />
+            <View style={[styles.content, {padding: 0}]}>
+              <InputBox
+                label='Luas Rumah *'
+                value={form.luas_rumah}
+                placeholder='1000'
+                containerStyle={{ width: '100%' }}
+                onChangeText={value => this.onValueChange('luas_rumah', value)}
+              />
+              <InputBox
+                label='Jumlah Penghuni Rumah *'
+                value={form.jumlah_penghuni_rumah}
+                containerStyle={{ width: '100%' }}
+                placeholder='2'
+                onChangeText={value => this.onValueChange('jumlah_penghuni_rumah', value)}
+              />
+            </View>
+
+            <Text style={styles.label}>Material Atap Terluas</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Jenis Atap',
+                value: null
+              }}
+              items={jenisAtap}
+              onValueChange={(value) => {
+                this.onValueChange('material_atap_terluas_rm', value)
+              }}
+              value={this.state.form.material_atap_terluas_rm}
+              style={{ ...pickerSelectStyles }}
+                />
+            <Text style={styles.label}>Kondisi Atap</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Kondisi',
+                value: null
+              }}
+              items={kondisi}
+              onValueChange={(value) => {
+                this.onValueChange('kondisi_atap_rm', value)
+              }}
+              value={this.state.form.kondisi_atap_rm}
+              style={{ ...pickerSelectStyles }}
+                />
+            <Text style={styles.label}>Material Dinding Terluas</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Jenis Material',
+                value: null
+              }}
+              items={jenisDinding}
+              onValueChange={(value) => {
+                this.onValueChange('material_dinding_terluas_rm', value)
+              }}
+              value={this.state.form.material_dinding_terluas_rm}
+              style={{ ...pickerSelectStyles }}
+                />
+            <Text style={styles.label}>Kondisi Dinding</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Kondisi',
+                value: null
+              }}
+              items={kondisi}
+              onValueChange={(value) => {
+                this.onValueChange('kondisi_dinding_rm', value)
+              }}
+              value={this.state.form.kondisi_dinding_rm}
+              style={{ ...pickerSelectStyles }}
+                />
+            <Text style={styles.label}>Material Lantai Terluas</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Jenis Material',
+                value: null
+              }}
+              items={jenisLantai}
+              onValueChange={(value) => {
+                this.onValueChange('material_lantai_terluas_rm', value)
+              }}
+              value={this.state.form.material_lantai_terluas_rm}
+              style={{ ...pickerSelectStyles }}
+                />
+            <Text style={styles.label}>Kondisi Lantai</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Pilih Kondisi',
+                value: null
+              }}
+              items={kondisi}
+              onValueChange={(value) => {
+                this.onValueChange('kondisi_lantai_rm', value)
+              }}
+              value={this.state.form.kondisi_lantai_rm}
+              style={{ ...pickerSelectStyles }}
+                />
             <View style={styles.customFieldBox}>
               <Text style={styles.label}>Tampak Depan *</Text>
               {!images.tampakDepan ? (<Button
@@ -523,6 +748,20 @@ const mapDispatchToProps = dispatch => {
       dispatch(SubmissionActions.createSubmission(form, files))
   }
 }
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 10,
+    paddingBottom: 12,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    backgroundColor: 'white',
+    color: 'black'
+  }
+})
 
 export default connect(
   mapStateToProps,

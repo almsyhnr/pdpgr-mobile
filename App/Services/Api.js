@@ -78,6 +78,15 @@ const create = (baseURL = AppConfig.baseUrl) => {
     if (form.bantuan_nelayan) body.append('bantuan_nelayan', form.bantuan_nelayan)
     if (form.jenis_disabilitas) body.append('jenis_disabilitas', form.jenis_disabilitas)
 
+    if (form.luas_rumah) body.append('luas_rumah', form.luas_rumah)
+    if (form.jumlah_penghuni_rumah) body.append('jumlah_penghuni_rumah', form.jumlah_penghuni_rumah)
+    if (form.material_atap_terluas_rm) body.append('material_atap_terluas_rm', form.material_atap_terluas_rm)
+    if (form.kondisi_atap_rm) body.append('kondisi_atap_rm', form.kondisi_atap_rm)
+    if (form.material_dinding_terluas_rm) body.append('material_dinding_terluas_rm', form.material_dinding_terluas_rm)
+    if (form.kondisi_dinding_rm) body.append('kondisi_dinding_rm', form.kondisi_dinding_rm)
+    if (form.material_lantai_terluas_rm) body.append('material_lantai_terluas_rm', form.material_lantai_terluas_rm)
+    if (form.kondisi_lantai_rm) body.append('kondisi_lantai_rm', form.kondisi_lantai_rm)
+
     if (files.length > 0) {
       files.map((file) => {
         if (file) {

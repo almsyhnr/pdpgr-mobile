@@ -123,6 +123,14 @@ class SubmissionDetail extends Component {
           {submission.jenis_disabilitas != null && this.fieldInfo('Jenis Disabilitas', submission.jenis_disabilitas_label)}
           {submission.jenis_nelayan != null && this.fieldInfo('Jenis Nelayan', submission.jenis_nelayan_label)}
           {submission.bantuan_nelayan != null && this.fieldInfo('Jenis Bantuan', submission.bantuan_nelayan_label)}
+          {submission.luas_rumah != null && this.fieldInfo('Luas Rumah', submission.luas_rumah)}
+          {submission.jumlah_penghuni_rumah != null && this.fieldInfo('Jumlah Penghuni Rumah', submission.jumlah_penghuni_rumah)}
+          {submission.material_atap_terluas_rm != null && this.fieldInfo('Material Atap Terluas', submission.material_atap_terluas_rm)}
+          {submission.kondisi_atap_rm != null && this.fieldInfo('Kondisi Atap', submission.kondisi_atap_rm)}
+          {submission.material_dinding_terluas_rm != null && this.fieldInfo('Material Dinding Terluas', submission.material_dinding_terluas_rm)}
+          {submission.kondisi_dinding_rm != null && this.fieldInfo('Kondisi Dinding', submission.kondisi_dinding_rm)}
+          {submission.material_lantai_terluas_rm != null && this.fieldInfo('Material Lantai Terluas', submission.material_lantai_terluas_rm)}
+          {submission.kondisi_lantai_rm != null && this.fieldInfo('Kondisi Lantai', submission.kondisi_lantai_rm)}
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Status</Text>
@@ -157,6 +165,7 @@ class SubmissionDetail extends Component {
               backgroundColor: Colors.primary
             }}
           />}
+
         </View>
         {isOwner && canReport && (
         <View>

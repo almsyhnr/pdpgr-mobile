@@ -7,7 +7,9 @@ const defaultRules = {
   numbers: /^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/,
   phone: /^[+](([0-9]*)|(([0-9]*)\.([0-9]*)))$/,
   email: /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/,
-  required: /\S+/,
+  required (rules, value) {
+    return (value !== '' && value != null)
+  },
   date (format = 'YYYY-MM-DD', value) {
     const d = moment(value, format)
     if (d == null || !d.isValid()) return false
