@@ -87,6 +87,11 @@ const create = (baseURL = AppConfig.baseUrl) => {
     if (form.material_lantai_terluas_rm) body.append('material_lantai_terluas_rm', form.material_lantai_terluas_rm)
     if (form.kondisi_lantai_rm) body.append('kondisi_lantai_rm', form.kondisi_lantai_rm)
 
+    if (form.kepemilikan_jamban) body.append('kepemilikan_jamban', form.kepemilikan_jamban)
+    if (form.jarak_sumber_air_tpa) body.append('jarak_sumber_air_tpa', form.jarak_sumber_air_tpa)
+    if (form.sumber_air_minum) body.append('sumber_air_minum', form.sumber_air_minum)
+    if (form.sumber_listrik_jamban) body.append('sumber_listrik_jamban', form.sumber_listrik_jamban)
+
     if (files.length > 0) {
       files.map((file) => {
         if (file) {

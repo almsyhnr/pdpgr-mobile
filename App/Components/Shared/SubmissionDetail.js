@@ -131,6 +131,13 @@ class SubmissionDetail extends Component {
           {submission.kondisi_dinding_rm != null && this.fieldInfo('Kondisi Dinding', submission.kondisi_dinding_rm)}
           {submission.material_lantai_terluas_rm != null && this.fieldInfo('Material Lantai Terluas', submission.material_lantai_terluas_rm)}
           {submission.kondisi_lantai_rm != null && this.fieldInfo('Kondisi Lantai', submission.kondisi_lantai_rm)}
+
+          {submission.kepemilikan_jamban != null && this.fieldInfo('Kepemilikan Jamban', submission.kepemilikan_jamban)}
+
+          {submission.sumber_air_minum != null && this.fieldInfo('Sumber Air Minum', submission.sumber_air_minum)}
+          {submission.jarak_sumber_air_tpa != null && this.fieldInfo('Jarak Sumber Air Minum ke TPA Tinja', submission.jarak_sumber_air_tpa)}
+          {submission.sumber_listrik_jamban != null && this.fieldInfo('Sumber Listrik', submission.sumber_listrik_jamban)}
+
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Status</Text>
