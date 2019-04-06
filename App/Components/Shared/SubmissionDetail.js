@@ -63,7 +63,7 @@ class SubmissionDetail extends Component {
     super(props)
     this.state = {
       laporan: null,
-      itemLaporan: props.submission.module.id === 2 ? [
+      itemLaporan: (props.submission && props.submission.module && props.submission.module.id === 2) ? [
         {
           label: 'Meninggal',
           value: 'meninggal'

@@ -3,8 +3,8 @@ export const FORUM_TYPE = {
     id: 1,
     title: 'Yasinan'
   },
-  SATPOL_PP: {
+  INFORMASI: {
     id: 2,
-    title: 'Satpol PP'
+    title: 'Informasi'
   }
 }

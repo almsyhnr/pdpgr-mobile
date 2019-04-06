@@ -48,9 +48,9 @@ const MainDrawer = DrawerNavigator({
     screen: DaftarRealisasi
   },
   ForumSatpolPp: {
-    screen: props => <ForumList {...props} type={FORUM_TYPE.SATPOL_PP} />,
+    screen: props => <ForumList {...props} type={FORUM_TYPE.INFORMASI} />,
     navigationOptions: {
-      drawerLabel: 'Forum Satpol PP',
+      drawerLabel: 'Forum Informasi',
       title: 'Forum',
       drawerIcon: ({focused}) => <Image source={Images.ic_forum} style={styles.sidebarIcon} />
     }
