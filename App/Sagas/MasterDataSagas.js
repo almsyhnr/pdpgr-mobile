@@ -11,6 +11,7 @@
 *************************************************************/
 
 import { call, put } from 'redux-saga/effects'
+import { Alert } from 'react-native'
 import MasterDataActions from '../Redux/MasterDataRedux'
 
 export function * getBantuanTani (api) {
@@ -21,6 +22,7 @@ export function * getBantuanTani (api) {
     yield put(MasterDataActions.getBantuanTaniSuccess(response.data.data))
   } else {
     yield put(MasterDataActions.masterDataFailure())
+    Alert.alert('Error', 'Gagal mendapatkan daftar jenis bantuan tani')
   }
 }
 
@@ -32,6 +34,7 @@ export function * getBantuanTernak (api) {
     yield put(MasterDataActions.getBantuanTernakSuccess(response.data.data))
   } else {
     yield put(MasterDataActions.masterDataFailure())
+    Alert.alert('Error', 'Gagal mendapatkan daftar jenis bantuan ternak')
   }
 }
 
@@ -43,6 +46,7 @@ export function * getDisabilitas (api) {
     yield put(MasterDataActions.getDisabilitasSuccess(response.data.data))
   } else {
     yield put(MasterDataActions.masterDataFailure())
+    Alert.alert('Error', 'Gagal mendapatkan daftar jenis disabilitas')
   }
 }
 
@@ -54,6 +58,7 @@ export function * getJenisNelayan (api) {
     yield put(MasterDataActions.getJenisNelayanSuccess(response.data.data))
   } else {
     yield put(MasterDataActions.masterDataFailure())
+    Alert.alert('Error', 'Gagal mendapatkan daftar jenis nelayan')
   }
 }
 
@@ -65,5 +70,6 @@ export function * getBantuanNelayan (api) {
     yield put(MasterDataActions.getBantuanNelayanSuccess(response.data.data))
   } else {
     yield put(MasterDataActions.masterDataFailure())
+    Alert.alert('Error', 'Gagal mendapatkan daftar jenis bantuan nelayan')
   }
 }
