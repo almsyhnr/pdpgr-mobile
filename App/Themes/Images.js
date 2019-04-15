@@ -32,7 +32,8 @@ const images = {
   ic_pengajuan_saya: require('../Images/ic_pengajuan_saya.png'),
   ic_realisasi: require('../Images/ic_realisasi.png'),
   ic_tambah_pengajuan: require('../Images/ic_tambah_pengajuan.png'),
-  ic_forum: require('../Images/ic_forum.png')
+  ic_forum: require('../Images/ic_forum.png'),
+  ic_stbm: require('../Images/ic_stbm.png')
 }
 
 export default images

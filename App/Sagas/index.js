@@ -18,6 +18,7 @@ import { CommentTypes } from '../Redux/CommentRedux'
 import { ForumTypes } from '../Redux/ForumRedux'
 import { ForumReplyTypes } from '../Redux/ForumReplyRedux'
 import { MasterDataTypes } from '../Redux/MasterDataRedux'
+import { StbmTypes } from '../Redux/StbmRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -65,6 +66,7 @@ import {
   getDisabilitas,
   getJenisNelayan
 } from './MasterDataSagas'
+import { getListStbm, getDetailStbm } from './StbmSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -158,6 +160,10 @@ export default function * root () {
 
     // forum reply
     takeLatest(ForumReplyTypes.GET_FORUM_REPLIES, getForumReplies, api),
-    takeLatest(ForumReplyTypes.REPLY_FORUM, replyForum, api)
+    takeLatest(ForumReplyTypes.REPLY_FORUM, replyForum, api),
+
+    /// stbm
+    takeLatest(StbmTypes.GET_LIST_STBM, getListStbm, api),
+    takeLatest(StbmTypes.GET_DETAIL_STBM, getDetailStbm, api)
   ])
 }

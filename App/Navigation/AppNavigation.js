@@ -33,6 +33,7 @@ import DrawerContent from '../Containers/DrawerContent'
 import { Colors, Images } from '../Themes'
 import styles from './Styles/NavigationStyles'
 import { FORUM_TYPE } from '../Containers/Forum/constant'
+import Stbm from '../Containers/Stbm'
 
 const MainDrawer = DrawerNavigator({
   Home: {
@@ -62,6 +63,9 @@ const MainDrawer = DrawerNavigator({
       title: 'Forum',
       drawerIcon: ({focused}) => <Image source={Images.ic_forum} style={styles.sidebarIcon} />
     }
+  },
+  Stbm: {
+    screen: Stbm
   },
   Profile: {
     screen: ProfileScreen

@@ -166,6 +166,10 @@ const create = (baseURL = AppConfig.baseUrl) => {
   const updateForum = (id, form) => api.put('api/forum/' + id + '/update')
   const replyForum = (form) => api.post('api/forum/reply', form)
 
+  // stbm
+  const getListStbm = (page) => api.get('api/stbm')
+  const getDetailStbm = (id) => api.get('api/stbm/' + id)
+
   // ------
   // STEP 3
   // ------
@@ -214,7 +218,11 @@ const create = (baseURL = AppConfig.baseUrl) => {
     getForumReplies,
     createForum,
     updateForum,
-    replyForum
+    replyForum,
+
+    // stbm
+    getListStbm,
+    getDetailStbm
   }
 }
 

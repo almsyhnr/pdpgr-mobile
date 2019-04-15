@@ -20,7 +20,8 @@ export const reducers = combineReducers({
   comment: require('./CommentRedux').reducer,
   forum: require('./ForumRedux').reducer,
   forumReply: require('./ForumReplyRedux').reducer,
-  masterData: require('./MasterDataRedux').reducer
+  masterData: require('./MasterDataRedux').reducer,
+  stbm: require('./StbmRedux').reducer
 })
 
 export default () => {
